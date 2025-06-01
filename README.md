@@ -2,7 +2,7 @@
 
 Automated tracking of function calling (tool) support across different models and providers on OpenRouter.
 
-View the live results at: `https://xeophon.github.io/openrouter-tool-check/`
+View the live results at: https://xeophon.github.io/openrouter-tool-check/
 
 ## Usage
 
