@@ -1,10 +1,10 @@
 {
-  "generated_at": "2025-06-01T12:59:33.211600",
+  "generated_at": "2025-06-01T13:02:51.305185",
   "total_models": 3,
   "models": [
     {
       "model_id": "qwen/qwen3-30b-a3b",
-      "timestamp": "2025-06-01T12:59:50.870185",
+      "timestamp": "2025-06-01T13:03:12.685927",
       "providers_tested": 6,
       "providers": [
         {
@@ -23,7 +23,7 @@
               "response_content": null,
               "tool_calls": [
                 {
-                  "id": "call_UZWVkbLeJatCo0OE9rnxoV8L",
+                  "id": "call_U1aP9XyU2aMq2vmCoX6PigZT",
                   "type": "function",
                   "function": {
                     "name": "get_weather",
@@ -33,7 +33,7 @@
               ],
               "finish_reason": "stop",
               "model_used": "qwen/qwen3-30b-a3b",
-              "timestamp": "2025-06-01T12:59:33.422997"
+              "timestamp": "2025-06-01T13:02:51.786176"
             },
             {
               "model_id": "qwen/qwen3-30b-a3b",
@@ -46,7 +46,7 @@
               "response_content": null,
               "tool_calls": [
                 {
-                  "id": "call_ZBp2csWAjzVODvDXTaF1nFKj",
+                  "id": "call_shNGPYHMxe0QJllStR3Nnqeb",
                   "type": "function",
                   "function": {
                     "name": "get_weather",
@@ -56,7 +56,7 @@
               ],
               "finish_reason": "stop",
               "model_used": "qwen/qwen3-30b-a3b",
-              "timestamp": "2025-06-01T12:59:35.269476"
+              "timestamp": "2025-06-01T13:02:54.005814"
             },
             {
               "model_id": "qwen/qwen3-30b-a3b",
@@ -69,7 +69,7 @@
               "response_content": null,
               "tool_calls": [
                 {
-                  "id": "call_gnd7hJNhzL8UBBtIewqiYu20",
+                  "id": "call_99BFhprQX8hAiRg2Nj2mXE3Q",
                   "type": "function",
                   "function": {
                     "name": "get_weather",
@@ -79,7 +79,7 @@
               ],
               "finish_reason": "stop",
               "model_used": "qwen/qwen3-30b-a3b",
-              "timestamp": "2025-06-01T12:59:37.891526"
+              "timestamp": "2025-06-01T13:02:56.023306"
             }
           ],
           "summary": {
@@ -89,7 +89,7 @@
             "unclear_count": 0,
             "no_tool_call_count": 0
           },
-          "timestamp": "2025-06-01T12:59:39.125542"
+          "timestamp": "2025-06-01T13:02:57.483428"
         },
         {
           "model_id": "qwen/qwen3-30b-a3b",
@@ -108,7 +108,7 @@
               "tool_calls": null,
               "finish_reason": null,
               "model_used": null,
-              "timestamp": "2025-06-01T12:59:39.626227"
+              "timestamp": "2025-06-01T13:02:57.984071"
             },
             {
               "model_id": "qwen/qwen3-30b-a3b",
@@ -122,7 +122,7 @@
               "tool_calls": null,
               "finish_reason": null,
               "model_used": null,
-              "timestamp": "2025-06-01T12:59:39.994682"
+              "timestamp": "2025-06-01T13:02:58.377878"
             },
             {
               "model_id": "qwen/qwen3-30b-a3b",
@@ -136,7 +136,7 @@
               "tool_calls": null,
               "finish_reason": null,
               "model_used": null,
-              "timestamp": "2025-06-01T12:59:40.441260"
+              "timestamp": "2025-06-01T13:02:58.784227"
             }
           ],
           "summary": {
@@ -146,7 +146,7 @@
             "unclear_count": 0,
             "no_tool_call_count": 0
           },
-          "timestamp": "2025-06-01T12:59:40.502381"
+          "timestamp": "2025-06-01T13:02:58.881560"
         },
         {
           "model_id": "qwen/qwen3-30b-a3b",
@@ -165,7 +165,7 @@
               "tool_calls": null,
               "finish_reason": null,
               "model_used": null,
-              "timestamp": "2025-06-01T12:59:41.003025"
+              "timestamp": "2025-06-01T13:02:59.382234"
             },
             {
               "model_id": "qwen/qwen3-30b-a3b",
@@ -179,7 +179,7 @@
               "tool_calls": null,
               "finish_reason": null,
               "model_used": null,
-              "timestamp": "2025-06-01T12:59:41.372033"
+              "timestamp": "2025-06-01T13:02:59.775533"
             },
             {
               "model_id": "qwen/qwen3-30b-a3b",
@@ -193,7 +193,7 @@
               "tool_calls": null,
               "finish_reason": null,
               "model_used": null,
-              "timestamp": "2025-06-01T12:59:41.732523"
+              "timestamp": "2025-06-01T13:03:00.202758"
             }
           ],
           "summary": {
@@ -203,7 +203,7 @@
             "unclear_count": 0,
             "no_tool_call_count": 0
           },
-          "timestamp": "2025-06-01T12:59:41.793335"
+          "timestamp": "2025-06-01T13:03:00.316371"
         },
         {
           "model_id": "qwen/qwen3-30b-a3b",
@@ -222,7 +222,7 @@
               "tool_calls": null,
               "finish_reason": null,
               "model_used": null,
-              "timestamp": "2025-06-01T12:59:42.294026"
+              "timestamp": "2025-06-01T13:03:00.816993"
             },
             {
               "model_id": "qwen/qwen3-30b-a3b",
@@ -236,7 +236,7 @@
               "tool_calls": null,
               "finish_reason": null,
               "model_used": null,
-              "timestamp": "2025-06-01T12:59:42.654036"
+              "timestamp": "2025-06-01T13:03:01.222552"
             },
             {
               "model_id": "qwen/qwen3-30b-a3b",
@@ -250,7 +250,7 @@
               "tool_calls": null,
               "finish_reason": null,
               "model_used": null,
-              "timestamp": "2025-06-01T12:59:43.009758"
+              "timestamp": "2025-06-01T13:03:01.628798"
             }
           ],
           "summary": {
@@ -260,7 +260,7 @@
             "unclear_count": 0,
             "no_tool_call_count": 0
           },
-          "timestamp": "2025-06-01T12:59:43.071504"
+          "timestamp": "2025-06-01T13:03:01.841396"
         },
         {
           "model_id": "qwen/qwen3-30b-a3b",
@@ -279,7 +279,7 @@
               "tool_calls": null,
               "finish_reason": null,
               "model_used": null,
-              "timestamp": "2025-06-01T12:59:43.572179"
+              "timestamp": "2025-06-01T13:03:02.342039"
             },
             {
               "model_id": "qwen/qwen3-30b-a3b",
@@ -293,7 +293,7 @@
               "tool_calls": null,
               "finish_reason": null,
               "model_used": null,
-              "timestamp": "2025-06-01T12:59:43.938318"
+              "timestamp": "2025-06-01T13:03:02.765207"
             },
             {
               "model_id": "qwen/qwen3-30b-a3b",
@@ -307,7 +307,7 @@
               "tool_calls": null,
               "finish_reason": null,
               "model_used": null,
-              "timestamp": "2025-06-01T12:59:44.366323"
+              "timestamp": "2025-06-01T13:03:03.161776"
             }
           ],
           "summary": {
@@ -317,7 +317,7 @@
             "unclear_count": 0,
             "no_tool_call_count": 0
           },
-          "timestamp": "2025-06-01T12:59:44.459839"
+          "timestamp": "2025-06-01T13:03:03.365035"
         },
         {
           "model_id": "qwen/qwen3-30b-a3b",
@@ -335,17 +335,17 @@
               "response_content": null,
               "tool_calls": [
                 {
-                  "id": "call_Bb7a3JOY9IHHXisMQv5DPga9",
+                  "id": "call_FWJpA3W2kMc95xSQXsTHSQBq",
                   "type": "function",
                   "function": {
                     "name": "get_weather",
-                    "arguments": "{\"location\": \"San Francisco, CA\", \"unit\": \"fahrenheit\"}"
+                    "arguments": "{\"location\": \"San Francisco\"}"
                   }
                 }
               ],
               "finish_reason": "tool_calls",
               "model_used": "qwen/qwen3-30b-a3b",
-              "timestamp": "2025-06-01T12:59:44.960527"
+              "timestamp": "2025-06-01T13:03:03.865725"
             },
             {
               "model_id": "qwen/qwen3-30b-a3b",
@@ -358,17 +358,17 @@
               "response_content": null,
               "tool_calls": [
                 {
-                  "id": "call_PMBVdGI3RwVwGdfx4InMTHZH",
+                  "id": "call_HtfkhuGHboMAxIMlje1zOy0B",
                   "type": "function",
                   "function": {
                     "name": "get_weather",
-                    "arguments": "{\"location\": \"San Francisco, CA\"}"
+                    "arguments": "{\"location\": \"San Francisco\"}"
                   }
                 }
               ],
               "finish_reason": "tool_calls",
               "model_used": "qwen/qwen3-30b-a3b",
-              "timestamp": "2025-06-01T12:59:46.637388"
+              "timestamp": "2025-06-01T13:03:08.604821"
             },
             {
               "model_id": "qwen/qwen3-30b-a3b",
@@ -381,7 +381,7 @@
               "response_content": null,
               "tool_calls": [
                 {
-                  "id": "call_KRCPKcJ8VSnwSu3c5VYfzVN5",
+                  "id": "call_svvbPlVnOFpffuc0M0Su5LAs",
                   "type": "function",
                   "function": {
                     "name": "get_weather",
@@ -391,7 +391,7 @@
               ],
               "finish_reason": "tool_calls",
               "model_used": "qwen/qwen3-30b-a3b",
-              "timestamp": "2025-06-01T12:59:48.403200"
+              "timestamp": "2025-06-01T13:03:10.538505"
             }
           ],
           "summary": {
@@ -401,13 +401,13 @@
             "unclear_count": 0,
             "no_tool_call_count": 0
           },
-          "timestamp": "2025-06-01T12:59:50.369556"
+          "timestamp": "2025-06-01T13:03:12.185274"
         }
       ]
     },
     {
       "model_id": "qwen/qwen3-30b-a3b:free",
-      "timestamp": "2025-06-01T12:59:53.547500",
+      "timestamp": "2025-06-01T13:03:15.539366",
       "providers_tested": 2,
       "providers": [
         {
@@ -427,7 +427,7 @@
               "tool_calls": null,
               "finish_reason": null,
               "model_used": null,
-              "timestamp": "2025-06-01T12:59:50.975610"
+              "timestamp": "2025-06-01T13:03:12.828729"
             },
             {
               "model_id": "qwen/qwen3-30b-a3b:free",
@@ -441,7 +441,7 @@
               "tool_calls": null,
               "finish_reason": null,
               "model_used": null,
-              "timestamp": "2025-06-01T12:59:51.334386"
+              "timestamp": "2025-06-01T13:03:13.204048"
             },
             {
               "model_id": "qwen/qwen3-30b-a3b:free",
@@ -455,7 +455,7 @@
               "tool_calls": null,
               "finish_reason": null,
               "model_used": null,
-              "timestamp": "2025-06-01T12:59:51.695038"
+              "timestamp": "2025-06-01T13:03:13.599047"
             }
           ],
           "summary": {
@@ -465,7 +465,7 @@
             "unclear_count": 0,
             "no_tool_call_count": 0
           },
-          "timestamp": "2025-06-01T12:59:51.747140"
+          "timestamp": "2025-06-01T13:03:13.671708"
         },
         {
           "model_id": "qwen/qwen3-30b-a3b:free",
@@ -484,7 +484,7 @@
               "tool_calls": null,
               "finish_reason": null,
               "model_used": null,
-              "timestamp": "2025-06-01T12:59:52.247842"
+              "timestamp": "2025-06-01T13:03:14.172381"
             },
             {
               "model_id": "qwen/qwen3-30b-a3b:free",
@@ -498,7 +498,7 @@
               "tool_calls": null,
               "finish_reason": null,
               "model_used": null,
-              "timestamp": "2025-06-01T12:59:52.622694"
+              "timestamp": "2025-06-01T13:03:14.580747"
             },
             {
               "model_id": "qwen/qwen3-30b-a3b:free",
@@ -512,7 +512,7 @@
               "tool_calls": null,
               "finish_reason": null,
               "model_used": null,
-              "timestamp": "2025-06-01T12:59:52.996814"
+              "timestamp": "2025-06-01T13:03:14.965496"
             }
           ],
           "summary": {
@@ -522,13 +522,13 @@
             "unclear_count": 0,
             "no_tool_call_count": 0
           },
-          "timestamp": "2025-06-01T12:59:53.046896"
+          "timestamp": "2025-06-01T13:03:15.038711"
         }
       ]
     },
     {
       "model_id": "openai/gpt-4.1-nano",
-      "timestamp": "2025-06-01T12:59:57.827221",
+      "timestamp": "2025-06-01T13:03:22.091054",
       "providers_tested": 1,
       "providers": [
         {
@@ -547,71 +547,87 @@
               "response_content": null,
               "tool_calls": [
                 {
-                  "id": "call_NGLGp9ZL1wpkefiYY7cZj2QW",
+                  "id": "call_5iEVdpchMDZCfzIZrN2vSbJi",
+                  "type": "function",
+                  "function": {
+                    "name": "get_weather",
+                    "arguments": "{\"location\": \"San Francisco, CA\"}"
+                  }
+                },
+                {
+                  "id": "call_yJtVMxPOpMlJdlvAv1N1L9Vw",
+                  "type": "function",
+                  "function": {
+                    "name": "get_weather",
+                    "arguments": "{\"location\": \"San Francisco, CA\"}"
+                  }
+                }
+              ],
+              "finish_reason": "tool_calls",
+              "model_used": "openai/gpt-4.1-nano",
+              "timestamp": "2025-06-01T13:03:15.638043"
+            },
+            {
+              "model_id": "openai/gpt-4.1-nano",
+              "provider_name": "OpenAI",
+              "display_name": "OpenAI | openai/gpt-4.1-nano-2025-04-14",
+              "supports_tools": true,
+              "tool_call_made": true,
+              "status": "success",
+              "error": null,
+              "response_content": null,
+              "tool_calls": [
+                {
+                  "id": "call_DuWlIcPAqzPYNNAkzcUXNTPT",
+                  "type": "function",
+                  "function": {
+                    "name": "get_weather",
+                    "arguments": "{\"location\": \"San Francisco, CA\"}"
+                  }
+                },
+                {
+                  "id": "call_mQLBZXegGLL5osvP9lEqTWWM",
+                  "type": "function",
+                  "function": {
+                    "name": "get_weather",
+                    "arguments": "{\"location\": \"San Francisco, CA\"}"
+                  }
+                }
+              ],
+              "finish_reason": "tool_calls",
+              "model_used": "openai/gpt-4.1-nano",
+              "timestamp": "2025-06-01T13:03:17.217322"
+            },
+            {
+              "model_id": "openai/gpt-4.1-nano",
+              "provider_name": "OpenAI",
+              "display_name": "OpenAI | openai/gpt-4.1-nano-2025-04-14",
+              "supports_tools": true,
+              "tool_call_made": true,
+              "status": "success",
+              "error": null,
+              "response_content": null,
+              "tool_calls": [
+                {
+                  "id": "call_VVYuUzEFtt7eH3AZMgCVKGeG",
+                  "type": "function",
+                  "function": {
+                    "name": "get_weather",
+                    "arguments": "{\"location\": \"San Francisco, CA\"}"
+                  }
+                },
+                {
+                  "id": "call_poTd3RI6jKhQsaw538M8gjbn",
                   "type": "function",
                   "function": {
                     "name": "get_weather",
                     "arguments": "{\"location\": \"San Francisco\"}"
                   }
-                },
-                {
-                  "id": "call_Wc94gEp3o68aUw45R6mc8sFT",
-                  "type": "function",
-                  "function": {
-                    "name": "get_weather",
-                    "arguments": "{\"location\": \"New York\"}"
-                  }
                 }
               ],
               "finish_reason": "tool_calls",
               "model_used": "openai/gpt-4.1-nano",
-              "timestamp": "2025-06-01T12:59:53.629476"
-            },
-            {
-              "model_id": "openai/gpt-4.1-nano",
-              "provider_name": "OpenAI",
-              "display_name": "OpenAI | openai/gpt-4.1-nano-2025-04-14",
-              "supports_tools": true,
-              "tool_call_made": true,
-              "status": "success",
-              "error": null,
-              "response_content": null,
-              "tool_calls": [
-                {
-                  "id": "call_K5LZaaYTxUAHG0Orp5pQqBch",
-                  "type": "function",
-                  "function": {
-                    "name": "get_weather",
-                    "arguments": "{\"location\":\"San Francisco\"}"
-                  }
-                }
-              ],
-              "finish_reason": "tool_calls",
-              "model_used": "openai/gpt-4.1-nano",
-              "timestamp": "2025-06-01T12:59:55.407047"
-            },
-            {
-              "model_id": "openai/gpt-4.1-nano",
-              "provider_name": "OpenAI",
-              "display_name": "OpenAI | openai/gpt-4.1-nano-2025-04-14",
-              "supports_tools": true,
-              "tool_call_made": true,
-              "status": "success",
-              "error": null,
-              "response_content": null,
-              "tool_calls": [
-                {
-                  "id": "call_Hxu98koL3RZM0z6ZzMrVc7gp",
-                  "type": "function",
-                  "function": {
-                    "name": "get_weather",
-                    "arguments": "{\"location\":\"San Francisco\",\"unit\":\"fahrenheit\"}"
-                  }
-                }
-              ],
-              "finish_reason": "tool_calls",
-              "model_used": "openai/gpt-4.1-nano",
-              "timestamp": "2025-06-01T12:59:56.692358"
+              "timestamp": "2025-06-01T13:03:19.772568"
             }
           ],
           "summary": {
@@ -621,7 +637,7 @@
             "unclear_count": 0,
             "no_tool_call_count": 0
           },
-          "timestamp": "2025-06-01T12:59:57.326584"
+          "timestamp": "2025-06-01T13:03:21.590419"
         }
       ]
     }
