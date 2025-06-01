@@ -190,6 +190,198 @@ class OpenRouterToolSupportChecker:
             
         return result
     
+    async def test_provider_structured_output(self, model_id: str, provider_info: Dict[str, Any]) -> Dict[str, Any]:
+        """Test if a specific provider supports structured outputs for a model."""
+        provider_name = provider_info["provider_name"]
+        display_name = provider_info.get("display_name", provider_name)
+        
+        result = {
+            "model_id": model_id,
+            "provider_name": provider_name,
+            "display_name": display_name,
+            "supports_structured_output": False,
+            "status": "unknown",  # "success", "error", "unclear"
+            "error": None,
+            "response_content": None,
+            "finish_reason": None,
+            "model_used": None,
+            "timestamp": datetime.now().isoformat()
+        }
+        
+        try:
+            # Create the completion with provider routing and structured output format
+            response = await self.client.chat.completions.create(
+                model=model_id,
+                messages=[
+                    {
+                        "role": "user",
+                        "content": "What's the weather like in London?"
+                    }
+                ],
+                response_format={
+                    "type": "json_schema",
+                    "json_schema": {
+                        "name": "weather",
+                        "strict": True,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "location": {
+                                    "type": "string",
+                                    "description": "City or location name"
+                                },
+                                "temperature": {
+                                    "type": "number",
+                                    "description": "Temperature in Celsius"
+                                },
+                                "conditions": {
+                                    "type": "string",
+                                    "description": "Weather conditions description"
+                                }
+                            },
+                            "required": ["location", "temperature", "conditions"],
+                            "additionalProperties": False
+                        }
+                    }
+                },
+                max_tokens=1000,
+                # Specify the provider using extra_body
+                extra_body={
+                    "provider": {
+                        "only": [provider_name]
+                    }
+                }
+            )
+            
+            # Extract debugging information
+            message = response.choices[0].message
+            result["finish_reason"] = response.choices[0].finish_reason
+            result["model_used"] = response.model if hasattr(response, 'model') else None
+            
+            # Check if the model returned valid JSON according to our schema
+            if message.content:
+                result["response_content"] = message.content
+                try:
+                    json_response = json.loads(message.content)
+                    if all(key in json_response for key in ["location", "temperature", "conditions"]):
+                        result["supports_structured_output"] = True
+                        result["status"] = "success"
+                    else:
+                        result["supports_structured_output"] = False
+                        result["status"] = "invalid_schema"
+                except json.JSONDecodeError:
+                    result["supports_structured_output"] = False
+                    result["status"] = "invalid_json"
+            else:
+                result["status"] = "unclear"
+                result["supports_structured_output"] = None
+                
+        except Exception as e:
+            error_str = str(e)
+            result["error"] = error_str
+            result["status"] = "error"
+            
+            # Analyze error type
+            if any(keyword in error_str.lower() for keyword in ["response_format", "json_schema", "not supported", "invalid"]):
+                result["supports_structured_output"] = False
+            else:
+                # Other errors - unclear if structured output is supported
+                result["supports_structured_output"] = None
+            
+        return result
+    
+    async def check_model_structured_output(self, model_id: str) -> Dict[str, Any]:
+        """Check all providers for structured output support for a specific model."""
+        print(f"\n{'='*60}")
+        print(f"Checking structured output support for model: {model_id}")
+        print(f"{'='*60}")
+        
+        # Get providers for this model
+        providers = await self.get_model_providers(model_id)
+        
+        if not providers:
+            print(f"No providers found for {model_id}")
+            return {
+                "model_id": model_id,
+                "timestamp": datetime.now().isoformat(),
+                "providers_tested": 0,
+                "providers": []
+            }
+        
+        print(f"Found {len(providers)} providers")
+        
+        # Test each provider multiple times
+        results = []
+        for i, provider in enumerate(providers, 1):
+            display_name = provider.get("display_name", provider["provider_name"])
+            provider_name = provider["provider_name"]
+            
+            print(f"\n[{i}/{len(providers)}] Testing: {display_name}")
+            
+            # Run 3 tests for this provider
+            test_runs = []
+            for run in range(3):
+                print(f"  Run {run + 1}/3...", end="", flush=True)
+                
+                test_result = await self.test_provider_structured_output(model_id, provider)
+                test_runs.append(test_result)
+                
+                # Quick status indicator
+                if test_result["status"] == "success":
+                    print(" ✓", end="", flush=True)
+                elif test_result["status"] == "unclear":
+                    print(" ?", end="", flush=True)
+                elif test_result["status"] == "error":
+                    print(" ⚠", end="", flush=True)
+                else:
+                    print(" ✗", end="", flush=True)
+                
+                # Small delay between runs
+                if run < 2:
+                    await asyncio.sleep(0.3)
+            
+            print()  # New line after run indicators
+            
+            # Summarize results
+            success_count = sum(1 for r in test_runs if r["status"] == "success")
+            error_count = sum(1 for r in test_runs if r["status"] == "error")
+            unclear_count = sum(1 for r in test_runs if r["status"] == "unclear")
+            
+            # Create aggregated result
+            aggregated_result = {
+                "model_id": model_id,
+                "provider_name": provider_name,
+                "display_name": display_name,
+                "test_runs": test_runs,
+                "summary": {
+                    "total_runs": 3,
+                    "success_count": success_count,
+                    "error_count": error_count,
+                    "unclear_count": unclear_count,
+                    "fail_count": 3 - success_count - error_count - unclear_count
+                },
+                "timestamp": datetime.now().isoformat()
+            }
+            
+            results.append(aggregated_result)
+            
+            # Print summary
+            print(f"  Summary: {success_count}/3 successful")
+            if error_count > 0:
+                print(f"  Errors: {error_count}/3")
+            if unclear_count > 0:
+                print(f"  Unclear: {unclear_count}/3")
+            
+            # Small delay to avoid rate limiting
+            await asyncio.sleep(0.5)
+        
+        return {
+            "model_id": model_id,
+            "timestamp": datetime.now().isoformat(),
+            "providers_tested": len(providers),
+            "providers": results
+        }
+    
     async def check_model(self, model_id: str) -> Dict[str, Any]:
         """Check all providers for a specific model."""
         print(f"\n{'='*60}")
@@ -314,8 +506,15 @@ async def main():
         "models": []
     }
     
+    
     for model_id in models:
+        # Test tool support
         model_result = await checker.check_model(model_id)
+        
+        # Test structured output support if requested
+        structured_output_result = await checker.check_model_structured_output(model_id)
+        model_result["structured_output"] = structured_output_result["providers"]
+        
         all_results["models"].append(model_result)
         
         # Save intermediate results
@@ -337,39 +536,77 @@ async def main():
     print("=" * 60)
     
     total_providers = 0
-    total_fully_supporting = 0  # 3/3 success
-    total_partially_supporting = 0  # 1-2/3 success
-    total_not_supporting = 0  # 0/3 success
+    total_fully_supporting_tools = 0  # 3/3 success
+    total_partially_supporting_tools = 0  # 1-2/3 success
+    total_not_supporting_tools = 0  # 0/3 success
+    
+    # Structured output counters
+    total_fully_supporting_structured_output = 0
+    total_partially_supporting_structured_output = 0
+    total_not_supporting_structured_output = 0
     
     for model in all_results["models"]:
         providers = model["providers"]
-        model_fully_supporting = sum(1 for p in providers if p["summary"]["success_count"] == 3)
-        model_partially_supporting = sum(1 for p in providers if 0 < p["summary"]["success_count"] < 3)
-        model_not_supporting = sum(1 for p in providers if p["summary"]["success_count"] == 0)
+        model_fully_supporting_tools = sum(1 for p in providers if p["summary"]["success_count"] == 3)
+        model_partially_supporting_tools = sum(1 for p in providers if 0 < p["summary"]["success_count"] < 3)
+        model_not_supporting_tools = sum(1 for p in providers if p["summary"]["success_count"] == 0)
         
         total_providers += len(providers)
-        total_fully_supporting += model_fully_supporting
-        total_partially_supporting += model_partially_supporting
-        total_not_supporting += model_not_supporting
+        total_fully_supporting_tools += model_fully_supporting_tools
+        total_partially_supporting_tools += model_partially_supporting_tools
+        total_not_supporting_tools += model_not_supporting_tools
         
         print(f"\n{model['model_id']}:")
         print(f"  Providers tested: {len(providers)}")
-        print(f"  Full support (3/3): {model_fully_supporting}")
-        if model_partially_supporting > 0:
-            print(f"  Partial support (1-2/3): {model_partially_supporting}")
-        if model_not_supporting > 0:
-            print(f"  No support (0/3): {model_not_supporting}")
+        print(f"  Tool support:")
+        print(f"    Full support (3/3): {model_fully_supporting_tools}")
+        if model_partially_supporting_tools > 0:
+            print(f"    Partial support (1-2/3): {model_partially_supporting_tools}")
+        if model_not_supporting_tools > 0:
+            print(f"    No support (0/3): {model_not_supporting_tools}")
+        
+        # Structured output summary if enabled
+        structured_providers = model["structured_output"]
+        model_fully_supporting_structured = sum(1 for p in structured_providers if p["summary"]["success_count"] == 3)
+        model_partially_supporting_structured = sum(1 for p in structured_providers if 0 < p["summary"]["success_count"] < 3)
+        model_not_supporting_structured = sum(1 for p in structured_providers if p["summary"]["success_count"] == 0)
+        
+        total_fully_supporting_structured_output += model_fully_supporting_structured
+        total_partially_supporting_structured_output += model_partially_supporting_structured
+        total_not_supporting_structured_output += model_not_supporting_structured
+        
+        print(f"  Structured output support:")
+        print(f"    Full support (3/3): {model_fully_supporting_structured}")
+        if model_partially_supporting_structured > 0:
+            print(f"    Partial support (1-2/3): {model_partially_supporting_structured}")
+        if model_not_supporting_structured > 0:
+            print(f"    No support (0/3): {model_not_supporting_structured}")
+
+    print(f"\n\nOVERALL SUMMARY")
+    print(f"Total providers tested: {total_providers}")
     
-    print(f"\n\nTotal providers tested: {total_providers}")
-    print(f"Full support (3/3): {total_fully_supporting}")
-    print(f"Partial support (1-2/3): {total_partially_supporting}")
-    print(f"No support (0/3): {total_not_supporting}")
+    print(f"\nTool Support:")
+    print(f"  Full support (3/3): {total_fully_supporting_tools}")
+    print(f"  Partial support (1-2/3): {total_partially_supporting_tools}")
+    print(f"  No support (0/3): {total_not_supporting_tools}")
     
     if total_providers > 0:
-        print(f"\nPercentages:")
-        print(f"  Full support: {(total_fully_supporting/total_providers*100):.1f}%")
-        print(f"  Partial support: {(total_partially_supporting/total_providers*100):.1f}%")
-        print(f"  No support: {(total_not_supporting/total_providers*100):.1f}%")
+        print(f"\nTool Support Percentages:")
+        print(f"  Full support: {(total_fully_supporting_tools/total_providers*100):.1f}%")
+        print(f"  Partial support: {(total_partially_supporting_tools/total_providers*100):.1f}%")
+        print(f"  No support: {(total_not_supporting_tools/total_providers*100):.1f}%")
+    
+    # Structured output overall summary if enabled
+    print(f"\nStructured Output Support:")
+    print(f"  Full support (3/3): {total_fully_supporting_structured_output}")
+    print(f"  Partial support (1-2/3): {total_partially_supporting_structured_output}")
+    print(f"  No support (0/3): {total_not_supporting_structured_output}")
+    
+    if total_providers > 0:
+        print(f"\nStructured Output Support Percentages:")
+        print(f"  Full support: {(total_fully_supporting_structured_output/total_providers*100):.1f}%")
+        print(f"  Partial support: {(total_partially_supporting_structured_output/total_providers*100):.1f}%")
+        print(f"  No support: {(total_not_supporting_structured_output/total_providers*100):.1f}%")
 
 
 if __name__ == "__main__":

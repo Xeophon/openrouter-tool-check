@@ -1,6 +1,13 @@
 [
 
-
+  "qwen/qwen3-30b-a3b",
+  "qwen/qwen3-30b-a3b:free",
+  "qwen/qwen3-1.7b",
+  "deepseek/deepseek-r1-0528",
+  "deepseek/deepseek-r1-0528:free",
+  "deepseek/deepseek-chat-v3-0324",
+  "deepseek/deepseek-chat-v3-0324:free",
+  "openai/gpt-4.1-nano",
   "qwen/qwen3-32b",
   "qwen/qwen3-32b:free",
   "sarvamai/sarvam-m",

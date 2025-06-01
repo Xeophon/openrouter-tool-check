@@ -46,9 +46,34 @@ def get_all_providers(results):
     return sorted(list(providers))
 
 
-def get_cell_status(model_data, provider_name):
-    """Get the status for a specific model-provider combination."""
-    for provider in model_data["providers"]:
+def has_structured_output_data(results):
+    """Check if the results contain structured output test data."""
+    if not results or not "models" in results:
+        return False
+    
+    # Check if any model has structured_output data
+    for model in results["models"]:
+        if "structured_output" in model:
+            return True
+    
+    return False
+
+
+def get_cell_status(model_data, provider_name, data_type="tool_support"):
+    """Get the status for a specific model-provider combination.
+    
+    Args:
+        model_data: The model data dictionary
+        provider_name: The provider name to check
+        data_type: Either "tool_support" (default) or "structured_output"
+    """
+    providers_list = model_data["providers"]
+    
+    # Use structured_output data if requested and available
+    if data_type == "structured_output" and "structured_output" in model_data:
+        providers_list = model_data["structured_output"]
+    
+    for provider in providers_list:
         if provider["provider_name"] == provider_name:
             summary = provider["summary"]
             success_count = summary["success_count"]
@@ -66,9 +91,9 @@ def get_cell_status(model_data, provider_name):
                             reasons.append(error)
                     elif run["status"] == "unclear":
                         reasons.append("Empty response")
-                    elif run["status"] == "no_tool_call":
+                    elif run["status"] == "no_tool_call" or run["status"] == "invalid_json" or run["status"] == "invalid_schema":
                         if run["response_content"]:
-                            reasons.append(f"No tool call: {run['response_content'][:50]}...")
+                            reasons.append(f"No proper response: {run['response_content'][:50]}...")
                 return "failure", f"{success_count}/3", reasons
             else:
                 # Partial success - collect both successes and failures
@@ -79,8 +104,8 @@ def get_cell_status(model_data, provider_name):
                             reasons.append(f"Error: {run['error'][:50]}...")
                         elif run["status"] == "unclear":
                             reasons.append("Empty response")
-                        elif run["status"] == "no_tool_call":
-                            reasons.append("No tool call made")
+                        elif run["status"] == "no_tool_call" or run["status"] == "invalid_json" or run["status"] == "invalid_schema":
+                            reasons.append("Invalid response format")
                 return "partial", f"{success_count}/3", reasons
     
     return "none", "-", None
@@ -100,8 +125,11 @@ def generate_html(results):
     
     grouped_models = group_models(results["models"])
     all_providers = get_all_providers(results)
+    
+    # Check if structured output data is available
+    has_structured_data = has_structured_output_data(results)
 
-    # New CSS styles
+    # CSS styles - add tab styles if we have structured output data
     style_sheet = f"""<style>
         body {{
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
@@ -163,6 +191,7 @@ def generate_html(results):
             border: 1px solid #dee2e6;
             border-radius: 3px;
             box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+            margin-bottom: 15px;
         }}
         table {{
             width: 100%;
@@ -273,6 +302,44 @@ def generate_html(results):
         .footer a:hover {{
             text-decoration: underline;
         }}
+        
+        /* Tab styles for switching between Tool Support and Structured Output */
+        .tabs {{
+            display: flex;
+            margin-bottom: 10px;
+            border-bottom: 1px solid #dee2e6;
+        }}
+        .tab {{
+            padding: 8px 12px;
+            cursor: pointer;
+            border: 1px solid transparent;
+            border-bottom: none;
+            border-radius: 4px 4px 0 0;
+            font-size: 14px;
+            background-color: #f8f9fa;
+            margin-right: 2px;
+        }}
+        .tab.active {{
+            background-color: #fff;
+            border-color: #dee2e6;
+            border-bottom-color: white;
+            margin-bottom: -1px;
+            font-weight: 600;
+            color: #2c3e50;
+        }}
+        .tab-content {{
+            display: none;
+        }}
+        .tab-content.active {{
+            display: block;
+        }}
+        .tab-heading {{
+            font-size: 16px;
+            font-weight: 600;
+            text-align: center;
+            margin: 10px 0;
+            color: #2c3e50;
+        }}
     </style>"""
 
     # HTML Structure
@@ -286,7 +353,7 @@ def generate_html(results):
 </head>
 <body>
     <div class="container">
-        <h1>OpenRouter Tool Support Matrix</h1>
+        <h1>OpenRouter Support Matrix</h1>
         <p class="subtitle">Last updated: {generated_at}</p>
         
         <div class="legend">
@@ -295,23 +362,41 @@ def generate_html(results):
             <div class="legend-item"><span class="legend-color failure-swatch"></span>No support (0/3)</div>
             <div class="legend-item"><span class="legend-color not-available-swatch"></span>Not available</div>
         </div>
+"""
 
+    # If we have structured output data, create tabs to toggle between reports
+    if has_structured_data:
+        html_start += """
+        <div class="tabs">
+            <div class="tab active" id="tab-tool-support">Tool Support</div>
+            <div class="tab" id="tab-structured-output">Structured Output</div>
+        </div>
+        
+        <div class="tab-content active" id="content-tool-support">
+            <div class="tab-heading">Tool Support Results</div>
+"""
+    
+    # Provider Headers - reused for both tables
+    provider_headers = ""
+    for provider_name in all_providers:
+        provider_headers += f"<th class='provider-header'>{provider_name}</th>"
+
+    # Start tool support table
+    html_start += """
         <div class="table-container">
             <table>
                 <thead>
                     <tr>
                         <th class="model-header">Model</th>
+""" + provider_headers + """</tr>
+                </thead>
+                <tbody>
 """
-    # Provider Headers
-    provider_headers_html = ""
-    for provider_name in all_providers:
-        provider_headers_html += f"<th class='provider-header'>{provider_name}</th>"
-    provider_headers_html += "</tr></thead><tbody>"
 
-    # Table Rows
-    table_rows_html = ""
+    # Table Rows for Tool Support
+    tool_support_rows_html = ""
     for base_name, model_variants in sorted(grouped_models.items()):
-        table_rows_html += f"<tr><td class='model-name-cell'>{base_name}</td>"
+        tool_support_rows_html += f"<tr><td class='model-name-cell'>{base_name}</td>"
         
         for provider_name in all_providers:
             cell_content_parts = []
@@ -334,7 +419,7 @@ def generate_html(results):
                     if base_name != model_id: 
                          variant_suffix = suffix_part # Still useful for class if needed
                 
-                status, text, reasons = get_cell_status(model_data, provider_name)
+                status, text, reasons = get_cell_status(model_data, provider_name, "tool_support")
                 
                 if status != "none":
                     found_any_for_provider = True
@@ -345,18 +430,84 @@ def generate_html(results):
                     )
             
             if found_any_for_provider:
-                table_rows_html += f"<td class='provider-cell'>{''.join(cell_content_parts)}</td>"
+                tool_support_rows_html += f"<td class='provider-cell'>{''.join(cell_content_parts)}</td>"
             else:
-                table_rows_html += f"<td class='provider-cell'><span class='cell none'>-</span></td>"
+                tool_support_rows_html += f"<td class='provider-cell'><span class='cell none'>-</span></td>"
         
-        table_rows_html += "</tr>"
+        tool_support_rows_html += "</tr>"
     
-    html_end = f"""</tbody>
+    # Close tool support table
+    tool_support_table_end = """
+                </tbody>
             </table>
         </div>
+"""
+    
+    # If we have structured output data, create a structured output table
+    structured_output_html = ""
+    if has_structured_data:
+        structured_output_html = """
+        </div> <!-- End tool support tab content -->
         
+        <div class="tab-content" id="content-structured-output">
+            <div class="tab-heading">Structured Output Results</div>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="model-header">Model</th>
+""" + provider_headers + """</tr>
+                    </thead>
+                    <tbody>
+"""
+
+        # Table Rows for Structured Output
+        for base_name, model_variants in sorted(grouped_models.items()):
+            structured_output_html += f"<tr><td class='model-name-cell'>{base_name}</td>"
+            
+            for provider_name in all_providers:
+                cell_content_parts = []
+                found_any_for_provider = False
+                
+                sorted_variants = sorted(model_variants, key=get_variant_sort_key)
+
+                for model_data in sorted_variants:
+                    model_id = model_data["model_id"]
+                    variant_suffix = 'standard' # Default, not displayed
+                    if ':' in model_id:
+                        suffix_part = model_id.split(':')[-1]
+                        if base_name != model_id: 
+                             variant_suffix = suffix_part # Still useful for class if needed
+                    
+                    status, text, reasons = get_cell_status(model_data, provider_name, "structured_output")
+                    
+                    if status != "none":
+                        found_any_for_provider = True
+                        cell_content_parts.append(
+                            f"<div class='variant-info variant-{variant_suffix.lower()}'>"
+                            f"<span class='cell {status}'>{text}</span>"
+                            f"</div>"
+                        )
+                
+                if found_any_for_provider:
+                    structured_output_html += f"<td class='provider-cell'>{''.join(cell_content_parts)}</td>"
+                else:
+                    structured_output_html += f"<td class='provider-cell'><span class='cell none'>-</span></td>"
+            
+            structured_output_html += "</tr>"
+        
+        # Close structured output table
+        structured_output_html += """
+                    </tbody>
+                </table>
+            </div>
+        </div> <!-- End structured output tab content -->
+"""
+    
+    # Footer content
+    footer_html = f"""
         <br>
-        Sometimes, the model (or the provider) does not properly call tools. That's why every call is made three times.<br>
+        Sometimes, the model (or the provider) does not properly call tools or return structured output. That's why every call is made three times.<br>
         The code to generate this website is available on <a href="https://github.com/Xeophon/openrouter-tool-check" target="_blank">GitHub</a>.
         
         <div class="footer">
@@ -364,11 +515,37 @@ def generate_html(results):
             <p>Updates every 12 hours &bull; Data source: <a href="https://openrouter.ai/docs/api-reference" target="_blank">OpenRouter API</a></p>
         </div>
     </div>
+
+    <!-- JavaScript for tab switching -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {{
+            const tabs = document.querySelectorAll('.tab');
+            const tabContents = document.querySelectorAll('.tab-content');
+            
+            tabs.forEach(tab => {{
+                tab.addEventListener('click', function() {{
+                    // Remove active class from all tabs and content
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tabContents.forEach(c => c.classList.remove('active'));
+                    
+                    // Add active class to clicked tab
+                    this.classList.add('active');
+                    
+                    // Show corresponding content
+                    const contentId = this.id.replace('tab', 'content');
+                    document.getElementById(contentId).classList.add('active');
+                }});
+            }});
+        }});
+    </script>
 </body>
 </html>"""
 
-    return html_start + provider_headers_html + table_rows_html + html_end
-
+    # Combine all parts
+    if has_structured_data:
+        return html_start + tool_support_rows_html + tool_support_table_end + structured_output_html + footer_html
+    else:
+        return html_start + tool_support_rows_html + tool_support_table_end + footer_html
 
 
 def main():
