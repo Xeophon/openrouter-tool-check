@@ -1,0 +1,3420 @@
+{
+  "generated_at": "2025-06-01T18:22:55.756609",
+  "total_models": 18,
+  "models": [
+    {
+      "model_id": "qwen/qwen3-32b",
+      "timestamp": "2025-06-01T18:23:18.505936",
+      "providers_tested": 9,
+      "providers": [
+        {
+          "model_id": "qwen/qwen3-32b",
+          "provider_name": "DeepInfra",
+          "display_name": "DeepInfra | qwen/qwen3-32b-04-28",
+          "test_runs": [
+            {
+              "model_id": "qwen/qwen3-32b",
+              "provider_name": "DeepInfra",
+              "display_name": "DeepInfra | qwen/qwen3-32b-04-28",
+              "supports_tools": true,
+              "tool_call_made": true,
+              "status": "success",
+              "error": null,
+              "response_content": null,
+              "tool_calls": [
+                {
+                  "id": "call_j2Pa3dlTcxOKV4ouLUbayK3M",
+                  "type": "function",
+                  "function": {
+                    "name": "get_weather",
+                    "arguments": "{\"location\": \"San Francisco, CA\", \"unit\": \"fahrenheit\"}"
+                  }
+                }
+              ],
+              "finish_reason": "stop",
+              "model_used": "qwen/qwen3-32b",
+              "timestamp": "2025-06-01T18:22:55.896471"
+            },
+            {
+              "model_id": "qwen/qwen3-32b",
+              "provider_name": "DeepInfra",
+              "display_name": "DeepInfra | qwen/qwen3-32b-04-28",
+              "supports_tools": true,
+              "tool_call_made": true,
+              "status": "success",
+              "error": null,
+              "response_content": null,
+              "tool_calls": [
+                {
+                  "id": "call_Io3Fnd6m9DHlenZYtK2TSIgP",
+                  "type": "function",
+                  "function": {
+                    "name": "get_weather",
+                    "arguments": "{\"location\": \"San Francisco, CA\", \"unit\": \"celsius\"}"
+                  }
+                }
+              ],
+              "finish_reason": "stop",
+              "model_used": "qwen/qwen3-32b",
+              "timestamp": "2025-06-01T18:22:59.778638"
+            },
+            {
+              "model_id": "qwen/qwen3-32b",
+              "provider_name": "DeepInfra",
+              "display_name": "DeepInfra | qwen/qwen3-32b-04-28",
+              "supports_tools": true,
+              "tool_call_made": true,
+              "status": "success",
+              "error": null,
+              "response_content": null,
+              "tool_calls": [
+                {
+                  "id": "call_x4QwzipIh7DvLueEoo0jTtWb",
+                  "type": "function",
+                  "function": {
+                    "name": "get_weather",
+                    "arguments": "{\"location\": \"San Francisco, CA\", \"unit\": \"fahrenheit\"}"
+                  }
+                }
+              ],
+              "finish_reason": "stop",
+              "model_used": "qwen/qwen3-32b",
+              "timestamp": "2025-06-01T18:23:02.743884"
+            }
+          ],
+          "summary": {
+            "total_runs": 3,
+            "success_count": 3,
+            "error_count": 0,
+            "unclear_count": 0,
+            "no_tool_call_count": 0
+          },
+          "timestamp": "2025-06-01T18:23:06.255818"
+        },
+        {
+          "model_id": "qwen/qwen3-32b",
+          "provider_name": "Nebius",
+          "display_name": "Nebius | qwen/qwen3-32b-04-28",
+          "test_runs": [
+            {
+              "model_id": "qwen/qwen3-32b",
+              "provider_name": "Nebius",
+              "display_name": "Nebius | qwen/qwen3-32b-04-28",
+              "supports_tools": false,
+              "tool_call_made": false,
+              "status": "error",
+              "error": "Error code: 404 - {'error': {'message': 'No endpoints found that support tool use. To learn more about provider routing, visit: https://openrouter.ai/docs/provider-routing', 'code': 404}}",
+              "response_content": null,
+              "tool_calls": null,
+              "finish_reason": null,
+              "model_used": null,
+              "timestamp": "2025-06-01T18:23:06.756499"
+            },
+            {
+              "model_id": "qwen/qwen3-32b",
+              "provider_name": "Nebius",
+              "display_name": "Nebius | qwen/qwen3-32b-04-28",
+              "supports_tools": false,
+              "tool_call_made": false,
+              "status": "error",
+              "error": "Error code: 404 - {'error': {'message': 'No endpoints found that support tool use. To learn more about provider routing, visit: https://openrouter.ai/docs/provider-routing', 'code': 404}}",
+              "response_content": null,
+              "tool_calls": null,
+              "finish_reason": null,
+              "model_used": null,
+              "timestamp": "2025-06-01T18:23:07.166012"
+            },
+            {
+              "model_id": "qwen/qwen3-32b",
+              "provider_name": "Nebius",
+              "display_name": "Nebius | qwen/qwen3-32b-04-28",
+              "supports_tools": false,
+              "tool_call_made": false,
+              "status": "error",
+              "error": "Error code: 404 - {'error': {'message': 'No endpoints found that support tool use. To learn more about provider routing, visit: https://openrouter.ai/docs/provider-routing', 'code': 404}}",
+              "response_content": null,
+              "tool_calls": null,
+              "finish_reason": null,
+              "model_used": null,
+              "timestamp": "2025-06-01T18:23:07.651052"
+            }
+          ],
+          "summary": {
+            "total_runs": 3,
+            "success_count": 0,
+            "error_count": 3,
+            "unclear_count": 0,
+            "no_tool_call_count": 0
+          },
+          "timestamp": "2025-06-01T18:23:07.706273"
+        },
+        {
+          "model_id": "qwen/qwen3-32b",
+          "provider_name": "Lambda",
+          "display_name": "Lambda | qwen/qwen3-32b-04-28",
+          "test_runs": [
+            {
+              "model_id": "qwen/qwen3-32b",
+              "provider_name": "Lambda",
+              "display_name": "Lambda | qwen/qwen3-32b-04-28",
+              "supports_tools": false,
+              "tool_call_made": false,
+              "status": "error",
+              "error": "Error code: 404 - {'error': {'message': 'No endpoints found that support tool use. To learn more about provider routing, visit: https://openrouter.ai/docs/provider-routing', 'code': 404}}",
+              "response_content": null,
+              "tool_calls": null,
+              "finish_reason": null,
+              "model_used": null,
+              "timestamp": "2025-06-01T18:23:08.206954"
+            },
+            {
+              "model_id": "qwen/qwen3-32b",
+              "provider_name": "Lambda",
+              "display_name": "Lambda | qwen/qwen3-32b-04-28",
+              "supports_tools": false,
+              "tool_call_made": false,
+              "status": "error",
+              "error": "Error code: 404 - {'error': {'message': 'No endpoints found that support tool use. To learn more about provider routing, visit: https://openrouter.ai/docs/provider-routing', 'code': 404}}",
+              "response_content": null,
+              "tool_calls": null,
+              "finish_reason": null,
+              "model_used": null,
+              "timestamp": "2025-06-01T18:23:08.574982"
+            },
+            {
+              "model_id": "qwen/qwen3-32b",
+              "provider_name": "Lambda",
+              "display_name": "Lambda | qwen/qwen3-32b-04-28",
+              "supports_tools": false,
+              "tool_call_made": false,
+              "status": "error",
+              "error": "Error code: 404 - {'error': {'message': 'No endpoints found that support tool use. To learn more about provider routing, visit: https://openrouter.ai/docs/provider-routing', 'code': 404}}",
+              "response_content": null,
+              "tool_calls": null,
+              "finish_reason": null,
+              "model_used": null,
+              "timestamp": "2025-06-01T18:23:08.928899"
+            }
+          ],
+          "summary": {
+            "total_runs": 3,
+            "success_count": 0,
+            "error_count": 3,
+            "unclear_count": 0,
+            "no_tool_call_count": 0
+          },
+          "timestamp": "2025-06-01T18:23:08.983387"
+        },
+        {
+          "model_id": "qwen/qwen3-32b",
+          "provider_name": "Novita",
+          "display_name": "Novita | qwen/qwen3-32b-04-28",
+          "test_runs": [
+            {
+              "model_id": "qwen/qwen3-32b",
+              "provider_name": "Novita",
+              "display_name": "Novita | qwen/qwen3-32b-04-28",
+              "supports_tools": false,
+              "tool_call_made": false,
+              "status": "error",
+              "error": "Error code: 404 - {'error': {'message': 'No endpoints found that support tool use. To learn more about provider routing, visit: https://openrouter.ai/docs/provider-routing', 'code': 404}}",
+              "response_content": null,
+              "tool_calls": null,
+              "finish_reason": null,
+              "model_used": null,
+              "timestamp": "2025-06-01T18:23:09.484051"
+            },
+            {
+              "model_id": "qwen/qwen3-32b",
+              "provider_name": "Novita",
+              "display_name": "Novita | qwen/qwen3-32b-04-28",
+              "supports_tools": false,
+              "tool_call_made": false,
+              "status": "error",
+              "error": "Error code: 404 - {'error': {'message': 'No endpoints found that support tool use. To learn more about provider routing, visit: https://openrouter.ai/docs/provider-routing', 'code': 404}}",
+              "response_content": null,
+              "tool_calls": null,
+              "finish_reason": null,
+              "model_used": null,
+              "timestamp": "2025-06-01T18:23:09.842104"
+            },
+            {
+              "model_id": "qwen/qwen3-32b",
+              "provider_name": "Novita",
+              "display_name": "Novita | qwen/qwen3-32b-04-28",
+              "supports_tools": false,
+              "tool_call_made": false,
+              "status": "error",
+              "error": "Error code: 404 - {'error': {'message': 'No endpoints found that support tool use. To learn more about provider routing, visit: https://openrouter.ai/docs/provider-routing', 'code': 404}}",
+              "response_content": null,
+              "tool_calls": null,
+              "finish_reason": null,
+              "model_used": null,
+              "timestamp": "2025-06-01T18:23:10.196848"
+            }
+          ],
+          "summary": {
+            "total_runs": 3,
+            "success_count": 0,
+            "error_count": 3,
+            "unclear_count": 0,
+            "no_tool_call_count": 0
+          },
+          "timestamp": "2025-06-01T18:23:10.254767"
+        },
+        {
+          "model_id": "qwen/qwen3-32b",
+          "provider_name": "Parasail",
+          "display_name": "Parasail | qwen/qwen3-32b-04-28",
+          "test_runs": [
+            {
+              "model_id": "qwen/qwen3-32b",
+              "provider_name": "Parasail",
+              "display_name": "Parasail | qwen/qwen3-32b-04-28",
+              "supports_tools": false,
+              "tool_call_made": false,
+              "status": "error",
+              "error": "Error code: 404 - {'error': {'message': 'No endpoints found that support tool use. To learn more about provider routing, visit: https://openrouter.ai/docs/provider-routing', 'code': 404}}",
+              "response_content": null,
+              "tool_calls": null,
+              "finish_reason": null,
+              "model_used": null,
+              "timestamp": "2025-06-01T18:23:10.755429"
+            },
+            {
+              "model_id": "qwen/qwen3-32b",
+              "provider_name": "Parasail",
+              "display_name": "Parasail | qwen/qwen3-32b-04-28",
+              "supports_tools": false,
+              "tool_call_made": false,
+              "status": "error",
+              "error": "Error code: 404 - {'error': {'message': 'No endpoints found that support tool use. To learn more about provider routing, visit: https://openrouter.ai/docs/provider-routing', 'code': 404}}",
+              "response_content": null,
+              "tool_calls": null,
+              "finish_reason": null,
+              "model_used": null,
+              "timestamp": "2025-06-01T18:23:11.197809"
+            },
+            {
+              "model_id": "qwen/qwen3-32b",
+              "provider_name": "Parasail",
+              "display_name": "Parasail | qwen/qwen3-32b-04-28",
+              "supports_tools": false,
+              "tool_call_made": false,
+              "status": "error",
+              "error": "Error code: 404 - {'error': {'message': 'No endpoints found that support tool use. To learn more about provider routing, visit: https://openrouter.ai/docs/provider-routing', 'code': 404}}",
+              "response_content": null,
+              "tool_calls": null,
+              "finish_reason": null,
+              "model_used": null,
+              "timestamp": "2025-06-01T18:23:11.565240"
+            }
+          ],
+          "summary": {
+            "total_runs": 3,
+            "success_count": 0,
+            "error_count": 3,
+            "unclear_count": 0,
+            "no_tool_call_count": 0
+          },
+          "timestamp": "2025-06-01T18:23:11.638634"
+        },
+        {
+          "model_id": "qwen/qwen3-32b",
+          "provider_name": "GMICloud",
+          "display_name": "GMICloud | qwen/qwen3-32b-04-28",
+          "test_runs": [
+            {
+              "model_id": "qwen/qwen3-32b",
+              "provider_name": "GMICloud",
+              "display_name": "GMICloud | qwen/qwen3-32b-04-28",
+              "supports_tools": false,
+              "tool_call_made": false,
+              "status": "error",
+              "error": "Error code: 404 - {'error': {'message': 'No endpoints found that support tool use. To learn more about provider routing, visit: https://openrouter.ai/docs/provider-routing', 'code': 404}}",
+              "response_content": null,
+              "tool_calls": null,
+              "finish_reason": null,
+              "model_used": null,
+              "timestamp": "2025-06-01T18:23:12.139285"
+            },
+            {
+              "model_id": "qwen/qwen3-32b",
+              "provider_name": "GMICloud",
+              "display_name": "GMICloud | qwen/qwen3-32b-04-28",
+              "supports_tools": false,
+              "tool_call_made": false,
+              "status": "error",
+              "error": "Error code: 404 - {'error': {'message': 'No endpoints found that support tool use. To learn more about provider routing, visit: https://openrouter.ai/docs/provider-routing', 'code': 404}}",
+              "response_content": null,
+              "tool_calls": null,
+              "finish_reason": null,
+              "model_used": null,
+              "timestamp": "2025-06-01T18:23:12.504015"
+            },
+            {
+              "model_id": "qwen/qwen3-32b",
+              "provider_name": "GMICloud",
+              "display_name": "GMICloud | qwen/qwen3-32b-04-28",
+              "supports_tools": false,
+              "tool_call_made": false,
+              "status": "error",
+              "error": "Error code: 404 - {'error': {'message': 'No endpoints found that support tool use. To learn more about provider routing, visit: https://openrouter.ai/docs/provider-routing', 'code': 404}}",
+              "response_content": null,
+              "tool_calls": null,
+              "finish_reason": null,
+              "model_used": null,
+              "timestamp": "2025-06-01T18:23:12.866227"
+            }
+          ],
+          "summary": {
+            "total_runs": 3,
+            "success_count": 0,
+            "error_count": 3,
+            "unclear_count": 0,
+            "no_tool_call_count": 0
+          },
+          "timestamp": "2025-06-01T18:23:12.936998"
+        },
+        {
+          "model_id": "qwen/qwen3-32b",
+          "provider_name": "Nebius",
+          "display_name": "Nebius | qwen/qwen3-32b-04-28",
+          "test_runs": [
+            {
+              "model_id": "qwen/qwen3-32b",
+              "provider_name": "Nebius",
+              "display_name": "Nebius | qwen/qwen3-32b-04-28",
+              "supports_tools": false,
+              "tool_call_made": false,
+              "status": "error",
+              "error": "Error code: 404 - {'error': {'message': 'No endpoints found that support tool use. To learn more about provider routing, visit: https://openrouter.ai/docs/provider-routing', 'code': 404}}",
+              "response_content": null,
+              "tool_calls": null,
+              "finish_reason": null,
+              "model_used": null,
+              "timestamp": "2025-06-01T18:23:13.437666"
+            },
+            {
+              "model_id": "qwen/qwen3-32b",
+              "provider_name": "Nebius",
+              "display_name": "Nebius | qwen/qwen3-32b-04-28",
+              "supports_tools": false,
+              "tool_call_made": false,
+              "status": "error",
+              "error": "Error code: 404 - {'error': {'message': 'No endpoints found that support tool use. To learn more about provider routing, visit: https://openrouter.ai/docs/provider-routing', 'code': 404}}",
+              "response_content": null,
+              "tool_calls": null,
+              "finish_reason": null,
+              "model_used": null,
+              "timestamp": "2025-06-01T18:23:13.802662"
+            },
+            {
+              "model_id": "qwen/qwen3-32b",
+              "provider_name": "Nebius",
+              "display_name": "Nebius | qwen/qwen3-32b-04-28",
+              "supports_tools": false,
+              "tool_call_made": false,
+              "status": "error",
+              "error": "Error code: 404 - {'error': {'message': 'No endpoints found that support tool use. To learn more about provider routing, visit: https://openrouter.ai/docs/provider-routing', 'code': 404}}",
+              "response_content": null,
+              "tool_calls": null,
+              "finish_reason": null,
+              "model_used": null,
+              "timestamp": "2025-06-01T18:23:14.241303"
+            }
+          ],
+          "summary": {
+            "total_runs": 3,
+            "success_count": 0,
+            "error_count": 3,
+            "unclear_count": 0,
+            "no_tool_call_count": 0
+          },
+          "timestamp": "2025-06-01T18:23:14.303463"
+        },
+        {
+          "model_id": "qwen/qwen3-32b",
+          "provider_name": "Cerebras",
+          "display_name": "Cerebras | qwen/qwen3-32b-04-28",
+          "test_runs": [
+            {
+              "model_id": "qwen/qwen3-32b",
+              "provider_name": "Cerebras",
+              "display_name": "Cerebras | qwen/qwen3-32b-04-28",
+              "supports_tools": true,
+              "tool_call_made": true,
+              "status": "success",
+              "error": null,
+              "response_content": null,
+              "tool_calls": [
+                {
+                  "id": "b3f539832",
+                  "type": "function",
+                  "function": {
+                    "name": "get_weather",
+                    "arguments": "{\"location\": \"San Francisco, CA\", \"unit\": \"fahrenheit\"}"
+                  }
+                }
+              ],
+              "finish_reason": "tool_calls",
+              "model_used": "qwen/qwen3-32b",
+              "timestamp": "2025-06-01T18:23:14.804123"
+            },
+            {
+              "model_id": "qwen/qwen3-32b",
+              "provider_name": "Cerebras",
+              "display_name": "Cerebras | qwen/qwen3-32b-04-28",
+              "supports_tools": true,
+              "tool_call_made": true,
+              "status": "success",
+              "error": null,
+              "response_content": null,
+              "tool_calls": [
+                {
+                  "id": "6c21fb19b",
+                  "type": "function",
+                  "function": {
+                    "name": "get_weather",
+                    "arguments": "{\"location\": \"San Francisco, CA\", \"unit\": \"fahrenheit\"}"
+                  }
+                }
+              ],
+              "finish_reason": "tool_calls",
+              "model_used": "qwen/qwen3-32b",
+              "timestamp": "2025-06-01T18:23:15.508623"
+            },
+            {
+              "model_id": "qwen/qwen3-32b",
+              "provider_name": "Cerebras",
+              "display_name": "Cerebras | qwen/qwen3-32b-04-28",
+              "supports_tools": true,
+              "tool_call_made": true,
+              "status": "success",
+              "error": null,
+              "response_content": null,
+              "tool_calls": [
+                {
+                  "id": "20d6aa786",
+                  "type": "function",
+                  "function": {
+                    "name": "get_weather",
+                    "arguments": "{\"location\": \"San Francisco\", \"unit\": \"fahrenheit\"}"
+                  }
+                }
+              ],
+              "finish_reason": "tool_calls",
+              "model_used": "qwen/qwen3-32b",
+              "timestamp": "2025-06-01T18:23:16.159313"
+            }
+          ],
+          "summary": {
+            "total_runs": 3,
+            "success_count": 3,
+            "error_count": 0,
+            "unclear_count": 0,
+            "no_tool_call_count": 0
+          },
+          "timestamp": "2025-06-01T18:23:16.675723"
+        },
+        {
+          "model_id": "qwen/qwen3-32b",
+          "provider_name": "SambaNova",
+          "display_name": "SambaNova | qwen/qwen3-32b-04-28",
+          "test_runs": [
+            {
+              "model_id": "qwen/qwen3-32b",
+              "provider_name": "SambaNova",
+              "display_name": "SambaNova | qwen/qwen3-32b-04-28",
+              "supports_tools": null,
+              "tool_call_made": false,
+              "status": "error",
+              "error": "Error code: 404 - {'error': {'message': 'All providers have been ignored. To change your default ignored providers, visit: https://openrouter.ai/settings/preferences', 'code': 404}}",
+              "response_content": null,
+              "tool_calls": null,
+              "finish_reason": null,
+              "model_used": null,
+              "timestamp": "2025-06-01T18:23:17.176395"
+            },
+            {
+              "model_id": "qwen/qwen3-32b",
+              "provider_name": "SambaNova",
+              "display_name": "SambaNova | qwen/qwen3-32b-04-28",
+              "supports_tools": null,
+              "tool_call_made": false,
+              "status": "error",
+              "error": "Error code: 404 - {'error': {'message': 'All providers have been ignored. To change your default ignored providers, visit: https://openrouter.ai/settings/preferences', 'code': 404}}",
+              "response_content": null,
+              "tool_calls": null,
+              "finish_reason": null,
+              "model_used": null,
+              "timestamp": "2025-06-01T18:23:17.563595"
+            },
+            {
+              "model_id": "qwen/qwen3-32b",
+              "provider_name": "SambaNova",
+              "display_name": "SambaNova | qwen/qwen3-32b-04-28",
+              "supports_tools": null,
+              "tool_call_made": false,
+              "status": "error",
+              "error": "Error code: 404 - {'error': {'message': 'All providers have been ignored. To change your default ignored providers, visit: https://openrouter.ai/settings/preferences', 'code': 404}}",
+              "response_content": null,
+              "tool_calls": null,
+              "finish_reason": null,
+              "model_used": null,
+              "timestamp": "2025-06-01T18:23:17.927004"
+            }
+          ],
+          "summary": {
+            "total_runs": 3,
+            "success_count": 0,
+            "error_count": 3,
+            "unclear_count": 0,
+            "no_tool_call_count": 0
+          },
+          "timestamp": "2025-06-01T18:23:18.005301"
+        }
+      ]
+    },
+    {
+      "model_id": "qwen/qwen3-32b:free",
+      "timestamp": "2025-06-01T18:23:19.859474",
+      "providers_tested": 1,
+      "providers": [
+        {
+          "model_id": "qwen/qwen3-32b:free",
+          "provider_name": "Chutes",
+          "display_name": "Chutes | qwen/qwen3-32b-04-28:free",
+          "test_runs": [
+            {
+              "model_id": "qwen/qwen3-32b:free",
+              "provider_name": "Chutes",
+              "display_name": "Chutes | qwen/qwen3-32b-04-28:free",
+              "supports_tools": false,
+              "tool_call_made": false,
+              "status": "error",
+              "error": "Error code: 404 - {'error': {'message': 'No endpoints found that support tool use. To learn more about provider routing, visit: https://openrouter.ai/docs/provider-routing', 'code': 404}}",
+              "response_content": null,
+              "tool_calls": null,
+              "finish_reason": null,
+              "model_used": null,
+              "timestamp": "2025-06-01T18:23:18.594519"
+            },
+            {
+              "model_id": "qwen/qwen3-32b:free",
+              "provider_name": "Chutes",
+              "display_name": "Chutes | qwen/qwen3-32b-04-28:free",
+              "supports_tools": false,
+              "tool_call_made": false,
+              "status": "error",
+              "error": "Error code: 404 - {'error': {'message': 'No endpoints found that support tool use. To learn more about provider routing, visit: https://openrouter.ai/docs/provider-routing', 'code': 404}}",
+              "response_content": null,
+              "tool_calls": null,
+              "finish_reason": null,
+              "model_used": null,
+              "timestamp": "2025-06-01T18:23:18.956278"
+            },
+            {
+              "model_id": "qwen/qwen3-32b:free",
+              "provider_name": "Chutes",
+              "display_name": "Chutes | qwen/qwen3-32b-04-28:free",
+              "supports_tools": false,
+              "tool_call_made": false,
+              "status": "error",
+              "error": "Error code: 404 - {'error': {'message': 'No endpoints found that support tool use. To learn more about provider routing, visit: https://openrouter.ai/docs/provider-routing', 'code': 404}}",
+              "response_content": null,
+              "tool_calls": null,
+              "finish_reason": null,
+              "model_used": null,
+              "timestamp": "2025-06-01T18:23:19.308807"
+            }
+          ],
+          "summary": {
+            "total_runs": 3,
+            "success_count": 0,
+            "error_count": 3,
+            "unclear_count": 0,
+            "no_tool_call_count": 0
+          },
+          "timestamp": "2025-06-01T18:23:19.358837"
+        }
+      ]
+    },
+    {
+      "model_id": "sarvamai/sarvam-m",
+      "timestamp": "2025-06-01T18:23:21.273981",
+      "providers_tested": 1,
+      "providers": [
+        {
+          "model_id": "sarvamai/sarvam-m",
+          "provider_name": "Parasail",
+          "display_name": "Parasail | sarvamai/sarvam-m",
+          "test_runs": [
+            {
+              "model_id": "sarvamai/sarvam-m",
+              "provider_name": "Parasail",
+              "display_name": "Parasail | sarvamai/sarvam-m",
+              "supports_tools": false,
+              "tool_call_made": false,
+              "status": "error",
+              "error": "Error code: 404 - {'error': {'message': 'No endpoints found that support tool use. To learn more about provider routing, visit: https://openrouter.ai/docs/provider-routing', 'code': 404}}",
+              "response_content": null,
+              "tool_calls": null,
+              "finish_reason": null,
+              "model_used": null,
+              "timestamp": "2025-06-01T18:23:19.977067"
+            },
+            {
+              "model_id": "sarvamai/sarvam-m",
+              "provider_name": "Parasail",
+              "display_name": "Parasail | sarvamai/sarvam-m",
+              "supports_tools": false,
+              "tool_call_made": false,
+              "status": "error",
+              "error": "Error code: 404 - {'error': {'message': 'No endpoints found that support tool use. To learn more about provider routing, visit: https://openrouter.ai/docs/provider-routing', 'code': 404}}",
+              "response_content": null,
+              "tool_calls": null,
+              "finish_reason": null,
+              "model_used": null,
+              "timestamp": "2025-06-01T18:23:20.321733"
+            },
+            {
+              "model_id": "sarvamai/sarvam-m",
+              "provider_name": "Parasail",
+              "display_name": "Parasail | sarvamai/sarvam-m",
+              "supports_tools": false,
+              "tool_call_made": false,
+              "status": "error",
+              "error": "Error code: 404 - {'error': {'message': 'No endpoints found that support tool use. To learn more about provider routing, visit: https://openrouter.ai/docs/provider-routing', 'code': 404}}",
+              "response_content": null,
+              "tool_calls": null,
+              "finish_reason": null,
+              "model_used": null,
+              "timestamp": "2025-06-01T18:23:20.728106"
+            }
+          ],
+          "summary": {
+            "total_runs": 3,
+            "success_count": 0,
+            "error_count": 3,
+            "unclear_count": 0,
+            "no_tool_call_count": 0
+          },
+          "timestamp": "2025-06-01T18:23:20.773348"
+        }
+      ]
+    },
+    {
+      "model_id": "sarvamai/sarvam-m:free",
+      "timestamp": "2025-06-01T18:23:22.617785",
+      "providers_tested": 1,
+      "providers": [
+        {
+          "model_id": "sarvamai/sarvam-m:free",
+          "provider_name": "Chutes",
+          "display_name": "Chutes | sarvamai/sarvam-m:free",
+          "test_runs": [
+            {
+              "model_id": "sarvamai/sarvam-m:free",
+              "provider_name": "Chutes",
+              "display_name": "Chutes | sarvamai/sarvam-m:free",
+              "supports_tools": false,
+              "tool_call_made": false,
+              "status": "error",
+              "error": "Error code: 404 - {'error': {'message': 'No endpoints found that support tool use. To learn more about provider routing, visit: https://openrouter.ai/docs/provider-routing', 'code': 404}}",
+              "response_content": null,
+              "tool_calls": null,
+              "finish_reason": null,
+              "model_used": null,
+              "timestamp": "2025-06-01T18:23:21.384320"
+            },
+            {
+              "model_id": "sarvamai/sarvam-m:free",
+              "provider_name": "Chutes",
+              "display_name": "Chutes | sarvamai/sarvam-m:free",
+              "supports_tools": false,
+              "tool_call_made": false,
+              "status": "error",
+              "error": "Error code: 404 - {'error': {'message': 'No endpoints found that support tool use. To learn more about provider routing, visit: https://openrouter.ai/docs/provider-routing', 'code': 404}}",
+              "response_content": null,
+              "tool_calls": null,
+              "finish_reason": null,
+              "model_used": null,
+              "timestamp": "2025-06-01T18:23:21.725136"
+            },
+            {
+              "model_id": "sarvamai/sarvam-m:free",
+              "provider_name": "Chutes",
+              "display_name": "Chutes | sarvamai/sarvam-m:free",
+              "supports_tools": false,
+              "tool_call_made": false,
+              "status": "error",
+              "error": "Error code: 404 - {'error': {'message': 'No endpoints found that support tool use. To learn more about provider routing, visit: https://openrouter.ai/docs/provider-routing', 'code': 404}}",
+              "response_content": null,
+              "tool_calls": null,
+              "finish_reason": null,
+              "model_used": null,
+              "timestamp": "2025-06-01T18:23:22.066986"
+            }
+          ],
+          "summary": {
+            "total_runs": 3,
+            "success_count": 0,
+            "error_count": 3,
+            "unclear_count": 0,
+            "no_tool_call_count": 0
+          },
+          "timestamp": "2025-06-01T18:23:22.117132"
+        }
+      ]
+    },
+    {
+      "model_id": "meta-llama/llama-4-maverick",
+      "timestamp": "2025-06-01T18:23:51.253757",
+      "providers_tested": 14,
+      "providers": [
+        {
+          "model_id": "meta-llama/llama-4-maverick",
+          "provider_name": "DeepInfra",
+          "display_name": "DeepInfra | meta-llama/llama-4-maverick-17b-128e-instruct",
+          "test_runs": [
+            {
+              "model_id": "meta-llama/llama-4-maverick",
+              "provider_name": "DeepInfra",
+              "display_name": "DeepInfra | meta-llama/llama-4-maverick-17b-128e-instruct",
+              "supports_tools": false,
+              "tool_call_made": false,
+              "status": "error",
+              "error": "Error code: 404 - {'error': {'message': 'No endpoints found that support tool use. To learn more about provider routing, visit: https://openrouter.ai/docs/provider-routing', 'code': 404}}",
+              "response_content": null,
+              "tool_calls": null,
+              "finish_reason": null,
+              "model_used": null,
+              "timestamp": "2025-06-01T18:23:22.745806"
+            },
+            {
+              "model_id": "meta-llama/llama-4-maverick",
+              "provider_name": "DeepInfra",
+              "display_name": "DeepInfra | meta-llama/llama-4-maverick-17b-128e-instruct",
+              "supports_tools": false,
+              "tool_call_made": false,
+              "status": "error",
+              "error": "Error code: 404 - {'error': {'message': 'No endpoints found that support tool use. To learn more about provider routing, visit: https://openrouter.ai/docs/provider-routing', 'code': 404}}",
+              "response_content": null,
+              "tool_calls": null,
+              "finish_reason": null,
+              "model_used": null,
+              "timestamp": "2025-06-01T18:23:23.095207"
+            },
+            {
+              "model_id": "meta-llama/llama-4-maverick",
+              "provider_name": "DeepInfra",
+              "display_name": "DeepInfra | meta-llama/llama-4-maverick-17b-128e-instruct",
+              "supports_tools": false,
+              "tool_call_made": false,
+              "status": "error",
+              "error": "Error code: 404 - {'error': {'message': 'No endpoints found that support tool use. To learn more about provider routing, visit: https://openrouter.ai/docs/provider-routing', 'code': 404}}",
+              "response_content": null,
+              "tool_calls": null,
+              "finish_reason": null,
+              "model_used": null,
+              "timestamp": "2025-06-01T18:23:23.507036"
+            }
+          ],
+          "summary": {
+            "total_runs": 3,
+            "success_count": 0,
+            "error_count": 3,
+            "unclear_count": 0,
+            "no_tool_call_count": 0
+          },
+          "timestamp": "2025-06-01T18:23:23.555448"
+        },
+        {
+          "model_id": "meta-llama/llama-4-maverick",
+          "provider_name": "Kluster",
+          "display_name": "Kluster | meta-llama/llama-4-maverick-17b-128e-instruct",
+          "test_runs": [
+            {
+              "model_id": "meta-llama/llama-4-maverick",
+              "provider_name": "Kluster",
+              "display_name": "Kluster | meta-llama/llama-4-maverick-17b-128e-instruct",
+              "supports_tools": false,
+              "tool_call_made": false,
+              "status": "error",
+              "error": "Error code: 404 - {'error': {'message': 'No endpoints found that support tool use. To learn more about provider routing, visit: https://openrouter.ai/docs/provider-routing', 'code': 404}}",
+              "response_content": null,
+              "tool_calls": null,
+              "finish_reason": null,
+              "model_used": null,
+              "timestamp": "2025-06-01T18:23:24.056132"
+            },
+            {
+              "model_id": "meta-llama/llama-4-maverick",
+              "provider_name": "Kluster",
+              "display_name": "Kluster | meta-llama/llama-4-maverick-17b-128e-instruct",
+              "supports_tools": false,
+              "tool_call_made": false,
+              "status": "error",
+              "error": "Error code: 404 - {'error': {'message': 'No endpoints found that support tool use. To learn more about provider routing, visit: https://openrouter.ai/docs/provider-routing', 'code': 404}}",
+              "response_content": null,
+              "tool_calls": null,
+              "finish_reason": null,
+              "model_used": null,
+              "timestamp": "2025-06-01T18:23:24.405873"
+            },
+            {
+              "model_id": "meta-llama/llama-4-maverick",
+              "provider_name": "Kluster",
+              "display_name": "Kluster | meta-llama/llama-4-maverick-17b-128e-instruct",
+              "supports_tools": false,
+              "tool_call_made": false,
+              "status": "error",
+              "error": "Error code: 404 - {'error': {'message': 'No endpoints found that support tool use. To learn more about provider routing, visit: https://openrouter.ai/docs/provider-routing', 'code': 404}}",
+              "response_content": null,
+              "tool_calls": null,
+              "finish_reason": null,
+              "model_used": null,
+              "timestamp": "2025-06-01T18:23:24.755405"
+            }
+          ],
+          "summary": {
+            "total_runs": 3,
+            "success_count": 0,
+            "error_count": 3,
+            "unclear_count": 0,
+            "no_tool_call_count": 0
+          },
+          "timestamp": "2025-06-01T18:23:24.799750"
+        },
+        {
+          "model_id": "meta-llama/llama-4-maverick",
+          "provider_name": "Novita",
+          "display_name": "Novita | meta-llama/llama-4-maverick-17b-128e-instruct",
+          "test_runs": [
+            {
+              "model_id": "meta-llama/llama-4-maverick",
+              "provider_name": "Novita",
+              "display_name": "Novita | meta-llama/llama-4-maverick-17b-128e-instruct",
+              "supports_tools": false,
+              "tool_call_made": false,
+              "status": "error",
+              "error": "Error code: 404 - {'error': {'message': 'No endpoints found that support tool use. To learn more about provider routing, visit: https://openrouter.ai/docs/provider-routing', 'code': 404}}",
+              "response_content": null,
+              "tool_calls": null,
+              "finish_reason": null,
+              "model_used": null,
+              "timestamp": "2025-06-01T18:23:25.300419"
+            },
+            {
+              "model_id": "meta-llama/llama-4-maverick",
+              "provider_name": "Novita",
+              "display_name": "Novita | meta-llama/llama-4-maverick-17b-128e-instruct",
+              "supports_tools": false,
+              "tool_call_made": false,
+              "status": "error",
+              "error": "Error code: 404 - {'error': {'message': 'No endpoints found that support tool use. To learn more about provider routing, visit: https://openrouter.ai/docs/provider-routing', 'code': 404}}",
+              "response_content": null,
+              "tool_calls": null,
+              "finish_reason": null,
+              "model_used": null,
+              "timestamp": "2025-06-01T18:23:25.653885"
+            },
+            {
+              "model_id": "meta-llama/llama-4-maverick",
+              "provider_name": "Novita",
+              "display_name": "Novita | meta-llama/llama-4-maverick-17b-128e-instruct",
+              "supports_tools": false,
+              "tool_call_made": false,
+              "status": "error",
+              "error": "Error code: 404 - {'error': {'message': 'No endpoints found that support tool use. To learn more about provider routing, visit: https://openrouter.ai/docs/provider-routing', 'code': 404}}",
+              "response_content": null,
+              "tool_calls": null,
+              "finish_reason": null,
+              "model_used": null,
+              "timestamp": "2025-06-01T18:23:25.999008"
+            }
+          ],
+          "summary": {
+            "total_runs": 3,
+            "success_count": 0,
+            "error_count": 3,
+            "unclear_count": 0,
+            "no_tool_call_count": 0
+          },
+          "timestamp": "2025-06-01T18:23:26.108170"
+        },
+        {
+          "model_id": "meta-llama/llama-4-maverick",
+          "provider_name": "Lambda",
+          "display_name": "Lambda | meta-llama/llama-4-maverick-17b-128e-instruct",
+          "test_runs": [
+            {
+              "model_id": "meta-llama/llama-4-maverick",
+              "provider_name": "Lambda",
+              "display_name": "Lambda | meta-llama/llama-4-maverick-17b-128e-instruct",
+              "supports_tools": true,
+              "tool_call_made": true,
+              "status": "success",
+              "error": null,
+              "response_content": null,
+              "tool_calls": [
+                {
+                  "id": "chatcmpl-tool-9aec4dd994324e8d8251d35347fa8fa5",
+                  "type": "function",
+                  "function": {
+                    "name": "get_weather",
+                    "arguments": "{\"location\": \"San Francisco, CA\", \"unit\": \"fahrenheit\"}"
+                  }
+                }
+              ],
+              "finish_reason": "tool_calls",
+              "model_used": "meta-llama/llama-4-maverick",
+              "timestamp": "2025-06-01T18:23:26.608834"
+            },
+            {
+              "model_id": "meta-llama/llama-4-maverick",
+              "provider_name": "Lambda",
+              "display_name": "Lambda | meta-llama/llama-4-maverick-17b-128e-instruct",
+              "supports_tools": true,
+              "tool_call_made": true,
+              "status": "success",
+              "error": null,
+              "response_content": null,
+              "tool_calls": [
+                {
+                  "id": "chatcmpl-tool-bbacb270a956465bbf7eb8a46f1ca2ac",
+                  "type": "function",
+                  "function": {
+                    "name": "get_weather",
+                    "arguments": "{\"location\": \"San Francisco, CA\", \"unit\": \"fahrenheit\"}"
+                  }
+                }
+              ],
+              "finish_reason": "tool_calls",
+              "model_used": "meta-llama/llama-4-maverick",
+              "timestamp": "2025-06-01T18:23:31.311600"
+            },
+            {
+              "model_id": "meta-llama/llama-4-maverick",
+              "provider_name": "Lambda",
+              "display_name": "Lambda | meta-llama/llama-4-maverick-17b-128e-instruct",
+              "supports_tools": true,
+              "tool_call_made": true,
+              "status": "success",
+              "error": null,
+              "response_content": null,
+              "tool_calls": [
+                {
+                  "id": "chatcmpl-tool-e55f6083cf2e46e19ef18db6e77a05f9",
+                  "type": "function",
+                  "function": {
+                    "name": "get_weather",
+                    "arguments": "{\"location\": \"San Francisco, CA\", \"unit\": \"fahrenheit\"}"
+                  }
+                }
+              ],
+              "finish_reason": "tool_calls",
+              "model_used": "meta-llama/llama-4-maverick",
+              "timestamp": "2025-06-01T18:23:32.046159"
+            }
+          ],
+          "summary": {
+            "total_runs": 3,
+            "success_count": 3,
+            "error_count": 0,
+            "unclear_count": 0,
+            "no_tool_call_count": 0
+          },
+          "timestamp": "2025-06-01T18:23:32.484307"
+        },
+        {
+          "model_id": "meta-llama/llama-4-maverick",
+          "provider_name": "BaseTen",
+          "display_name": "BaseTen | meta-llama/llama-4-maverick-17b-128e-instruct",
+          "test_runs": [
+            {
+              "model_id": "meta-llama/llama-4-maverick",
+              "provider_name": "BaseTen",
+              "display_name": "BaseTen | meta-llama/llama-4-maverick-17b-128e-instruct",
+              "supports_tools": true,
+              "tool_call_made": true,
+              "status": "success",
+              "error": null,
+              "response_content": null,
+              "tool_calls": [
+                {
+                  "id": "0",
+                  "type": "function",
+                  "function": {
+                    "name": "get_weather",
+                    "arguments": "{\"location\": \"San Francisco, CA\", \"unit\": \"fahrenheit\"}"
+                  }
+                }
+              ],
+              "finish_reason": "tool_calls",
+              "model_used": "meta-llama/llama-4-maverick",
+              "timestamp": "2025-06-01T18:23:32.984979"
+            },
+            {
+              "model_id": "meta-llama/llama-4-maverick",
+              "provider_name": "BaseTen",
+              "display_name": "BaseTen | meta-llama/llama-4-maverick-17b-128e-instruct",
+              "supports_tools": true,
+              "tool_call_made": true,
+              "status": "success",
+              "error": null,
+              "response_content": null,
+              "tool_calls": [
+                {
+                  "id": "0",
+                  "type": "function",
+                  "function": {
+                    "name": "get_weather",
+                    "arguments": "{\"location\": \"San Francisco, CA\"}"
+                  }
+                }
+              ],
+              "finish_reason": "tool_calls",
+              "model_used": "meta-llama/llama-4-maverick",
+              "timestamp": "2025-06-01T18:23:34.140765"
+            },
+            {
+              "model_id": "meta-llama/llama-4-maverick",
+              "provider_name": "BaseTen",
+              "display_name": "BaseTen | meta-llama/llama-4-maverick-17b-128e-instruct",
+              "supports_tools": true,
+              "tool_call_made": true,
+              "status": "success",
+              "error": null,
+              "response_content": null,
+              "tool_calls": [
+                {
+                  "id": "0",
+                  "type": "function",
+                  "function": {
+                    "name": "get_weather",
+                    "arguments": "{\"location\": \"San Francisco, CA\"}"
+                  }
+                }
+              ],
+              "finish_reason": "tool_calls",
+              "model_used": "meta-llama/llama-4-maverick",
+              "timestamp": "2025-06-01T18:23:35.412574"
+            }
+          ],
+          "summary": {
+            "total_runs": 3,
+            "success_count": 3,
+            "error_count": 0,
+            "unclear_count": 0,
+            "no_tool_call_count": 0
+          },
+          "timestamp": "2025-06-01T18:23:36.226424"
+        },
+        {
+          "model_id": "meta-llama/llama-4-maverick",
+          "provider_name": "Parasail",
+          "display_name": "Parasail | meta-llama/llama-4-maverick-17b-128e-instruct",
+          "test_runs": [
+            {
+              "model_id": "meta-llama/llama-4-maverick",
+              "provider_name": "Parasail",
+              "display_name": "Parasail | meta-llama/llama-4-maverick-17b-128e-instruct",
+              "supports_tools": false,
+              "tool_call_made": false,
+              "status": "error",
+              "error": "Error code: 404 - {'error': {'message': 'No endpoints found that support tool use. To learn more about provider routing, visit: https://openrouter.ai/docs/provider-routing', 'code': 404}}",
+              "response_content": null,
+              "tool_calls": null,
+              "finish_reason": null,
+              "model_used": null,
+              "timestamp": "2025-06-01T18:23:36.727101"
+            },
+            {
+              "model_id": "meta-llama/llama-4-maverick",
+              "provider_name": "Parasail",
+              "display_name": "Parasail | meta-llama/llama-4-maverick-17b-128e-instruct",
+              "supports_tools": false,
+              "tool_call_made": false,
+              "status": "error",
+              "error": "Error code: 404 - {'error': {'message': 'No endpoints found that support tool use. To learn more about provider routing, visit: https://openrouter.ai/docs/provider-routing', 'code': 404}}",
+              "response_content": null,
+              "tool_calls": null,
+              "finish_reason": null,
+              "model_used": null,
+              "timestamp": "2025-06-01T18:23:37.077926"
+            },
+            {
+              "model_id": "meta-llama/llama-4-maverick",
+              "provider_name": "Parasail",
+              "display_name": "Parasail | meta-llama/llama-4-maverick-17b-128e-instruct",
+              "supports_tools": false,
+              "tool_call_made": false,
+              "status": "error",
+              "error": "Error code: 404 - {'error': {'message': 'No endpoints found that support tool use. To learn more about provider routing, visit: https://openrouter.ai/docs/provider-routing', 'code': 404}}",
+              "response_content": null,
+              "tool_calls": null,
+              "finish_reason": null,
+              "model_used": null,
+              "timestamp": "2025-06-01T18:23:37.432903"
+            }
+          ],
+          "summary": {
+            "total_runs": 3,
+            "success_count": 0,
+            "error_count": 3,
+            "unclear_count": 0,
+            "no_tool_call_count": 0
+          },
+          "timestamp": "2025-06-01T18:23:37.479673"
+        },
+        {
+          "model_id": "meta-llama/llama-4-maverick",
+          "provider_name": "Cent-ML",
+          "display_name": "Cent-ML | meta-llama/llama-4-maverick-17b-128e-instruct",
+          "test_runs": [
+            {
+              "model_id": "meta-llama/llama-4-maverick",
+              "provider_name": "Cent-ML",
+              "display_name": "Cent-ML | meta-llama/llama-4-maverick-17b-128e-instruct",
+              "supports_tools": false,
+              "tool_call_made": false,
+              "status": "error",
+              "error": "Error code: 404 - {'error': {'message': 'No endpoints found that support tool use. To learn more about provider routing, visit: https://openrouter.ai/docs/provider-routing', 'code': 404}}",
+              "response_content": null,
+              "tool_calls": null,
+              "finish_reason": null,
+              "model_used": null,
+              "timestamp": "2025-06-01T18:23:37.980361"
+            },
+            {
+              "model_id": "meta-llama/llama-4-maverick",
+              "provider_name": "Cent-ML",
+              "display_name": "Cent-ML | meta-llama/llama-4-maverick-17b-128e-instruct",
+              "supports_tools": false,
+              "tool_call_made": false,
+              "status": "error",
+              "error": "Error code: 404 - {'error': {'message': 'No endpoints found that support tool use. To learn more about provider routing, visit: https://openrouter.ai/docs/provider-routing', 'code': 404}}",
+              "response_content": null,
+              "tool_calls": null,
+              "finish_reason": null,
+              "model_used": null,
+              "timestamp": "2025-06-01T18:23:38.381066"
+            },
+            {
+              "model_id": "meta-llama/llama-4-maverick",
+              "provider_name": "Cent-ML",
+              "display_name": "Cent-ML | meta-llama/llama-4-maverick-17b-128e-instruct",
+              "supports_tools": false,
+              "tool_call_made": false,
+              "status": "error",
+              "error": "Error code: 404 - {'error': {'message': 'No endpoints found that support tool use. To learn more about provider routing, visit: https://openrouter.ai/docs/provider-routing', 'code': 404}}",
+              "response_content": null,
+              "tool_calls": null,
+              "finish_reason": null,
+              "model_used": null,
+              "timestamp": "2025-06-01T18:23:38.728291"
+            }
+          ],
+          "summary": {
+            "total_runs": 3,
+            "success_count": 0,
+            "error_count": 3,
+            "unclear_count": 0,
+            "no_tool_call_count": 0
+          },
+          "timestamp": "2025-06-01T18:23:38.774150"
+        },
+        {
+          "model_id": "meta-llama/llama-4-maverick",
+          "provider_name": "Groq",
+          "display_name": "Groq | meta-llama/llama-4-maverick-17b-128e-instruct",
+          "test_runs": [
+            {
+              "model_id": "meta-llama/llama-4-maverick",
+              "provider_name": "Groq",
+              "display_name": "Groq | meta-llama/llama-4-maverick-17b-128e-instruct",
+              "supports_tools": true,
+              "tool_call_made": true,
+              "status": "success",
+              "error": null,
+              "response_content": null,
+              "tool_calls": [
+                {
+                  "id": "call_f6k5",
+                  "type": "function",
+                  "function": {
+                    "name": "get_weather",
+                    "arguments": "{\"location\":\"San Francisco, CA\",\"unit\":\"fahrenheit\"}"
+                  }
+                }
+              ],
+              "finish_reason": "tool_calls",
+              "model_used": "meta-llama/llama-4-maverick",
+              "timestamp": "2025-06-01T18:23:39.274813"
+            },
+            {
+              "model_id": "meta-llama/llama-4-maverick",
+              "provider_name": "Groq",
+              "display_name": "Groq | meta-llama/llama-4-maverick-17b-128e-instruct",
+              "supports_tools": true,
+              "tool_call_made": true,
+              "status": "success",
+              "error": null,
+              "response_content": null,
+              "tool_calls": [
+                {
+                  "id": "call_nqgp",
+                  "type": "function",
+                  "function": {
+                    "name": "get_weather",
+                    "arguments": "{\"location\":\"San Francisco, CA\",\"unit\":\"fahrenheit\"}"
+                  }
+                }
+              ],
+              "finish_reason": "tool_calls",
+              "model_used": "meta-llama/llama-4-maverick",
+              "timestamp": "2025-06-01T18:23:39.813411"
+            },
+            {
+              "model_id": "meta-llama/llama-4-maverick",
+              "provider_name": "Groq",
+              "display_name": "Groq | meta-llama/llama-4-maverick-17b-128e-instruct",
+              "supports_tools": true,
+              "tool_call_made": true,
+              "status": "success",
+              "error": null,
+              "response_content": null,
+              "tool_calls": [
+                {
+                  "id": "call_dkmr",
+                  "type": "function",
+                  "function": {
+                    "name": "get_weather",
+                    "arguments": "{\"location\":\"San Francisco, CA\",\"unit\":\"fahrenheit\"}"
+                  }
+                }
+              ],
+              "finish_reason": "tool_calls",
+              "model_used": "meta-llama/llama-4-maverick",
+              "timestamp": "2025-06-01T18:23:40.342840"
+            }
+          ],
+          "summary": {
+            "total_runs": 3,
+            "success_count": 3,
+            "error_count": 0,
+            "unclear_count": 0,
+            "no_tool_call_count": 0
+          },
+          "timestamp": "2025-06-01T18:23:40.581953"
+        },
+        {
+          "model_id": "meta-llama/llama-4-maverick",
+          "provider_name": "NCompass",
+          "display_name": "NCompass | meta-llama/llama-4-maverick-17b-128e-instruct",
+          "test_runs": [
+            {
+              "model_id": "meta-llama/llama-4-maverick",
+              "provider_name": "NCompass",
+              "display_name": "NCompass | meta-llama/llama-4-maverick-17b-128e-instruct",
+              "supports_tools": false,
+              "tool_call_made": false,
+              "status": "error",
+              "error": "Error code: 404 - {'error': {'message': 'No endpoints found that support tool use. To learn more about provider routing, visit: https://openrouter.ai/docs/provider-routing', 'code': 404}}",
+              "response_content": null,
+              "tool_calls": null,
+              "finish_reason": null,
+              "model_used": null,
+              "timestamp": "2025-06-01T18:23:41.082625"
+            },
+            {
+              "model_id": "meta-llama/llama-4-maverick",
+              "provider_name": "NCompass",
+              "display_name": "NCompass | meta-llama/llama-4-maverick-17b-128e-instruct",
+              "supports_tools": false,
+              "tool_call_made": false,
+              "status": "error",
+              "error": "Error code: 404 - {'error': {'message': 'No endpoints found that support tool use. To learn more about provider routing, visit: https://openrouter.ai/docs/provider-routing', 'code': 404}}",
+              "response_content": null,
+              "tool_calls": null,
+              "finish_reason": null,
+              "model_used": null,
+              "timestamp": "2025-06-01T18:23:41.433323"
+            },
+            {
+              "model_id": "meta-llama/llama-4-maverick",
+              "provider_name": "NCompass",
+              "display_name": "NCompass | meta-llama/llama-4-maverick-17b-128e-instruct",
+              "supports_tools": false,
+              "tool_call_made": false,
+              "status": "error",
+              "error": "Error code: 404 - {'error': {'message': 'No endpoints found that support tool use. To learn more about provider routing, visit: https://openrouter.ai/docs/provider-routing', 'code': 404}}",
+              "response_content": null,
+              "tool_calls": null,
+              "finish_reason": null,
+              "model_used": null,
+              "timestamp": "2025-06-01T18:23:41.839604"
+            }
+          ],
+          "summary": {
+            "total_runs": 3,
+            "success_count": 0,
+            "error_count": 3,
+            "unclear_count": 0,
+            "no_tool_call_count": 0
+          },
+          "timestamp": "2025-06-01T18:23:41.886421"
+        },
+        {
+          "model_id": "meta-llama/llama-4-maverick",
+          "provider_name": "Fireworks",
+          "display_name": "Fireworks | meta-llama/llama-4-maverick-17b-128e-instruct",
+          "test_runs": [
+            {
+              "model_id": "meta-llama/llama-4-maverick",
+              "provider_name": "Fireworks",
+              "display_name": "Fireworks | meta-llama/llama-4-maverick-17b-128e-instruct",
+              "supports_tools": true,
+              "tool_call_made": true,
+              "status": "success",
+              "error": null,
+              "response_content": null,
+              "tool_calls": [
+                {
+                  "id": "call_LXFvWeYljiJzK1NvVwuPYPRc",
+                  "type": "function",
+                  "function": {
+                    "name": "get_weather",
+                    "arguments": "{\"location\": \"San Francisco, CA\"}"
+                  }
+                }
+              ],
+              "finish_reason": "tool_calls",
+              "model_used": "meta-llama/llama-4-maverick",
+              "timestamp": "2025-06-01T18:23:42.387075"
+            },
+            {
+              "model_id": "meta-llama/llama-4-maverick",
+              "provider_name": "Fireworks",
+              "display_name": "Fireworks | meta-llama/llama-4-maverick-17b-128e-instruct",
+              "supports_tools": true,
+              "tool_call_made": true,
+              "status": "success",
+              "error": null,
+              "response_content": null,
+              "tool_calls": [
+                {
+                  "id": "call_hq5CgLtEqv2WKU774XH1C58I",
+                  "type": "function",
+                  "function": {
+                    "name": "get_weather",
+                    "arguments": "{\"location\": \"San Francisco, CA\", \"unit\": \"fahrenheit\"}"
+                  }
+                }
+              ],
+              "finish_reason": "tool_calls",
+              "model_used": "meta-llama/llama-4-maverick",
+              "timestamp": "2025-06-01T18:23:43.148937"
+            },
+            {
+              "model_id": "meta-llama/llama-4-maverick",
+              "provider_name": "Fireworks",
+              "display_name": "Fireworks | meta-llama/llama-4-maverick-17b-128e-instruct",
+              "supports_tools": true,
+              "tool_call_made": true,
+              "status": "success",
+              "error": null,
+              "response_content": null,
+              "tool_calls": [
+                {
+                  "id": "call_eLXSvWzGGnmnsHNjTR71dkzW",
+                  "type": "function",
+                  "function": {
+                    "name": "get_weather",
+                    "arguments": "{\"location\": \"San Francisco, CA\", \"unit\": \"fahrenheit\"}"
+                  }
+                }
+              ],
+              "finish_reason": "tool_calls",
+              "model_used": "meta-llama/llama-4-maverick",
+              "timestamp": "2025-06-01T18:23:43.877070"
+            }
+          ],
+          "summary": {
+            "total_runs": 3,
+            "success_count": 3,
+            "error_count": 0,
+            "unclear_count": 0,
+            "no_tool_call_count": 0
+          },
+          "timestamp": "2025-06-01T18:23:44.305609"
+        },
+        {
+          "model_id": "meta-llama/llama-4-maverick",
+          "provider_name": "GMICloud",
+          "display_name": "GMICloud | meta-llama/llama-4-maverick-17b-128e-instruct",
+          "test_runs": [
+            {
+              "model_id": "meta-llama/llama-4-maverick",
+              "provider_name": "GMICloud",
+              "display_name": "GMICloud | meta-llama/llama-4-maverick-17b-128e-instruct",
+              "supports_tools": false,
+              "tool_call_made": false,
+              "status": "error",
+              "error": "Error code: 404 - {'error': {'message': 'No endpoints found that support tool use. To learn more about provider routing, visit: https://openrouter.ai/docs/provider-routing', 'code': 404}}",
+              "response_content": null,
+              "tool_calls": null,
+              "finish_reason": null,
+              "model_used": null,
+              "timestamp": "2025-06-01T18:23:44.806282"
+            },
+            {
+              "model_id": "meta-llama/llama-4-maverick",
+              "provider_name": "GMICloud",
+              "display_name": "GMICloud | meta-llama/llama-4-maverick-17b-128e-instruct",
+              "supports_tools": false,
+              "tool_call_made": false,
+              "status": "error",
+              "error": "Error code: 404 - {'error': {'message': 'No endpoints found that support tool use. To learn more about provider routing, visit: https://openrouter.ai/docs/provider-routing', 'code': 404}}",
+              "response_content": null,
+              "tool_calls": null,
+              "finish_reason": null,
+              "model_used": null,
+              "timestamp": "2025-06-01T18:23:45.163633"
+            },
+            {
+              "model_id": "meta-llama/llama-4-maverick",
+              "provider_name": "GMICloud",
+              "display_name": "GMICloud | meta-llama/llama-4-maverick-17b-128e-instruct",
+              "supports_tools": false,
+              "tool_call_made": false,
+              "status": "error",
+              "error": "Error code: 404 - {'error': {'message': 'No endpoints found that support tool use. To learn more about provider routing, visit: https://openrouter.ai/docs/provider-routing', 'code': 404}}",
+              "response_content": null,
+              "tool_calls": null,
+              "finish_reason": null,
+              "model_used": null,
+              "timestamp": "2025-06-01T18:23:45.515352"
+            }
+          ],
+          "summary": {
+            "total_runs": 3,
+            "success_count": 0,
+            "error_count": 3,
+            "unclear_count": 0,
+            "no_tool_call_count": 0
+          },
+          "timestamp": "2025-06-01T18:23:45.615287"
+        },
+        {
+          "model_id": "meta-llama/llama-4-maverick",
+          "provider_name": "Together",
+          "display_name": "Together | meta-llama/llama-4-maverick-17b-128e-instruct",
+          "test_runs": [
+            {
+              "model_id": "meta-llama/llama-4-maverick",
+              "provider_name": "Together",
+              "display_name": "Together | meta-llama/llama-4-maverick-17b-128e-instruct",
+              "supports_tools": true,
+              "tool_call_made": true,
+              "status": "success",
+              "error": null,
+              "response_content": null,
+              "tool_calls": [
+                {
+                  "id": "call_7sotksfe778p7bfgz0r3dw89",
+                  "type": "function",
+                  "function": {
+                    "name": "get_weather",
+                    "arguments": "{\"location\":\"San Francisco, CA\",\"unit\":\"fahrenheit\"}"
+                  }
+                }
+              ],
+              "finish_reason": "tool_calls",
+              "model_used": "meta-llama/llama-4-maverick",
+              "timestamp": "2025-06-01T18:23:46.115952"
+            },
+            {
+              "model_id": "meta-llama/llama-4-maverick",
+              "provider_name": "Together",
+              "display_name": "Together | meta-llama/llama-4-maverick-17b-128e-instruct",
+              "supports_tools": true,
+              "tool_call_made": true,
+              "status": "success",
+              "error": null,
+              "response_content": null,
+              "tool_calls": [
+                {
+                  "id": "call_r4n9q9ek6jsg0u9nxa7y7va6",
+                  "type": "function",
+                  "function": {
+                    "name": "get_weather",
+                    "arguments": "{\"location\":\"San Francisco, CA\",\"unit\":\"fahrenheit\"}"
+                  }
+                }
+              ],
+              "finish_reason": "tool_calls",
+              "model_used": "meta-llama/llama-4-maverick",
+              "timestamp": "2025-06-01T18:23:46.999941"
+            },
+            {
+              "model_id": "meta-llama/llama-4-maverick",
+              "provider_name": "Together",
+              "display_name": "Together | meta-llama/llama-4-maverick-17b-128e-instruct",
+              "supports_tools": true,
+              "tool_call_made": true,
+              "status": "success",
+              "error": null,
+              "response_content": null,
+              "tool_calls": [
+                {
+                  "id": "call_6sguvn1r1cq06tx0pmrcbrjf",
+                  "type": "function",
+                  "function": {
+                    "name": "get_weather",
+                    "arguments": "{\"location\":\"San Francisco, CA\",\"unit\":\"fahrenheit\"}"
+                  }
+                }
+              ],
+              "finish_reason": "tool_calls",
+              "model_used": "meta-llama/llama-4-maverick",
+              "timestamp": "2025-06-01T18:23:47.748297"
+            }
+          ],
+          "summary": {
+            "total_runs": 3,
+            "success_count": 3,
+            "error_count": 0,
+            "unclear_count": 0,
+            "no_tool_call_count": 0
+          },
+          "timestamp": "2025-06-01T18:23:48.197153"
+        },
+        {
+          "model_id": "meta-llama/llama-4-maverick",
+          "provider_name": "Google",
+          "display_name": "Google | meta-llama/llama-4-maverick-17b-128e-instruct",
+          "test_runs": [
+            {
+              "model_id": "meta-llama/llama-4-maverick",
+              "provider_name": "Google",
+              "display_name": "Google | meta-llama/llama-4-maverick-17b-128e-instruct",
+              "supports_tools": false,
+              "tool_call_made": false,
+              "status": "error",
+              "error": "Error code: 404 - {'error': {'message': 'No endpoints found that support tool use. To learn more about provider routing, visit: https://openrouter.ai/docs/provider-routing', 'code': 404}}",
+              "response_content": null,
+              "tool_calls": null,
+              "finish_reason": null,
+              "model_used": null,
+              "timestamp": "2025-06-01T18:23:48.697805"
+            },
+            {
+              "model_id": "meta-llama/llama-4-maverick",
+              "provider_name": "Google",
+              "display_name": "Google | meta-llama/llama-4-maverick-17b-128e-instruct",
+              "supports_tools": false,
+              "tool_call_made": false,
+              "status": "error",
+              "error": "Error code: 404 - {'error': {'message': 'No endpoints found that support tool use. To learn more about provider routing, visit: https://openrouter.ai/docs/provider-routing', 'code': 404}}",
+              "response_content": null,
+              "tool_calls": null,
+              "finish_reason": null,
+              "model_used": null,
+              "timestamp": "2025-06-01T18:23:49.044390"
+            },
+            {
+              "model_id": "meta-llama/llama-4-maverick",
+              "provider_name": "Google",
+              "display_name": "Google | meta-llama/llama-4-maverick-17b-128e-instruct",
+              "supports_tools": false,
+              "tool_call_made": false,
+              "status": "error",
+              "error": "Error code: 404 - {'error': {'message': 'No endpoints found that support tool use. To learn more about provider routing, visit: https://openrouter.ai/docs/provider-routing', 'code': 404}}",
+              "response_content": null,
+              "tool_calls": null,
+              "finish_reason": null,
+              "model_used": null,
+              "timestamp": "2025-06-01T18:23:49.399559"
+            }
+          ],
+          "summary": {
+            "total_runs": 3,
+            "success_count": 0,
+            "error_count": 3,
+            "unclear_count": 0,
+            "no_tool_call_count": 0
+          },
+          "timestamp": "2025-06-01T18:23:49.448399"
+        },
+        {
+          "model_id": "meta-llama/llama-4-maverick",
+          "provider_name": "SambaNova",
+          "display_name": "SambaNova | meta-llama/llama-4-maverick-17b-128e-instruct",
+          "test_runs": [
+            {
+              "model_id": "meta-llama/llama-4-maverick",
+              "provider_name": "SambaNova",
+              "display_name": "SambaNova | meta-llama/llama-4-maverick-17b-128e-instruct",
+              "supports_tools": null,
+              "tool_call_made": false,
+              "status": "error",
+              "error": "Error code: 404 - {'error': {'message': 'All providers have been ignored. To change your default ignored providers, visit: https://openrouter.ai/settings/preferences', 'code': 404}}",
+              "response_content": null,
+              "tool_calls": null,
+              "finish_reason": null,
+              "model_used": null,
+              "timestamp": "2025-06-01T18:23:49.949047"
+            },
+            {
+              "model_id": "meta-llama/llama-4-maverick",
+              "provider_name": "SambaNova",
+              "display_name": "SambaNova | meta-llama/llama-4-maverick-17b-128e-instruct",
+              "supports_tools": null,
+              "tool_call_made": false,
+              "status": "error",
+              "error": "Error code: 404 - {'error': {'message': 'All providers have been ignored. To change your default ignored providers, visit: https://openrouter.ai/settings/preferences', 'code': 404}}",
+              "response_content": null,
+              "tool_calls": null,
+              "finish_reason": null,
+              "model_used": null,
+              "timestamp": "2025-06-01T18:23:50.358076"
+            },
+            {
+              "model_id": "meta-llama/llama-4-maverick",
+              "provider_name": "SambaNova",
+              "display_name": "SambaNova | meta-llama/llama-4-maverick-17b-128e-instruct",
+              "supports_tools": null,
+              "tool_call_made": false,
+              "status": "error",
+              "error": "Error code: 404 - {'error': {'message': 'All providers have been ignored. To change your default ignored providers, visit: https://openrouter.ai/settings/preferences', 'code': 404}}",
+              "response_content": null,
+              "tool_calls": null,
+              "finish_reason": null,
+              "model_used": null,
+              "timestamp": "2025-06-01T18:23:50.710655"
+            }
+          ],
+          "summary": {
+            "total_runs": 3,
+            "success_count": 0,
+            "error_count": 3,
+            "unclear_count": 0,
+            "no_tool_call_count": 0
+          },
+          "timestamp": "2025-06-01T18:23:50.753110"
+        }
+      ]
+    },
+    {
+      "model_id": "meta-llama/llama-4-maverick:free",
+      "timestamp": "2025-06-01T18:23:55.254875",
+      "providers_tested": 2,
+      "providers": [
+        {
+          "model_id": "meta-llama/llama-4-maverick:free",
+          "provider_name": "Chutes",
+          "display_name": "Chutes | meta-llama/llama-4-maverick-17b-128e-instruct:free",
+          "test_runs": [
+            {
+              "model_id": "meta-llama/llama-4-maverick:free",
+              "provider_name": "Chutes",
+              "display_name": "Chutes | meta-llama/llama-4-maverick-17b-128e-instruct:free",
+              "supports_tools": false,
+              "tool_call_made": false,
+              "status": "error",
+              "error": "Error code: 404 - {'error': {'message': 'No endpoints found that support tool use. To learn more about provider routing, visit: https://openrouter.ai/docs/provider-routing', 'code': 404}}",
+              "response_content": null,
+              "tool_calls": null,
+              "finish_reason": null,
+              "model_used": null,
+              "timestamp": "2025-06-01T18:23:51.346104"
+            },
+            {
+              "model_id": "meta-llama/llama-4-maverick:free",
+              "provider_name": "Chutes",
+              "display_name": "Chutes | meta-llama/llama-4-maverick-17b-128e-instruct:free",
+              "supports_tools": false,
+              "tool_call_made": false,
+              "status": "error",
+              "error": "Error code: 404 - {'error': {'message': 'No endpoints found that support tool use. To learn more about provider routing, visit: https://openrouter.ai/docs/provider-routing', 'code': 404}}",
+              "response_content": null,
+              "tool_calls": null,
+              "finish_reason": null,
+              "model_used": null,
+              "timestamp": "2025-06-01T18:23:51.692734"
+            },
+            {
+              "model_id": "meta-llama/llama-4-maverick:free",
+              "provider_name": "Chutes",
+              "display_name": "Chutes | meta-llama/llama-4-maverick-17b-128e-instruct:free",
+              "supports_tools": false,
+              "tool_call_made": false,
+              "status": "error",
+              "error": "Error code: 404 - {'error': {'message': 'No endpoints found that support tool use. To learn more about provider routing, visit: https://openrouter.ai/docs/provider-routing', 'code': 404}}",
+              "response_content": null,
+              "tool_calls": null,
+              "finish_reason": null,
+              "model_used": null,
+              "timestamp": "2025-06-01T18:23:52.038586"
+            }
+          ],
+          "summary": {
+            "total_runs": 3,
+            "success_count": 0,
+            "error_count": 3,
+            "unclear_count": 0,
+            "no_tool_call_count": 0
+          },
+          "timestamp": "2025-06-01T18:23:52.097686"
+        },
+        {
+          "model_id": "meta-llama/llama-4-maverick:free",
+          "provider_name": "Meta",
+          "display_name": "Meta | meta-llama/llama-4-maverick-17b-128e-instruct:free",
+          "test_runs": [
+            {
+              "model_id": "meta-llama/llama-4-maverick:free",
+              "provider_name": "Meta",
+              "display_name": "Meta | meta-llama/llama-4-maverick-17b-128e-instruct:free",
+              "supports_tools": true,
+              "tool_call_made": true,
+              "status": "success",
+              "error": null,
+              "response_content": null,
+              "tool_calls": [
+                {
+                  "id": "da783157-03cf-4fba-83c7-034b2fe1cdc1",
+                  "type": "function",
+                  "function": {
+                    "name": "get_weather",
+                    "arguments": "{\"location\":\"San Francisco, CA\"}"
+                  }
+                }
+              ],
+              "finish_reason": "tool_calls",
+              "model_used": "meta-llama/llama-4-maverick:free",
+              "timestamp": "2025-06-01T18:23:52.598361"
+            },
+            {
+              "model_id": "meta-llama/llama-4-maverick:free",
+              "provider_name": "Meta",
+              "display_name": "Meta | meta-llama/llama-4-maverick-17b-128e-instruct:free",
+              "supports_tools": true,
+              "tool_call_made": true,
+              "status": "success",
+              "error": null,
+              "response_content": null,
+              "tool_calls": [
+                {
+                  "id": "9a148816-ba3b-4ab8-826c-8c835e849212",
+                  "type": "function",
+                  "function": {
+                    "name": "get_weather",
+                    "arguments": "{\"location\":\"San Francisco, CA\"}"
+                  }
+                }
+              ],
+              "finish_reason": "tool_calls",
+              "model_used": "meta-llama/llama-4-maverick:free",
+              "timestamp": "2025-06-01T18:23:53.472726"
+            },
+            {
+              "model_id": "meta-llama/llama-4-maverick:free",
+              "provider_name": "Meta",
+              "display_name": "Meta | meta-llama/llama-4-maverick-17b-128e-instruct:free",
+              "supports_tools": true,
+              "tool_call_made": true,
+              "status": "success",
+              "error": null,
+              "response_content": null,
+              "tool_calls": [
+                {
+                  "id": "9b68746f-9795-4285-a656-96a68bb89cc0",
+                  "type": "function",
+                  "function": {
+                    "name": "get_weather",
+                    "arguments": "{\"location\":\"San Francisco, CA\"}"
+                  }
+                }
+              ],
+              "finish_reason": "tool_calls",
+              "model_used": "meta-llama/llama-4-maverick:free",
+              "timestamp": "2025-06-01T18:23:54.459678"
+            }
+          ],
+          "summary": {
+            "total_runs": 3,
+            "success_count": 3,
+            "error_count": 0,
+            "unclear_count": 0,
+            "no_tool_call_count": 0
+          },
+          "timestamp": "2025-06-01T18:23:54.754242"
+        }
+      ]
+    },
+    {
+      "model_id": "meta-llama/llama-4-scout",
+      "timestamp": "2025-06-01T18:24:38.173788",
+      "providers_tested": 14,
+      "providers": [
+        {
+          "model_id": "meta-llama/llama-4-scout",
+          "provider_name": "Lambda",
+          "display_name": "Lambda | meta-llama/llama-4-scout-17b-16e-instruct",
+          "test_runs": [
+            {
+              "model_id": "meta-llama/llama-4-scout",
+              "provider_name": "Lambda",
+              "display_name": "Lambda | meta-llama/llama-4-scout-17b-16e-instruct",
+              "supports_tools": true,
+              "tool_call_made": true,
+              "status": "success",
+              "error": null,
+              "response_content": null,
+              "tool_calls": [
+                {
+                  "id": "chatcmpl-tool-2c40fd522b6b4fff80f0e4cef174848d",
+                  "type": "function",
+                  "function": {
+                    "name": "get_weather",
+                    "arguments": "{\"location\": \"San Francisco, CA\", \"unit\": \"fahrenheit\"}"
+                  }
+                }
+              ],
+              "finish_reason": "tool_calls",
+              "model_used": "meta-llama/llama-4-scout",
+              "timestamp": "2025-06-01T18:23:55.377528"
+            },
+            {
+              "model_id": "meta-llama/llama-4-scout",
+              "provider_name": "Lambda",
+              "display_name": "Lambda | meta-llama/llama-4-scout-17b-16e-instruct",
+              "supports_tools": true,
+              "tool_call_made": true,
+              "status": "success",
+              "error": null,
+              "response_content": null,
+              "tool_calls": [
+                {
+                  "id": "chatcmpl-tool-aa2cb9fff6b249fa81c9ab6a4ad24391",
+                  "type": "function",
+                  "function": {
+                    "name": "get_weather",
+                    "arguments": "{\"location\": \"San Francisco, CA\", \"unit\": \"fahrenheit\"}"
+                  }
+                }
+              ],
+              "finish_reason": "tool_calls",
+              "model_used": "meta-llama/llama-4-scout",
+              "timestamp": "2025-06-01T18:23:56.127050"
+            },
+            {
+              "model_id": "meta-llama/llama-4-scout",
+              "provider_name": "Lambda",
+              "display_name": "Lambda | meta-llama/llama-4-scout-17b-16e-instruct",
+              "supports_tools": true,
+              "tool_call_made": true,
+              "status": "success",
+              "error": null,
+              "response_content": null,
+              "tool_calls": [
+                {
+                  "id": "chatcmpl-tool-e3dc6713b4ed4f4785c22c015d56f1fc",
+                  "type": "function",
+                  "function": {
+                    "name": "get_weather",
+                    "arguments": "{\"location\": \"San Francisco, CA\", \"unit\": \"fahrenheit\"}"
+                  }
+                }
+              ],
+              "finish_reason": "tool_calls",
+              "model_used": "meta-llama/llama-4-scout",
+              "timestamp": "2025-06-01T18:24:03.361782"
+            }
+          ],
+          "summary": {
+            "total_runs": 3,
+            "success_count": 3,
+            "error_count": 0,
+            "unclear_count": 0,
+            "no_tool_call_count": 0
+          },
+          "timestamp": "2025-06-01T18:24:16.137697"
+        },
+        {
+          "model_id": "meta-llama/llama-4-scout",
+          "provider_name": "DeepInfra",
+          "display_name": "DeepInfra | meta-llama/llama-4-scout-17b-16e-instruct",
+          "test_runs": [
+            {
+              "model_id": "meta-llama/llama-4-scout",
+              "provider_name": "DeepInfra",
+              "display_name": "DeepInfra | meta-llama/llama-4-scout-17b-16e-instruct",
+              "supports_tools": false,
+              "tool_call_made": false,
+              "status": "error",
+              "error": "Error code: 404 - {'error': {'message': 'No endpoints found that support tool use. To learn more about provider routing, visit: https://openrouter.ai/docs/provider-routing', 'code': 404}}",
+              "response_content": null,
+              "tool_calls": null,
+              "finish_reason": null,
+              "model_used": null,
+              "timestamp": "2025-06-01T18:24:16.638383"
+            },
+            {
+              "model_id": "meta-llama/llama-4-scout",
+              "provider_name": "DeepInfra",
+              "display_name": "DeepInfra | meta-llama/llama-4-scout-17b-16e-instruct",
+              "supports_tools": false,
+              "tool_call_made": false,
+              "status": "error",
+              "error": "Error code: 404 - {'error': {'message': 'No endpoints found that support tool use. To learn more about provider routing, visit: https://openrouter.ai/docs/provider-routing', 'code': 404}}",
+              "response_content": null,
+              "tool_calls": null,
+              "finish_reason": null,
+              "model_used": null,
+              "timestamp": "2025-06-01T18:24:17.022892"
+            },
+            {
+              "model_id": "meta-llama/llama-4-scout",
+              "provider_name": "DeepInfra",
+              "display_name": "DeepInfra | meta-llama/llama-4-scout-17b-16e-instruct",
+              "supports_tools": false,
+              "tool_call_made": false,
+              "status": "error",
+              "error": "Error code: 404 - {'error': {'message': 'No endpoints found that support tool use. To learn more about provider routing, visit: https://openrouter.ai/docs/provider-routing', 'code': 404}}",
+              "response_content": null,
+              "tool_calls": null,
+              "finish_reason": null,
+              "model_used": null,
+              "timestamp": "2025-06-01T18:24:17.370014"
+            }
+          ],
+          "summary": {
+            "total_runs": 3,
+            "success_count": 0,
+            "error_count": 3,
+            "unclear_count": 0,
+            "no_tool_call_count": 0
+          },
+          "timestamp": "2025-06-01T18:24:17.483592"
+        },
+        {
+          "model_id": "meta-llama/llama-4-scout",
+          "provider_name": "Kluster",
+          "display_name": "Kluster | meta-llama/llama-4-scout-17b-16e-instruct",
+          "test_runs": [
+            {
+              "model_id": "meta-llama/llama-4-scout",
+              "provider_name": "Kluster",
+              "display_name": "Kluster | meta-llama/llama-4-scout-17b-16e-instruct",
+              "supports_tools": false,
+              "tool_call_made": false,
+              "status": "error",
+              "error": "Error code: 404 - {'error': {'message': 'No endpoints found that support tool use. To learn more about provider routing, visit: https://openrouter.ai/docs/provider-routing', 'code': 404}}",
+              "response_content": null,
+              "tool_calls": null,
+              "finish_reason": null,
+              "model_used": null,
+              "timestamp": "2025-06-01T18:24:17.984273"
+            },
+            {
+              "model_id": "meta-llama/llama-4-scout",
+              "provider_name": "Kluster",
+              "display_name": "Kluster | meta-llama/llama-4-scout-17b-16e-instruct",
+              "supports_tools": false,
+              "tool_call_made": false,
+              "status": "error",
+              "error": "Error code: 404 - {'error': {'message': 'No endpoints found that support tool use. To learn more about provider routing, visit: https://openrouter.ai/docs/provider-routing', 'code': 404}}",
+              "response_content": null,
+              "tool_calls": null,
+              "finish_reason": null,
+              "model_used": null,
+              "timestamp": "2025-06-01T18:24:18.331174"
+            },
+            {
+              "model_id": "meta-llama/llama-4-scout",
+              "provider_name": "Kluster",
+              "display_name": "Kluster | meta-llama/llama-4-scout-17b-16e-instruct",
+              "supports_tools": false,
+              "tool_call_made": false,
+              "status": "error",
+              "error": "Error code: 404 - {'error': {'message': 'No endpoints found that support tool use. To learn more about provider routing, visit: https://openrouter.ai/docs/provider-routing', 'code': 404}}",
+              "response_content": null,
+              "tool_calls": null,
+              "finish_reason": null,
+              "model_used": null,
+              "timestamp": "2025-06-01T18:24:18.676360"
+            }
+          ],
+          "summary": {
+            "total_runs": 3,
+            "success_count": 0,
+            "error_count": 3,
+            "unclear_count": 0,
+            "no_tool_call_count": 0
+          },
+          "timestamp": "2025-06-01T18:24:18.722399"
+        },
+        {
+          "model_id": "meta-llama/llama-4-scout",
+          "provider_name": "GMICloud",
+          "display_name": "GMICloud | meta-llama/llama-4-scout-17b-16e-instruct",
+          "test_runs": [
+            {
+              "model_id": "meta-llama/llama-4-scout",
+              "provider_name": "GMICloud",
+              "display_name": "GMICloud | meta-llama/llama-4-scout-17b-16e-instruct",
+              "supports_tools": false,
+              "tool_call_made": false,
+              "status": "error",
+              "error": "Error code: 404 - {'error': {'message': 'No endpoints found that support tool use. To learn more about provider routing, visit: https://openrouter.ai/docs/provider-routing', 'code': 404}}",
+              "response_content": null,
+              "tool_calls": null,
+              "finish_reason": null,
+              "model_used": null,
+              "timestamp": "2025-06-01T18:24:19.223064"
+            },
+            {
+              "model_id": "meta-llama/llama-4-scout",
+              "provider_name": "GMICloud",
+              "display_name": "GMICloud | meta-llama/llama-4-scout-17b-16e-instruct",
+              "supports_tools": false,
+              "tool_call_made": false,
+              "status": "error",
+              "error": "Error code: 404 - {'error': {'message': 'No endpoints found that support tool use. To learn more about provider routing, visit: https://openrouter.ai/docs/provider-routing', 'code': 404}}",
+              "response_content": null,
+              "tool_calls": null,
+              "finish_reason": null,
+              "model_used": null,
+              "timestamp": "2025-06-01T18:24:19.573295"
+            },
+            {
+              "model_id": "meta-llama/llama-4-scout",
+              "provider_name": "GMICloud",
+              "display_name": "GMICloud | meta-llama/llama-4-scout-17b-16e-instruct",
+              "supports_tools": false,
+              "tool_call_made": false,
+              "status": "error",
+              "error": "Error code: 404 - {'error': {'message': 'No endpoints found that support tool use. To learn more about provider routing, visit: https://openrouter.ai/docs/provider-routing', 'code': 404}}",
+              "response_content": null,
+              "tool_calls": null,
+              "finish_reason": null,
+              "model_used": null,
+              "timestamp": "2025-06-01T18:24:19.920930"
+            }
+          ],
+          "summary": {
+            "total_runs": 3,
+            "success_count": 0,
+            "error_count": 3,
+            "unclear_count": 0,
+            "no_tool_call_count": 0
+          },
+          "timestamp": "2025-06-01T18:24:19.970971"
+        },
+        {
+          "model_id": "meta-llama/llama-4-scout",
+          "provider_name": "Parasail",
+          "display_name": "Parasail | meta-llama/llama-4-scout-17b-16e-instruct",
+          "test_runs": [
+            {
+              "model_id": "meta-llama/llama-4-scout",
+              "provider_name": "Parasail",
+              "display_name": "Parasail | meta-llama/llama-4-scout-17b-16e-instruct",
+              "supports_tools": false,
+              "tool_call_made": false,
+              "status": "error",
+              "error": "Error code: 404 - {'error': {'message': 'No endpoints found that support tool use. To learn more about provider routing, visit: https://openrouter.ai/docs/provider-routing', 'code': 404}}",
+              "response_content": null,
+              "tool_calls": null,
+              "finish_reason": null,
+              "model_used": null,
+              "timestamp": "2025-06-01T18:24:20.471637"
+            },
+            {
+              "model_id": "meta-llama/llama-4-scout",
+              "provider_name": "Parasail",
+              "display_name": "Parasail | meta-llama/llama-4-scout-17b-16e-instruct",
+              "supports_tools": false,
+              "tool_call_made": false,
+              "status": "error",
+              "error": "Error code: 404 - {'error': {'message': 'No endpoints found that support tool use. To learn more about provider routing, visit: https://openrouter.ai/docs/provider-routing', 'code': 404}}",
+              "response_content": null,
+              "tool_calls": null,
+              "finish_reason": null,
+              "model_used": null,
+              "timestamp": "2025-06-01T18:24:20.935895"
+            },
+            {
+              "model_id": "meta-llama/llama-4-scout",
+              "provider_name": "Parasail",
+              "display_name": "Parasail | meta-llama/llama-4-scout-17b-16e-instruct",
+              "supports_tools": false,
+              "tool_call_made": false,
+              "status": "error",
+              "error": "Error code: 404 - {'error': {'message': 'No endpoints found that support tool use. To learn more about provider routing, visit: https://openrouter.ai/docs/provider-routing', 'code': 404}}",
+              "response_content": null,
+              "tool_calls": null,
+              "finish_reason": null,
+              "model_used": null,
+              "timestamp": "2025-06-01T18:24:21.288421"
+            }
+          ],
+          "summary": {
+            "total_runs": 3,
+            "success_count": 0,
+            "error_count": 3,
+            "unclear_count": 0,
+            "no_tool_call_count": 0
+          },
+          "timestamp": "2025-06-01T18:24:21.339341"
+        },
+        {
+          "model_id": "meta-llama/llama-4-scout",
+          "provider_name": "Cent-ML",
+          "display_name": "Cent-ML | meta-llama/llama-4-scout-17b-16e-instruct",
+          "test_runs": [
+            {
+              "model_id": "meta-llama/llama-4-scout",
+              "provider_name": "Cent-ML",
+              "display_name": "Cent-ML | meta-llama/llama-4-scout-17b-16e-instruct",
+              "supports_tools": false,
+              "tool_call_made": false,
+              "status": "error",
+              "error": "Error code: 404 - {'error': {'message': 'No endpoints found that support tool use. To learn more about provider routing, visit: https://openrouter.ai/docs/provider-routing', 'code': 404}}",
+              "response_content": null,
+              "tool_calls": null,
+              "finish_reason": null,
+              "model_used": null,
+              "timestamp": "2025-06-01T18:24:21.840001"
+            },
+            {
+              "model_id": "meta-llama/llama-4-scout",
+              "provider_name": "Cent-ML",
+              "display_name": "Cent-ML | meta-llama/llama-4-scout-17b-16e-instruct",
+              "supports_tools": false,
+              "tool_call_made": false,
+              "status": "error",
+              "error": "Error code: 404 - {'error': {'message': 'No endpoints found that support tool use. To learn more about provider routing, visit: https://openrouter.ai/docs/provider-routing', 'code': 404}}",
+              "response_content": null,
+              "tool_calls": null,
+              "finish_reason": null,
+              "model_used": null,
+              "timestamp": "2025-06-01T18:24:22.184513"
+            },
+            {
+              "model_id": "meta-llama/llama-4-scout",
+              "provider_name": "Cent-ML",
+              "display_name": "Cent-ML | meta-llama/llama-4-scout-17b-16e-instruct",
+              "supports_tools": false,
+              "tool_call_made": false,
+              "status": "error",
+              "error": "Error code: 404 - {'error': {'message': 'No endpoints found that support tool use. To learn more about provider routing, visit: https://openrouter.ai/docs/provider-routing', 'code': 404}}",
+              "response_content": null,
+              "tool_calls": null,
+              "finish_reason": null,
+              "model_used": null,
+              "timestamp": "2025-06-01T18:24:22.530517"
+            }
+          ],
+          "summary": {
+            "total_runs": 3,
+            "success_count": 0,
+            "error_count": 3,
+            "unclear_count": 0,
+            "no_tool_call_count": 0
+          },
+          "timestamp": "2025-06-01T18:24:22.580089"
+        },
+        {
+          "model_id": "meta-llama/llama-4-scout",
+          "provider_name": "Novita",
+          "display_name": "Novita | meta-llama/llama-4-scout-17b-16e-instruct",
+          "test_runs": [
+            {
+              "model_id": "meta-llama/llama-4-scout",
+              "provider_name": "Novita",
+              "display_name": "Novita | meta-llama/llama-4-scout-17b-16e-instruct",
+              "supports_tools": false,
+              "tool_call_made": false,
+              "status": "error",
+              "error": "Error code: 404 - {'error': {'message': 'No endpoints found that support tool use. To learn more about provider routing, visit: https://openrouter.ai/docs/provider-routing', 'code': 404}}",
+              "response_content": null,
+              "tool_calls": null,
+              "finish_reason": null,
+              "model_used": null,
+              "timestamp": "2025-06-01T18:24:23.080770"
+            },
+            {
+              "model_id": "meta-llama/llama-4-scout",
+              "provider_name": "Novita",
+              "display_name": "Novita | meta-llama/llama-4-scout-17b-16e-instruct",
+              "supports_tools": false,
+              "tool_call_made": false,
+              "status": "error",
+              "error": "Error code: 404 - {'error': {'message': 'No endpoints found that support tool use. To learn more about provider routing, visit: https://openrouter.ai/docs/provider-routing', 'code': 404}}",
+              "response_content": null,
+              "tool_calls": null,
+              "finish_reason": null,
+              "model_used": null,
+              "timestamp": "2025-06-01T18:24:23.428235"
+            },
+            {
+              "model_id": "meta-llama/llama-4-scout",
+              "provider_name": "Novita",
+              "display_name": "Novita | meta-llama/llama-4-scout-17b-16e-instruct",
+              "supports_tools": false,
+              "tool_call_made": false,
+              "status": "error",
+              "error": "Error code: 404 - {'error': {'message': 'No endpoints found that support tool use. To learn more about provider routing, visit: https://openrouter.ai/docs/provider-routing', 'code': 404}}",
+              "response_content": null,
+              "tool_calls": null,
+              "finish_reason": null,
+              "model_used": null,
+              "timestamp": "2025-06-01T18:24:23.825763"
+            }
+          ],
+          "summary": {
+            "total_runs": 3,
+            "success_count": 0,
+            "error_count": 3,
+            "unclear_count": 0,
+            "no_tool_call_count": 0
+          },
+          "timestamp": "2025-06-01T18:24:23.874680"
+        },
+        {
+          "model_id": "meta-llama/llama-4-scout",
+          "provider_name": "Groq",
+          "display_name": "Groq | meta-llama/llama-4-scout-17b-16e-instruct",
+          "test_runs": [
+            {
+              "model_id": "meta-llama/llama-4-scout",
+              "provider_name": "Groq",
+              "display_name": "Groq | meta-llama/llama-4-scout-17b-16e-instruct",
+              "supports_tools": true,
+              "tool_call_made": true,
+              "status": "success",
+              "error": null,
+              "response_content": null,
+              "tool_calls": [
+                {
+                  "id": "call_x7b2",
+                  "type": "function",
+                  "function": {
+                    "name": "get_weather",
+                    "arguments": "{\"location\":\"San Francisco, CA\",\"unit\":\"fahrenheit\"}"
+                  }
+                }
+              ],
+              "finish_reason": "tool_calls",
+              "model_used": "meta-llama/llama-4-scout",
+              "timestamp": "2025-06-01T18:24:24.375363"
+            },
+            {
+              "model_id": "meta-llama/llama-4-scout",
+              "provider_name": "Groq",
+              "display_name": "Groq | meta-llama/llama-4-scout-17b-16e-instruct",
+              "supports_tools": true,
+              "tool_call_made": true,
+              "status": "success",
+              "error": null,
+              "response_content": null,
+              "tool_calls": [
+                {
+                  "id": "call_5812",
+                  "type": "function",
+                  "function": {
+                    "name": "get_weather",
+                    "arguments": "{\"location\":\"San Francisco, CA\",\"unit\":\"fahrenheit\"}"
+                  }
+                }
+              ],
+              "finish_reason": "tool_calls",
+              "model_used": "meta-llama/llama-4-scout",
+              "timestamp": "2025-06-01T18:24:24.918809"
+            },
+            {
+              "model_id": "meta-llama/llama-4-scout",
+              "provider_name": "Groq",
+              "display_name": "Groq | meta-llama/llama-4-scout-17b-16e-instruct",
+              "supports_tools": true,
+              "tool_call_made": true,
+              "status": "success",
+              "error": null,
+              "response_content": null,
+              "tool_calls": [
+                {
+                  "id": "call_gkvr",
+                  "type": "function",
+                  "function": {
+                    "name": "get_weather",
+                    "arguments": "{\"location\":\"San Francisco, CA\",\"unit\":\"fahrenheit\"}"
+                  }
+                }
+              ],
+              "finish_reason": "tool_calls",
+              "model_used": "meta-llama/llama-4-scout",
+              "timestamp": "2025-06-01T18:24:25.465994"
+            }
+          ],
+          "summary": {
+            "total_runs": 3,
+            "success_count": 3,
+            "error_count": 0,
+            "unclear_count": 0,
+            "no_tool_call_count": 0
+          },
+          "timestamp": "2025-06-01T18:24:25.970521"
+        },
+        {
+          "model_id": "meta-llama/llama-4-scout",
+          "provider_name": "BaseTen",
+          "display_name": "BaseTen | meta-llama/llama-4-scout-17b-16e-instruct",
+          "test_runs": [
+            {
+              "model_id": "meta-llama/llama-4-scout",
+              "provider_name": "BaseTen",
+              "display_name": "BaseTen | meta-llama/llama-4-scout-17b-16e-instruct",
+              "supports_tools": true,
+              "tool_call_made": true,
+              "status": "success",
+              "error": null,
+              "response_content": null,
+              "tool_calls": [
+                {
+                  "id": "0",
+                  "type": "function",
+                  "function": {
+                    "name": "get_weather",
+                    "arguments": "{\"location\": \"San Francisco, CA\", \"unit\": \"fahrenheit\"}"
+                  }
+                }
+              ],
+              "finish_reason": "tool_calls",
+              "model_used": "meta-llama/llama-4-scout",
+              "timestamp": "2025-06-01T18:24:26.471176"
+            },
+            {
+              "model_id": "meta-llama/llama-4-scout",
+              "provider_name": "BaseTen",
+              "display_name": "BaseTen | meta-llama/llama-4-scout-17b-16e-instruct",
+              "supports_tools": true,
+              "tool_call_made": true,
+              "status": "success",
+              "error": null,
+              "response_content": null,
+              "tool_calls": [
+                {
+                  "id": "0",
+                  "type": "function",
+                  "function": {
+                    "name": "get_weather",
+                    "arguments": "{\"location\": \"San Francisco, CA\", \"unit\": \"fahrenheit\"}"
+                  }
+                }
+              ],
+              "finish_reason": "tool_calls",
+              "model_used": "meta-llama/llama-4-scout",
+              "timestamp": "2025-06-01T18:24:27.096772"
+            },
+            {
+              "model_id": "meta-llama/llama-4-scout",
+              "provider_name": "BaseTen",
+              "display_name": "BaseTen | meta-llama/llama-4-scout-17b-16e-instruct",
+              "supports_tools": true,
+              "tool_call_made": true,
+              "status": "success",
+              "error": null,
+              "response_content": null,
+              "tool_calls": [
+                {
+                  "id": "0",
+                  "type": "function",
+                  "function": {
+                    "name": "get_weather",
+                    "arguments": "{\"location\": \"San Francisco, CA\", \"unit\": \"fahrenheit\"}"
+                  }
+                }
+              ],
+              "finish_reason": "tool_calls",
+              "model_used": "meta-llama/llama-4-scout",
+              "timestamp": "2025-06-01T18:24:27.713199"
+            }
+          ],
+          "summary": {
+            "total_runs": 3,
+            "success_count": 3,
+            "error_count": 0,
+            "unclear_count": 0,
+            "no_tool_call_count": 0
+          },
+          "timestamp": "2025-06-01T18:24:28.027874"
+        },
+        {
+          "model_id": "meta-llama/llama-4-scout",
+          "provider_name": "Fireworks",
+          "display_name": "Fireworks | meta-llama/llama-4-scout-17b-16e-instruct",
+          "test_runs": [
+            {
+              "model_id": "meta-llama/llama-4-scout",
+              "provider_name": "Fireworks",
+              "display_name": "Fireworks | meta-llama/llama-4-scout-17b-16e-instruct",
+              "supports_tools": true,
+              "tool_call_made": true,
+              "status": "success",
+              "error": null,
+              "response_content": null,
+              "tool_calls": [
+                {
+                  "id": "call_KOsf0XDmOR2pqh9d6Z0NsX0J",
+                  "type": "function",
+                  "function": {
+                    "name": "get_weather",
+                    "arguments": "{\"location\": \"San Francisco, CA\", \"unit\": \"fahrenheit\"}"
+                  }
+                }
+              ],
+              "finish_reason": "tool_calls",
+              "model_used": "meta-llama/llama-4-scout",
+              "timestamp": "2025-06-01T18:24:28.528565"
+            },
+            {
+              "model_id": "meta-llama/llama-4-scout",
+              "provider_name": "Fireworks",
+              "display_name": "Fireworks | meta-llama/llama-4-scout-17b-16e-instruct",
+              "supports_tools": true,
+              "tool_call_made": true,
+              "status": "success",
+              "error": null,
+              "response_content": null,
+              "tool_calls": [
+                {
+                  "id": "call_so9EdXWiphfq6kswUiP5ZPDV",
+                  "type": "function",
+                  "function": {
+                    "name": "get_weather",
+                    "arguments": "{\"location\": \"San Francisco, CA\", \"unit\": \"fahrenheit\"}"
+                  }
+                }
+              ],
+              "finish_reason": "tool_calls",
+              "model_used": "meta-llama/llama-4-scout",
+              "timestamp": "2025-06-01T18:24:29.414298"
+            },
+            {
+              "model_id": "meta-llama/llama-4-scout",
+              "provider_name": "Fireworks",
+              "display_name": "Fireworks | meta-llama/llama-4-scout-17b-16e-instruct",
+              "supports_tools": true,
+              "tool_call_made": true,
+              "status": "success",
+              "error": null,
+              "response_content": null,
+              "tool_calls": [
+                {
+                  "id": "call_jVmCFFPT5U3pv9dTt5Jxjl19",
+                  "type": "function",
+                  "function": {
+                    "name": "get_weather",
+                    "arguments": "{\"location\": \"San Francisco, CA\", \"unit\": \"fahrenheit\"}"
+                  }
+                }
+              ],
+              "finish_reason": "tool_calls",
+              "model_used": "meta-llama/llama-4-scout",
+              "timestamp": "2025-06-01T18:24:30.150533"
+            }
+          ],
+          "summary": {
+            "total_runs": 3,
+            "success_count": 3,
+            "error_count": 0,
+            "unclear_count": 0,
+            "no_tool_call_count": 0
+          },
+          "timestamp": "2025-06-01T18:24:30.597502"
+        },
+        {
+          "model_id": "meta-llama/llama-4-scout",
+          "provider_name": "Together",
+          "display_name": "Together | meta-llama/llama-4-scout-17b-16e-instruct",
+          "test_runs": [
+            {
+              "model_id": "meta-llama/llama-4-scout",
+              "provider_name": "Together",
+              "display_name": "Together | meta-llama/llama-4-scout-17b-16e-instruct",
+              "supports_tools": true,
+              "tool_call_made": true,
+              "status": "success",
+              "error": null,
+              "response_content": null,
+              "tool_calls": [
+                {
+                  "id": "call_cfddysdlth0sr5vy3gjrsjgi",
+                  "type": "function",
+                  "function": {
+                    "name": "get_weather",
+                    "arguments": "{\"location\":\"San Francisco, CA\",\"unit\":\"fahrenheit\"}"
+                  }
+                }
+              ],
+              "finish_reason": "tool_calls",
+              "model_used": "meta-llama/llama-4-scout",
+              "timestamp": "2025-06-01T18:24:31.098173"
+            },
+            {
+              "model_id": "meta-llama/llama-4-scout",
+              "provider_name": "Together",
+              "display_name": "Together | meta-llama/llama-4-scout-17b-16e-instruct",
+              "supports_tools": true,
+              "tool_call_made": true,
+              "status": "success",
+              "error": null,
+              "response_content": null,
+              "tool_calls": [
+                {
+                  "id": "call_txlse9n4z1n5m0avtylqwf4p",
+                  "type": "function",
+                  "function": {
+                    "name": "get_weather",
+                    "arguments": "{\"location\":\"San Francisco, CA\",\"unit\":\"fahrenheit\"}"
+                  }
+                }
+              ],
+              "finish_reason": "tool_calls",
+              "model_used": "meta-llama/llama-4-scout",
+              "timestamp": "2025-06-01T18:24:31.874872"
+            },
+            {
+              "model_id": "meta-llama/llama-4-scout",
+              "provider_name": "Together",
+              "display_name": "Together | meta-llama/llama-4-scout-17b-16e-instruct",
+              "supports_tools": true,
+              "tool_call_made": true,
+              "status": "success",
+              "error": null,
+              "response_content": null,
+              "tool_calls": [
+                {
+                  "id": "call_j1pxm0qajckaxs36448alzjm",
+                  "type": "function",
+                  "function": {
+                    "name": "get_weather",
+                    "arguments": "{\"location\":\"San Francisco, CA\",\"unit\":\"fahrenheit\"}"
+                  }
+                }
+              ],
+              "finish_reason": "tool_calls",
+              "model_used": "meta-llama/llama-4-scout",
+              "timestamp": "2025-06-01T18:24:32.660478"
+            }
+          ],
+          "summary": {
+            "total_runs": 3,
+            "success_count": 3,
+            "error_count": 0,
+            "unclear_count": 0,
+            "no_tool_call_count": 0
+          },
+          "timestamp": "2025-06-01T18:24:33.152098"
+        },
+        {
+          "model_id": "meta-llama/llama-4-scout",
+          "provider_name": "Google",
+          "display_name": "Google | meta-llama/llama-4-scout-17b-16e-instruct",
+          "test_runs": [
+            {
+              "model_id": "meta-llama/llama-4-scout",
+              "provider_name": "Google",
+              "display_name": "Google | meta-llama/llama-4-scout-17b-16e-instruct",
+              "supports_tools": false,
+              "tool_call_made": false,
+              "status": "error",
+              "error": "Error code: 404 - {'error': {'message': 'No endpoints found that support tool use. To learn more about provider routing, visit: https://openrouter.ai/docs/provider-routing', 'code': 404}}",
+              "response_content": null,
+              "tool_calls": null,
+              "finish_reason": null,
+              "model_used": null,
+              "timestamp": "2025-06-01T18:24:33.652800"
+            },
+            {
+              "model_id": "meta-llama/llama-4-scout",
+              "provider_name": "Google",
+              "display_name": "Google | meta-llama/llama-4-scout-17b-16e-instruct",
+              "supports_tools": false,
+              "tool_call_made": false,
+              "status": "error",
+              "error": "Error code: 404 - {'error': {'message': 'No endpoints found that support tool use. To learn more about provider routing, visit: https://openrouter.ai/docs/provider-routing', 'code': 404}}",
+              "response_content": null,
+              "tool_calls": null,
+              "finish_reason": null,
+              "model_used": null,
+              "timestamp": "2025-06-01T18:24:33.998823"
+            },
+            {
+              "model_id": "meta-llama/llama-4-scout",
+              "provider_name": "Google",
+              "display_name": "Google | meta-llama/llama-4-scout-17b-16e-instruct",
+              "supports_tools": false,
+              "tool_call_made": false,
+              "status": "error",
+              "error": "Error code: 404 - {'error': {'message': 'No endpoints found that support tool use. To learn more about provider routing, visit: https://openrouter.ai/docs/provider-routing', 'code': 404}}",
+              "response_content": null,
+              "tool_calls": null,
+              "finish_reason": null,
+              "model_used": null,
+              "timestamp": "2025-06-01T18:24:34.344493"
+            }
+          ],
+          "summary": {
+            "total_runs": 3,
+            "success_count": 0,
+            "error_count": 3,
+            "unclear_count": 0,
+            "no_tool_call_count": 0
+          },
+          "timestamp": "2025-06-01T18:24:34.391396"
+        },
+        {
+          "model_id": "meta-llama/llama-4-scout",
+          "provider_name": "SambaNova",
+          "display_name": "SambaNova | meta-llama/llama-4-scout-17b-16e-instruct",
+          "test_runs": [
+            {
+              "model_id": "meta-llama/llama-4-scout",
+              "provider_name": "SambaNova",
+              "display_name": "SambaNova | meta-llama/llama-4-scout-17b-16e-instruct",
+              "supports_tools": null,
+              "tool_call_made": false,
+              "status": "error",
+              "error": "Error code: 404 - {'error': {'message': 'All providers have been ignored. To change your default ignored providers, visit: https://openrouter.ai/settings/preferences', 'code': 404}}",
+              "response_content": null,
+              "tool_calls": null,
+              "finish_reason": null,
+              "model_used": null,
+              "timestamp": "2025-06-01T18:24:34.892064"
+            },
+            {
+              "model_id": "meta-llama/llama-4-scout",
+              "provider_name": "SambaNova",
+              "display_name": "SambaNova | meta-llama/llama-4-scout-17b-16e-instruct",
+              "supports_tools": null,
+              "tool_call_made": false,
+              "status": "error",
+              "error": "Error code: 404 - {'error': {'message': 'All providers have been ignored. To change your default ignored providers, visit: https://openrouter.ai/settings/preferences', 'code': 404}}",
+              "response_content": null,
+              "tool_calls": null,
+              "finish_reason": null,
+              "model_used": null,
+              "timestamp": "2025-06-01T18:24:35.256115"
+            },
+            {
+              "model_id": "meta-llama/llama-4-scout",
+              "provider_name": "SambaNova",
+              "display_name": "SambaNova | meta-llama/llama-4-scout-17b-16e-instruct",
+              "supports_tools": null,
+              "tool_call_made": false,
+              "status": "error",
+              "error": "Error code: 404 - {'error': {'message': 'All providers have been ignored. To change your default ignored providers, visit: https://openrouter.ai/settings/preferences', 'code': 404}}",
+              "response_content": null,
+              "tool_calls": null,
+              "finish_reason": null,
+              "model_used": null,
+              "timestamp": "2025-06-01T18:24:35.677046"
+            }
+          ],
+          "summary": {
+            "total_runs": 3,
+            "success_count": 0,
+            "error_count": 3,
+            "unclear_count": 0,
+            "no_tool_call_count": 0
+          },
+          "timestamp": "2025-06-01T18:24:35.729300"
+        },
+        {
+          "model_id": "meta-llama/llama-4-scout",
+          "provider_name": "Cerebras",
+          "display_name": "Cerebras | meta-llama/llama-4-scout-17b-16e-instruct",
+          "test_runs": [
+            {
+              "model_id": "meta-llama/llama-4-scout",
+              "provider_name": "Cerebras",
+              "display_name": "Cerebras | meta-llama/llama-4-scout-17b-16e-instruct",
+              "supports_tools": false,
+              "tool_call_made": false,
+              "status": "no_tool_call",
+              "error": null,
+              "response_content": "{\"name\": \"get_weather\", \"arguments\": {\"location\": \"San Francisco, CA\", \"unit\": null}}",
+              "tool_calls": null,
+              "finish_reason": "stop",
+              "model_used": "meta-llama/llama-4-scout",
+              "timestamp": "2025-06-01T18:24:36.229962"
+            },
+            {
+              "model_id": "meta-llama/llama-4-scout",
+              "provider_name": "Cerebras",
+              "display_name": "Cerebras | meta-llama/llama-4-scout-17b-16e-instruct",
+              "supports_tools": true,
+              "tool_call_made": true,
+              "status": "success",
+              "error": null,
+              "response_content": null,
+              "tool_calls": [
+                {
+                  "id": "c0ddb5cbc",
+                  "type": "function",
+                  "function": {
+                    "name": "get_weather",
+                    "arguments": "{\"location\": \"San Francisco, CA\", \"unit\": null}"
+                  }
+                }
+              ],
+              "finish_reason": "tool_calls",
+              "model_used": "meta-llama/llama-4-scout",
+              "timestamp": "2025-06-01T18:24:36.809087"
+            },
+            {
+              "model_id": "meta-llama/llama-4-scout",
+              "provider_name": "Cerebras",
+              "display_name": "Cerebras | meta-llama/llama-4-scout-17b-16e-instruct",
+              "supports_tools": false,
+              "tool_call_made": false,
+              "status": "no_tool_call",
+              "error": null,
+              "response_content": "{\"name\": \"get_weather\", \"arguments\": {\"location\": \"San Francisco, CA\", \"unit\": null}}",
+              "tool_calls": null,
+              "finish_reason": "stop",
+              "model_used": "meta-llama/llama-4-scout",
+              "timestamp": "2025-06-01T18:24:37.352350"
+            }
+          ],
+          "summary": {
+            "total_runs": 3,
+            "success_count": 1,
+            "error_count": 0,
+            "unclear_count": 0,
+            "no_tool_call_count": 2
+          },
+          "timestamp": "2025-06-01T18:24:37.673147"
+        }
+      ]
+    },
+    {
+      "model_id": "meta-llama/llama-4-scout:free",
+      "timestamp": "2025-06-01T18:24:41.830080",
+      "providers_tested": 2,
+      "providers": [
+        {
+          "model_id": "meta-llama/llama-4-scout:free",
+          "provider_name": "Chutes",
+          "display_name": "Chutes | meta-llama/llama-4-scout-17b-16e-instruct:free",
+          "test_runs": [
+            {
+              "model_id": "meta-llama/llama-4-scout:free",
+              "provider_name": "Chutes",
+              "display_name": "Chutes | meta-llama/llama-4-scout-17b-16e-instruct:free",
+              "supports_tools": false,
+              "tool_call_made": false,
+              "status": "error",
+              "error": "Error code: 404 - {'error': {'message': 'No endpoints found that support tool use. To learn more about provider routing, visit: https://openrouter.ai/docs/provider-routing', 'code': 404}}",
+              "response_content": null,
+              "tool_calls": null,
+              "finish_reason": null,
+              "model_used": null,
+              "timestamp": "2025-06-01T18:24:38.298772"
+            },
+            {
+              "model_id": "meta-llama/llama-4-scout:free",
+              "provider_name": "Chutes",
+              "display_name": "Chutes | meta-llama/llama-4-scout-17b-16e-instruct:free",
+              "supports_tools": false,
+              "tool_call_made": false,
+              "status": "error",
+              "error": "Error code: 404 - {'error': {'message': 'No endpoints found that support tool use. To learn more about provider routing, visit: https://openrouter.ai/docs/provider-routing', 'code': 404}}",
+              "response_content": null,
+              "tool_calls": null,
+              "finish_reason": null,
+              "model_used": null,
+              "timestamp": "2025-06-01T18:24:38.664679"
+            },
+            {
+              "model_id": "meta-llama/llama-4-scout:free",
+              "provider_name": "Chutes",
+              "display_name": "Chutes | meta-llama/llama-4-scout-17b-16e-instruct:free",
+              "supports_tools": false,
+              "tool_call_made": false,
+              "status": "error",
+              "error": "Error code: 404 - {'error': {'message': 'No endpoints found that support tool use. To learn more about provider routing, visit: https://openrouter.ai/docs/provider-routing', 'code': 404}}",
+              "response_content": null,
+              "tool_calls": null,
+              "finish_reason": null,
+              "model_used": null,
+              "timestamp": "2025-06-01T18:24:39.019761"
+            }
+          ],
+          "summary": {
+            "total_runs": 3,
+            "success_count": 0,
+            "error_count": 3,
+            "unclear_count": 0,
+            "no_tool_call_count": 0
+          },
+          "timestamp": "2025-06-01T18:24:39.074514"
+        },
+        {
+          "model_id": "meta-llama/llama-4-scout:free",
+          "provider_name": "Meta",
+          "display_name": "Meta | meta-llama/llama-4-scout-17b-16e-instruct:free",
+          "test_runs": [
+            {
+              "model_id": "meta-llama/llama-4-scout:free",
+              "provider_name": "Meta",
+              "display_name": "Meta | meta-llama/llama-4-scout-17b-16e-instruct:free",
+              "supports_tools": true,
+              "tool_call_made": true,
+              "status": "success",
+              "error": null,
+              "response_content": null,
+              "tool_calls": [
+                {
+                  "id": "71ce04dc-36fd-4b3c-8296-84ea88fe4615",
+                  "type": "function",
+                  "function": {
+                    "name": "get_weather",
+                    "arguments": "{\"location\":\"San Francisco, CA\"}"
+                  }
+                }
+              ],
+              "finish_reason": "tool_calls",
+              "model_used": "meta-llama/llama-4-scout:free",
+              "timestamp": "2025-06-01T18:24:39.575189"
+            },
+            {
+              "model_id": "meta-llama/llama-4-scout:free",
+              "provider_name": "Meta",
+              "display_name": "Meta | meta-llama/llama-4-scout-17b-16e-instruct:free",
+              "supports_tools": true,
+              "tool_call_made": true,
+              "status": "success",
+              "error": null,
+              "response_content": null,
+              "tool_calls": [
+                {
+                  "id": "ed6500ac-af1e-4c76-9856-52b2d653c442",
+                  "type": "function",
+                  "function": {
+                    "name": "get_weather",
+                    "arguments": "{\"location\":\"San Francisco, CA\"}"
+                  }
+                }
+              ],
+              "finish_reason": "tool_calls",
+              "model_used": "meta-llama/llama-4-scout:free",
+              "timestamp": "2025-06-01T18:24:40.328432"
+            },
+            {
+              "model_id": "meta-llama/llama-4-scout:free",
+              "provider_name": "Meta",
+              "display_name": "Meta | meta-llama/llama-4-scout-17b-16e-instruct:free",
+              "supports_tools": true,
+              "tool_call_made": true,
+              "status": "success",
+              "error": null,
+              "response_content": null,
+              "tool_calls": [
+                {
+                  "id": "25df0d33-a615-4266-9098-ebf832d0ae54",
+                  "type": "function",
+                  "function": {
+                    "name": "get_weather",
+                    "arguments": "{\"location\":\"San Francisco, CA\"}"
+                  }
+                }
+              ],
+              "finish_reason": "tool_calls",
+              "model_used": "meta-llama/llama-4-scout:free",
+              "timestamp": "2025-06-01T18:24:40.980881"
+            }
+          ],
+          "summary": {
+            "total_runs": 3,
+            "success_count": 3,
+            "error_count": 0,
+            "unclear_count": 0,
+            "no_tool_call_count": 0
+          },
+          "timestamp": "2025-06-01T18:24:41.329442"
+        }
+      ]
+    },
+    {
+      "model_id": "qwen/qwen-2.5-coder-32b-instruct",
+      "timestamp": "2025-06-01T18:24:52.121102",
+      "providers_tested": 8,
+      "providers": [
+        {
+          "model_id": "qwen/qwen-2.5-coder-32b-instruct",
+          "provider_name": "DeepInfra",
+          "display_name": "DeepInfra | qwen/qwen-2.5-coder-32b-instruct",
+          "test_runs": [
+            {
+              "model_id": "qwen/qwen-2.5-coder-32b-instruct",
+              "provider_name": "DeepInfra",
+              "display_name": "DeepInfra | qwen/qwen-2.5-coder-32b-instruct",
+              "supports_tools": false,
+              "tool_call_made": false,
+              "status": "error",
+              "error": "Error code: 404 - {'error': {'message': 'No endpoints found that support tool use. To learn more about provider routing, visit: https://openrouter.ai/docs/provider-routing', 'code': 404}}",
+              "response_content": null,
+              "tool_calls": null,
+              "finish_reason": null,
+              "model_used": null,
+              "timestamp": "2025-06-01T18:24:41.943362"
+            },
+            {
+              "model_id": "qwen/qwen-2.5-coder-32b-instruct",
+              "provider_name": "DeepInfra",
+              "display_name": "DeepInfra | qwen/qwen-2.5-coder-32b-instruct",
+              "supports_tools": false,
+              "tool_call_made": false,
+              "status": "error",
+              "error": "Error code: 404 - {'error': {'message': 'No endpoints found that support tool use. To learn more about provider routing, visit: https://openrouter.ai/docs/provider-routing', 'code': 404}}",
+              "response_content": null,
+              "tool_calls": null,
+              "finish_reason": null,
+              "model_used": null,
+              "timestamp": "2025-06-01T18:24:42.289832"
+            },
+            {
+              "model_id": "qwen/qwen-2.5-coder-32b-instruct",
+              "provider_name": "DeepInfra",
+              "display_name": "DeepInfra | qwen/qwen-2.5-coder-32b-instruct",
+              "supports_tools": false,
+              "tool_call_made": false,
+              "status": "error",
+              "error": "Error code: 404 - {'error': {'message': 'No endpoints found that support tool use. To learn more about provider routing, visit: https://openrouter.ai/docs/provider-routing', 'code': 404}}",
+              "response_content": null,
+              "tool_calls": null,
+              "finish_reason": null,
+              "model_used": null,
+              "timestamp": "2025-06-01T18:24:42.659637"
+            }
+          ],
+          "summary": {
+            "total_runs": 3,
+            "success_count": 0,
+            "error_count": 3,
+            "unclear_count": 0,
+            "no_tool_call_count": 0
+          },
+          "timestamp": "2025-06-01T18:24:42.716122"
+        },
+        {
+          "model_id": "qwen/qwen-2.5-coder-32b-instruct",
+          "provider_name": "Nebius",
+          "display_name": "Nebius | qwen/qwen-2.5-coder-32b-instruct",
+          "test_runs": [
+            {
+              "model_id": "qwen/qwen-2.5-coder-32b-instruct",
+              "provider_name": "Nebius",
+              "display_name": "Nebius | qwen/qwen-2.5-coder-32b-instruct",
+              "supports_tools": false,
+              "tool_call_made": false,
+              "status": "error",
+              "error": "Error code: 404 - {'error': {'message': 'No endpoints found that support tool use. To learn more about provider routing, visit: https://openrouter.ai/docs/provider-routing', 'code': 404}}",
+              "response_content": null,
+              "tool_calls": null,
+              "finish_reason": null,
+              "model_used": null,
+              "timestamp": "2025-06-01T18:24:43.216787"
+            },
+            {
+              "model_id": "qwen/qwen-2.5-coder-32b-instruct",
+              "provider_name": "Nebius",
+              "display_name": "Nebius | qwen/qwen-2.5-coder-32b-instruct",
+              "supports_tools": false,
+              "tool_call_made": false,
+              "status": "error",
+              "error": "Error code: 404 - {'error': {'message': 'No endpoints found that support tool use. To learn more about provider routing, visit: https://openrouter.ai/docs/provider-routing', 'code': 404}}",
+              "response_content": null,
+              "tool_calls": null,
+              "finish_reason": null,
+              "model_used": null,
+              "timestamp": "2025-06-01T18:24:43.568759"
+            },
+            {
+              "model_id": "qwen/qwen-2.5-coder-32b-instruct",
+              "provider_name": "Nebius",
+              "display_name": "Nebius | qwen/qwen-2.5-coder-32b-instruct",
+              "supports_tools": false,
+              "tool_call_made": false,
+              "status": "error",
+              "error": "Error code: 404 - {'error': {'message': 'No endpoints found that support tool use. To learn more about provider routing, visit: https://openrouter.ai/docs/provider-routing', 'code': 404}}",
+              "response_content": null,
+              "tool_calls": null,
+              "finish_reason": null,
+              "model_used": null,
+              "timestamp": "2025-06-01T18:24:43.976275"
+            }
+          ],
+          "summary": {
+            "total_runs": 3,
+            "success_count": 0,
+            "error_count": 3,
+            "unclear_count": 0,
+            "no_tool_call_count": 0
+          },
+          "timestamp": "2025-06-01T18:24:44.024795"
+        },
+        {
+          "model_id": "qwen/qwen-2.5-coder-32b-instruct",
+          "provider_name": "Lambda",
+          "display_name": "Lambda | qwen/qwen-2.5-coder-32b-instruct",
+          "test_runs": [
+            {
+              "model_id": "qwen/qwen-2.5-coder-32b-instruct",
+              "provider_name": "Lambda",
+              "display_name": "Lambda | qwen/qwen-2.5-coder-32b-instruct",
+              "supports_tools": false,
+              "tool_call_made": false,
+              "status": "error",
+              "error": "Error code: 404 - {'error': {'message': 'No endpoints found that support tool use. To learn more about provider routing, visit: https://openrouter.ai/docs/provider-routing', 'code': 404}}",
+              "response_content": null,
+              "tool_calls": null,
+              "finish_reason": null,
+              "model_used": null,
+              "timestamp": "2025-06-01T18:24:44.525461"
+            },
+            {
+              "model_id": "qwen/qwen-2.5-coder-32b-instruct",
+              "provider_name": "Lambda",
+              "display_name": "Lambda | qwen/qwen-2.5-coder-32b-instruct",
+              "supports_tools": false,
+              "tool_call_made": false,
+              "status": "error",
+              "error": "Error code: 404 - {'error': {'message': 'No endpoints found that support tool use. To learn more about provider routing, visit: https://openrouter.ai/docs/provider-routing', 'code': 404}}",
+              "response_content": null,
+              "tool_calls": null,
+              "finish_reason": null,
+              "model_used": null,
+              "timestamp": "2025-06-01T18:24:44.875052"
+            },
+            {
+              "model_id": "qwen/qwen-2.5-coder-32b-instruct",
+              "provider_name": "Lambda",
+              "display_name": "Lambda | qwen/qwen-2.5-coder-32b-instruct",
+              "supports_tools": false,
+              "tool_call_made": false,
+              "status": "error",
+              "error": "Error code: 404 - {'error': {'message': 'No endpoints found that support tool use. To learn more about provider routing, visit: https://openrouter.ai/docs/provider-routing', 'code': 404}}",
+              "response_content": null,
+              "tool_calls": null,
+              "finish_reason": null,
+              "model_used": null,
+              "timestamp": "2025-06-01T18:24:45.222064"
+            }
+          ],
+          "summary": {
+            "total_runs": 3,
+            "success_count": 0,
+            "error_count": 3,
+            "unclear_count": 0,
+            "no_tool_call_count": 0
+          },
+          "timestamp": "2025-06-01T18:24:45.268270"
+        },
+        {
+          "model_id": "qwen/qwen-2.5-coder-32b-instruct",
+          "provider_name": "Hyperbolic",
+          "display_name": "Hyperbolic | qwen/qwen-2.5-coder-32b-instruct",
+          "test_runs": [
+            {
+              "model_id": "qwen/qwen-2.5-coder-32b-instruct",
+              "provider_name": "Hyperbolic",
+              "display_name": "Hyperbolic | qwen/qwen-2.5-coder-32b-instruct",
+              "supports_tools": false,
+              "tool_call_made": false,
+              "status": "error",
+              "error": "Error code: 404 - {'error': {'message': 'No endpoints found that support tool use. To learn more about provider routing, visit: https://openrouter.ai/docs/provider-routing', 'code': 404}}",
+              "response_content": null,
+              "tool_calls": null,
+              "finish_reason": null,
+              "model_used": null,
+              "timestamp": "2025-06-01T18:24:45.768955"
+            },
+            {
+              "model_id": "qwen/qwen-2.5-coder-32b-instruct",
+              "provider_name": "Hyperbolic",
+              "display_name": "Hyperbolic | qwen/qwen-2.5-coder-32b-instruct",
+              "supports_tools": false,
+              "tool_call_made": false,
+              "status": "error",
+              "error": "Error code: 404 - {'error': {'message': 'No endpoints found that support tool use. To learn more about provider routing, visit: https://openrouter.ai/docs/provider-routing', 'code': 404}}",
+              "response_content": null,
+              "tool_calls": null,
+              "finish_reason": null,
+              "model_used": null,
+              "timestamp": "2025-06-01T18:24:46.117028"
+            },
+            {
+              "model_id": "qwen/qwen-2.5-coder-32b-instruct",
+              "provider_name": "Hyperbolic",
+              "display_name": "Hyperbolic | qwen/qwen-2.5-coder-32b-instruct",
+              "supports_tools": false,
+              "tool_call_made": false,
+              "status": "error",
+              "error": "Error code: 404 - {'error': {'message': 'No endpoints found that support tool use. To learn more about provider routing, visit: https://openrouter.ai/docs/provider-routing', 'code': 404}}",
+              "response_content": null,
+              "tool_calls": null,
+              "finish_reason": null,
+              "model_used": null,
+              "timestamp": "2025-06-01T18:24:46.471845"
+            }
+          ],
+          "summary": {
+            "total_runs": 3,
+            "success_count": 0,
+            "error_count": 3,
+            "unclear_count": 0,
+            "no_tool_call_count": 0
+          },
+          "timestamp": "2025-06-01T18:24:46.574121"
+        },
+        {
+          "model_id": "qwen/qwen-2.5-coder-32b-instruct",
+          "provider_name": "Parasail",
+          "display_name": "Parasail | qwen/qwen-2.5-coder-32b-instruct",
+          "test_runs": [
+            {
+              "model_id": "qwen/qwen-2.5-coder-32b-instruct",
+              "provider_name": "Parasail",
+              "display_name": "Parasail | qwen/qwen-2.5-coder-32b-instruct",
+              "supports_tools": false,
+              "tool_call_made": false,
+              "status": "error",
+              "error": "Error code: 404 - {'error': {'message': 'No endpoints found that support tool use. To learn more about provider routing, visit: https://openrouter.ai/docs/provider-routing', 'code': 404}}",
+              "response_content": null,
+              "tool_calls": null,
+              "finish_reason": null,
+              "model_used": null,
+              "timestamp": "2025-06-01T18:24:47.074827"
+            },
+            {
+              "model_id": "qwen/qwen-2.5-coder-32b-instruct",
+              "provider_name": "Parasail",
+              "display_name": "Parasail | qwen/qwen-2.5-coder-32b-instruct",
+              "supports_tools": false,
+              "tool_call_made": false,
+              "status": "error",
+              "error": "Error code: 404 - {'error': {'message': 'No endpoints found that support tool use. To learn more about provider routing, visit: https://openrouter.ai/docs/provider-routing', 'code': 404}}",
+              "response_content": null,
+              "tool_calls": null,
+              "finish_reason": null,
+              "model_used": null,
+              "timestamp": "2025-06-01T18:24:47.423401"
+            },
+            {
+              "model_id": "qwen/qwen-2.5-coder-32b-instruct",
+              "provider_name": "Parasail",
+              "display_name": "Parasail | qwen/qwen-2.5-coder-32b-instruct",
+              "supports_tools": false,
+              "tool_call_made": false,
+              "status": "error",
+              "error": "Error code: 404 - {'error': {'message': 'No endpoints found that support tool use. To learn more about provider routing, visit: https://openrouter.ai/docs/provider-routing', 'code': 404}}",
+              "response_content": null,
+              "tool_calls": null,
+              "finish_reason": null,
+              "model_used": null,
+              "timestamp": "2025-06-01T18:24:47.771887"
+            }
+          ],
+          "summary": {
+            "total_runs": 3,
+            "success_count": 0,
+            "error_count": 3,
+            "unclear_count": 0,
+            "no_tool_call_count": 0
+          },
+          "timestamp": "2025-06-01T18:24:47.820227"
+        },
+        {
+          "model_id": "qwen/qwen-2.5-coder-32b-instruct",
+          "provider_name": "Cloudflare",
+          "display_name": "Cloudflare | qwen/qwen-2.5-coder-32b-instruct",
+          "test_runs": [
+            {
+              "model_id": "qwen/qwen-2.5-coder-32b-instruct",
+              "provider_name": "Cloudflare",
+              "display_name": "Cloudflare | qwen/qwen-2.5-coder-32b-instruct",
+              "supports_tools": false,
+              "tool_call_made": false,
+              "status": "error",
+              "error": "Error code: 404 - {'error': {'message': 'No endpoints found that support tool use. To learn more about provider routing, visit: https://openrouter.ai/docs/provider-routing', 'code': 404}}",
+              "response_content": null,
+              "tool_calls": null,
+              "finish_reason": null,
+              "model_used": null,
+              "timestamp": "2025-06-01T18:24:48.320903"
+            },
+            {
+              "model_id": "qwen/qwen-2.5-coder-32b-instruct",
+              "provider_name": "Cloudflare",
+              "display_name": "Cloudflare | qwen/qwen-2.5-coder-32b-instruct",
+              "supports_tools": false,
+              "tool_call_made": false,
+              "status": "error",
+              "error": "Error code: 404 - {'error': {'message': 'No endpoints found that support tool use. To learn more about provider routing, visit: https://openrouter.ai/docs/provider-routing', 'code': 404}}",
+              "response_content": null,
+              "tool_calls": null,
+              "finish_reason": null,
+              "model_used": null,
+              "timestamp": "2025-06-01T18:24:48.671638"
+            },
+            {
+              "model_id": "qwen/qwen-2.5-coder-32b-instruct",
+              "provider_name": "Cloudflare",
+              "display_name": "Cloudflare | qwen/qwen-2.5-coder-32b-instruct",
+              "supports_tools": false,
+              "tool_call_made": false,
+              "status": "error",
+              "error": "Error code: 404 - {'error': {'message': 'No endpoints found that support tool use. To learn more about provider routing, visit: https://openrouter.ai/docs/provider-routing', 'code': 404}}",
+              "response_content": null,
+              "tool_calls": null,
+              "finish_reason": null,
+              "model_used": null,
+              "timestamp": "2025-06-01T18:24:49.025570"
+            }
+          ],
+          "summary": {
+            "total_runs": 3,
+            "success_count": 0,
+            "error_count": 3,
+            "unclear_count": 0,
+            "no_tool_call_count": 0
+          },
+          "timestamp": "2025-06-01T18:24:49.080276"
+        },
+        {
+          "model_id": "qwen/qwen-2.5-coder-32b-instruct",
+          "provider_name": "Together",
+          "display_name": "Together | qwen/qwen-2.5-coder-32b-instruct",
+          "test_runs": [
+            {
+              "model_id": "qwen/qwen-2.5-coder-32b-instruct",
+              "provider_name": "Together",
+              "display_name": "Together | qwen/qwen-2.5-coder-32b-instruct",
+              "supports_tools": false,
+              "tool_call_made": false,
+              "status": "error",
+              "error": "Error code: 404 - {'error': {'message': 'No endpoints found that support tool use. To learn more about provider routing, visit: https://openrouter.ai/docs/provider-routing', 'code': 404}}",
+              "response_content": null,
+              "tool_calls": null,
+              "finish_reason": null,
+              "model_used": null,
+              "timestamp": "2025-06-01T18:24:49.580957"
+            },
+            {
+              "model_id": "qwen/qwen-2.5-coder-32b-instruct",
+              "provider_name": "Together",
+              "display_name": "Together | qwen/qwen-2.5-coder-32b-instruct",
+              "supports_tools": false,
+              "tool_call_made": false,
+              "status": "error",
+              "error": "Error code: 404 - {'error': {'message': 'No endpoints found that support tool use. To learn more about provider routing, visit: https://openrouter.ai/docs/provider-routing', 'code': 404}}",
+              "response_content": null,
+              "tool_calls": null,
+              "finish_reason": null,
+              "model_used": null,
+              "timestamp": "2025-06-01T18:24:49.987814"
+            },
+            {
+              "model_id": "qwen/qwen-2.5-coder-32b-instruct",
+              "provider_name": "Together",
+              "display_name": "Together | qwen/qwen-2.5-coder-32b-instruct",
+              "supports_tools": false,
+              "tool_call_made": false,
+              "status": "error",
+              "error": "Error code: 404 - {'error': {'message': 'No endpoints found that support tool use. To learn more about provider routing, visit: https://openrouter.ai/docs/provider-routing', 'code': 404}}",
+              "response_content": null,
+              "tool_calls": null,
+              "finish_reason": null,
+              "model_used": null,
+              "timestamp": "2025-06-01T18:24:50.332767"
+            }
+          ],
+          "summary": {
+            "total_runs": 3,
+            "success_count": 0,
+            "error_count": 3,
+            "unclear_count": 0,
+            "no_tool_call_count": 0
+          },
+          "timestamp": "2025-06-01T18:24:50.375129"
+        },
+        {
+          "model_id": "qwen/qwen-2.5-coder-32b-instruct",
+          "provider_name": "Featherless",
+          "display_name": "Featherless | qwen/qwen-2.5-coder-32b-instruct",
+          "test_runs": [
+            {
+              "model_id": "qwen/qwen-2.5-coder-32b-instruct",
+              "provider_name": "Featherless",
+              "display_name": "Featherless | qwen/qwen-2.5-coder-32b-instruct",
+              "supports_tools": false,
+              "tool_call_made": false,
+              "status": "error",
+              "error": "Error code: 404 - {'error': {'message': 'No endpoints found that support tool use. To learn more about provider routing, visit: https://openrouter.ai/docs/provider-routing', 'code': 404}}",
+              "response_content": null,
+              "tool_calls": null,
+              "finish_reason": null,
+              "model_used": null,
+              "timestamp": "2025-06-01T18:24:50.875824"
+            },
+            {
+              "model_id": "qwen/qwen-2.5-coder-32b-instruct",
+              "provider_name": "Featherless",
+              "display_name": "Featherless | qwen/qwen-2.5-coder-32b-instruct",
+              "supports_tools": false,
+              "tool_call_made": false,
+              "status": "error",
+              "error": "Error code: 404 - {'error': {'message': 'No endpoints found that support tool use. To learn more about provider routing, visit: https://openrouter.ai/docs/provider-routing', 'code': 404}}",
+              "response_content": null,
+              "tool_calls": null,
+              "finish_reason": null,
+              "model_used": null,
+              "timestamp": "2025-06-01T18:24:51.221436"
+            },
+            {
+              "model_id": "qwen/qwen-2.5-coder-32b-instruct",
+              "provider_name": "Featherless",
+              "display_name": "Featherless | qwen/qwen-2.5-coder-32b-instruct",
+              "supports_tools": false,
+              "tool_call_made": false,
+              "status": "error",
+              "error": "Error code: 404 - {'error': {'message': 'No endpoints found that support tool use. To learn more about provider routing, visit: https://openrouter.ai/docs/provider-routing', 'code': 404}}",
+              "response_content": null,
+              "tool_calls": null,
+              "finish_reason": null,
+              "model_used": null,
+              "timestamp": "2025-06-01T18:24:51.573045"
+            }
+          ],
+          "summary": {
+            "total_runs": 3,
+            "success_count": 0,
+            "error_count": 3,
+            "unclear_count": 0,
+            "no_tool_call_count": 0
+          },
+          "timestamp": "2025-06-01T18:24:51.620471"
+        }
+      ]
+    }
+  ]
+}
