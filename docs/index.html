@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OpenRouter Tool Support Matrix</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.4; /* Further reduced line height */
+            color: #333;
+            background-color: #f4f7f9;
+            margin: 0;
+            padding: 5px; /* Further reduced padding */
+        }
+        .container {
+            max-width: 99%; /* Maximize width */
+            margin: 0 auto;
+            padding: 10px; /* Further reduced padding */
+            background-color: #fff;
+            border-radius: 4px;
+            box-shadow: 0 1px 6px rgba(0,0,0,0.06);
+        }
+        h1 {
+            font-size: 22px; /* Further reduced font size */
+            margin-bottom: 4px; /* Further reduced margin */
+            color: #2c3e50;
+            text-align: center;
+        }
+        .subtitle {
+            color: #555;
+            font-size: 12px; /* Further reduced font size */
+            margin-bottom: 10px; /* Further reduced margin */
+            text-align: center;
+        }
+        .legend {
+            margin-bottom: 10px; /* Further reduced margin */
+            padding: 8px; /* Further reduced padding */
+            background-color: #f8f9fa;
+            border-radius: 3px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px 12px; /* Further reduced gap */
+            justify-content: center;
+            border: 1px solid #dee2e6;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            font-size: 11px; /* Further reduced font size */
+        }
+        .legend-color {
+            width: 12px; /* Smaller swatch */
+            height: 12px; /* Smaller swatch */
+            margin-right: 5px;
+            border-radius: 2px;
+        }
+        .legend-color.success-swatch { background-color: #d4edda; border: 1px solid #155724; }
+        .legend-color.partial-swatch { background-color: #fff3cd; border: 1px solid #856404; }
+        .legend-color.failure-swatch { background-color: #f8d7da; border: 1px solid #721c24; }
+        .legend-color.not-available-swatch { background-color: #e9ecef; border: 1px solid #adb5bd; }
+
+        .table-container {
+            overflow-x: auto;
+            border: 1px solid #dee2e6;
+            border-radius: 3px;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 11px; /* Further reduced font size */
+            min-width: 800px; /* Adjusted min-width */
+        }
+        th, td {
+            padding: 4px 6px; /* Further reduced padding */
+            text-align: left;
+            border: 1px solid #e9ecef;
+            vertical-align: top;
+        }
+        th {
+            background-color: #f1f3f5;
+            color: #343a40;
+            font-weight: 600;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+        th.model-header {
+            min-width: 180px; /* Further reduced min-width */
+            text-align: left;
+            position: sticky;
+            left: 0;
+            z-index: 11;
+            background-color: #e9ecef;
+        }
+        th.provider-header {
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            white-space: nowrap;
+            text-align: center;
+            min-width: 30px; /* Further reduced min-width */
+            max-width: 35px; /* Further reduced max-width */
+            height: 120px; /* Further reduced height */
+            vertical-align: bottom;
+            padding-bottom: 4px;
+        }
+        tbody tr:hover {
+            background-color: #f8f9fa;
+        }
+        .model-name-cell {
+            font-weight: 500;
+            color: #2c3e50;
+            background-color: #f8f9fa;
+            position: sticky;
+            left: 0;
+            z-index: 5;
+        }
+        .provider-cell {
+            text-align: center;
+            min-width: 50px; /* Further reduced min-width */
+        }
+        .variant-info {
+            padding: 1px 0; /* Further reduced padding */
+            /* Consider removing border if labels are gone and only one item usually appears */
+            /* border-bottom: 1px dashed #e0e0e0; */ 
+        }
+        .variant-info:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+        .variant-info:first-child {
+            padding-top: 0;
+        }
+        /* .variant-label is no longer used for text, but class might be on div */
+        
+        .cell {
+            display: inline-block;
+            padding: 1px 4px; /* Further reduced padding */
+            border-radius: 2px;
+            font-weight: bold;
+            font-size: 10px; /* Further reduced font size */
+            cursor: default; /* No longer help cursor as tooltip is gone */
+            border: 1px solid transparent;
+        }
+        .cell.success {
+            background-color: #d4edda;
+            color: #155724;
+            border-color: #c3e6cb;
+        }
+        .cell.partial {
+            background-color: #fff3cd;
+            color: #856404;
+            border-color: #ffeeba;
+        }
+        .cell.failure {
+            background-color: #f8d7da;
+            color: #721c24;
+            border-color: #f5c6cb;
+        }
+        .cell.none {
+            color: #6c757d;
+            font-weight: normal;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 15px; /* Further reduced margin */
+            font-size: 11px; /* Further reduced font size */
+            color: #6c757d;
+        }
+        .footer a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        .footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>OpenRouter Tool Support Matrix</h1>
+        <p class="subtitle">Last updated: 2025-06-01 12:59 UTC</p>
+        
+        <div class="legend">
+            <div class="legend-item"><span class="legend-color success-swatch"></span>Full support (3/3)</div>
+            <div class="legend-item"><span class="legend-color partial-swatch"></span>Partial support (1-2/3)</div>
+            <div class="legend-item"><span class="legend-color failure-swatch"></span>No support (0/3)</div>
+            <div class="legend-item"><span class="legend-color not-available-swatch"></span>Not available</div>
+        </div>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th class="model-header">Model</th>
+<th class='provider-header'>Chutes</th><th class='provider-header'>DeepInfra</th><th class='provider-header'>Fireworks</th><th class='provider-header'>InferenceNet</th><th class='provider-header'>Nebius</th><th class='provider-header'>Novita</th><th class='provider-header'>OpenAI</th><th class='provider-header'>OpenInference</th><th class='provider-header'>Parasail</th></tr></thead><tbody><tr><td class='model-name-cell'>openai/gpt-4.1-nano</td><td class='provider-cell'><span class='cell none'>-</span></td><td class='provider-cell'><span class='cell none'>-</span></td><td class='provider-cell'><span class='cell none'>-</span></td><td class='provider-cell'><span class='cell none'>-</span></td><td class='provider-cell'><span class='cell none'>-</span></td><td class='provider-cell'><span class='cell none'>-</span></td><td class='provider-cell'><div class='variant-info variant-standard'><span class='cell success'>3/3</span></div></td><td class='provider-cell'><span class='cell none'>-</span></td><td class='provider-cell'><span class='cell none'>-</span></td></tr><tr><td class='model-name-cell'>qwen/qwen3-30b-a3b</td><td class='provider-cell'><div class='variant-info variant-free'><span class='cell failure'>0/3</span></div></td><td class='provider-cell'><div class='variant-info variant-standard'><span class='cell success'>3/3</span></div></td><td class='provider-cell'><div class='variant-info variant-standard'><span class='cell success'>3/3</span></div></td><td class='provider-cell'><div class='variant-info variant-standard'><span class='cell failure'>0/3</span></div></td><td class='provider-cell'><div class='variant-info variant-standard'><span class='cell failure'>0/3</span></div></td><td class='provider-cell'><div class='variant-info variant-standard'><span class='cell failure'>0/3</span></div></td><td class='provider-cell'><span class='cell none'>-</span></td><td class='provider-cell'><div class='variant-info variant-free'><span class='cell failure'>0/3</span></div></td><td class='provider-cell'><div class='variant-info variant-standard'><span class='cell failure'>0/3</span></div></td></tr></tbody>
+            </table>
+        </div>
+        
+        <div class="footer">
+            <p>Generated automatically by <a href="https://github.com/windsurf-ai/openrouter-tool-tracker" target="_blank">OpenRouter Tool Support Tracker</a>.</p>
+            <p>Updates every 12 hours &bull; Data source: <a href="https://openrouter.ai/docs/api-reference" target="_blank">OpenRouter API</a></p>
+        </div>
+    </div>
+</body>
+</html>
