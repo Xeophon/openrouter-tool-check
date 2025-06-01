@@ -360,7 +360,7 @@ def generate_html(results):
         The code to generate this website is available on <a href="https://github.com/Xeophon/openrouter-tool-check" target="_blank">GitHub</a>.
         
         <div class="footer">
-            <p>Generated automatically by <a href="https://github.com/windsurf-ai/openrouter-tool-tracker" target="_blank">OpenRouter Tool Support Tracker</a>.</p>
+            <p>Generated automatically by <a href="https://github.com/Xeophon/openrouter-tool-check" target="_blank">OpenRouter Tool Support Tracker</a>.</p>
             <p>Updates every 12 hours &bull; Data source: <a href="https://openrouter.ai/docs/api-reference" target="_blank">OpenRouter API</a></p>
         </div>
     </div>
