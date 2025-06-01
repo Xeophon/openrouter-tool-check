@@ -1,0 +1,75 @@
+name: Check Tool Support
+
+on:
+  schedule:
+    # Run every 12 hours
+    - cron: '0 */12 * * *'
+  workflow_dispatch:  # Allow manual triggers
+  push:
+    branches:
+      - main
+      - master
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+jobs:
+  check-and-deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+    
+    - name: Install uv
+      uses: astral-sh/setup-uv@v3
+      with:
+        enable-cache: true
+        cache-dependency-glob: "uv.lock"
+
+    - name: Set up Python
+      run: uv python install 3.13
+
+    - name: Install dependencies
+      run: uv sync --frozen
+    
+    - name: Run tool support checks
+      env:
+        OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+      run: |
+        uv run check_all_models.py
+    
+    - name: Generate website
+      run: |
+        uv run generate_website.py
+    
+    - name: Commit and push results
+      run: |
+        git config --local user.email "github-actions[bot]@users.noreply.github.com"
+        git config --local user.name "github-actions[bot]"
+        
+        # Add all changes
+        git add data/
+        git add docs/
+        
+        # Check if there are changes to commit
+        if git diff --staged --quiet; then
+          echo "No changes to commit"
+        else
+          git commit -m "Update tool support results - $(date -u +'%Y-%m-%d %H:%M UTC')"
+          git push
+        fi
+    
+    - name: Setup Pages
+      uses: actions/configure-pages@v4
+    
+    - name: Upload artifact
+      uses: actions/upload-pages-artifact@v3
+      with:
+        path: 'docs'
+    
+    - name: Deploy to GitHub Pages
+      id: deployment
+      uses: actions/deploy-pages@v4
