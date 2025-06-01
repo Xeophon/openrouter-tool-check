@@ -263,7 +263,7 @@ def generate_html(results):
         .footer {{
             text-align: center;
             margin-top: 15px; /* Further reduced margin */
-            font-size: 11px; /* Further reduced font size */
+            font-size: 10px; /* Further reduced font size to 10px */
             color: #6c757d;
         }}
         .footer a {{
@@ -354,6 +354,10 @@ def generate_html(results):
     html_end = f"""</tbody>
             </table>
         </div>
+        
+        <br>
+        Sometimes, the model (or the provider) does not properly call tools. That's why every call is made three times.<br>
+        The code to generate this website is available on <a href="https://github.com/Xeophon/openrouter-tool-check" target="_blank">GitHub</a>.
         
         <div class="footer">
             <p>Generated automatically by <a href="https://github.com/windsurf-ai/openrouter-tool-tracker" target="_blank">OpenRouter Tool Support Tracker</a>.</p>
