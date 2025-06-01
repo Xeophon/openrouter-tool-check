@@ -1,0 +1,952 @@
+{
+  "generated_at": "2025-06-01T22:49:04.310627",
+  "total_models": 18,
+  "models": [
+    {
+      "model_id": "qwen/qwen3-32b",
+      "timestamp": "2025-06-01T22:49:37.337260",
+      "providers_tested": 9,
+      "providers": [
+        {
+          "model_id": "qwen/qwen3-32b",
+          "provider_name": "DeepInfra",
+          "display_name": "DeepInfra | qwen/qwen3-32b-04-28",
+          "test_runs": [
+            {
+              "model_id": "qwen/qwen3-32b",
+              "provider_name": "DeepInfra",
+              "display_name": "DeepInfra | qwen/qwen3-32b-04-28",
+              "supports_tools": true,
+              "tool_call_made": true,
+              "status": "success",
+              "error": null,
+              "response_content": null,
+              "tool_calls": [
+                {
+                  "id": "62751f70b",
+                  "type": "function",
+                  "function": {
+                    "name": "get_weather",
+                    "arguments": "{\"location\": \"San Francisco\", \"unit\": null}"
+                  }
+                }
+              ],
+              "finish_reason": "tool_calls",
+              "model_used": "qwen/qwen3-32b",
+              "timestamp": "2025-06-01T22:49:05.112756"
+            },
+            {
+              "model_id": "qwen/qwen3-32b",
+              "provider_name": "DeepInfra",
+              "display_name": "DeepInfra | qwen/qwen3-32b-04-28",
+              "supports_tools": true,
+              "tool_call_made": true,
+              "status": "success",
+              "error": null,
+              "response_content": null,
+              "tool_calls": [
+                {
+                  "id": "147e0a503",
+                  "type": "function",
+                  "function": {
+                    "name": "get_weather",
+                    "arguments": "{\"location\": \"San Francisco, CA\", \"unit\": \"fahrenheit\"}"
+                  }
+                }
+              ],
+              "finish_reason": "tool_calls",
+              "model_used": "qwen/qwen3-32b",
+              "timestamp": "2025-06-01T22:49:07.878164"
+            },
+            {
+              "model_id": "qwen/qwen3-32b",
+              "provider_name": "DeepInfra",
+              "display_name": "DeepInfra | qwen/qwen3-32b-04-28",
+              "supports_tools": true,
+              "tool_call_made": true,
+              "status": "success",
+              "error": null,
+              "response_content": null,
+              "tool_calls": [
+                {
+                  "id": "5a182e9b8",
+                  "type": "function",
+                  "function": {
+                    "name": "get_weather",
+                    "arguments": "{\"location\": \"San Francisco\", \"unit\": \"fahrenheit\"}"
+                  }
+                }
+              ],
+              "finish_reason": "tool_calls",
+              "model_used": "qwen/qwen3-32b",
+              "timestamp": "2025-06-01T22:49:09.001344"
+            }
+          ],
+          "summary": {
+            "total_runs": 3,
+            "success_count": 3,
+            "error_count": 0,
+            "unclear_count": 0,
+            "no_tool_call_count": 0
+          },
+          "timestamp": "2025-06-01T22:49:09.816413"
+        },
+        {
+          "model_id": "qwen/qwen3-32b",
+          "provider_name": "Nebius",
+          "display_name": "Nebius | qwen/qwen3-32b-04-28",
+          "test_runs": [
+            {
+              "model_id": "qwen/qwen3-32b",
+              "provider_name": "Nebius",
+              "display_name": "Nebius | qwen/qwen3-32b-04-28",
+              "supports_tools": true,
+              "tool_call_made": true,
+              "status": "success",
+              "error": null,
+              "response_content": null,
+              "tool_calls": [
+                {
+                  "id": "179679c80",
+                  "type": "function",
+                  "function": {
+                    "name": "get_weather",
+                    "arguments": "{\"location\": \"San Francisco, CA\", \"unit\": \"fahrenheit\"}"
+                  }
+                }
+              ],
+              "finish_reason": "tool_calls",
+              "model_used": "qwen/qwen3-32b",
+              "timestamp": "2025-06-01T22:49:10.322883"
+            },
+            {
+              "model_id": "qwen/qwen3-32b",
+              "provider_name": "Nebius",
+              "display_name": "Nebius | qwen/qwen3-32b-04-28",
+              "supports_tools": true,
+              "tool_call_made": true,
+              "status": "success",
+              "error": null,
+              "response_content": null,
+              "tool_calls": [
+                {
+                  "id": "d18872483",
+                  "type": "function",
+                  "function": {
+                    "name": "get_weather",
+                    "arguments": "{\"location\": \"San Francisco, CA\", \"unit\": \"fahrenheit\"}"
+                  }
+                }
+              ],
+              "finish_reason": "tool_calls",
+              "model_used": "qwen/qwen3-32b",
+              "timestamp": "2025-06-01T22:49:11.256567"
+            },
+            {
+              "model_id": "qwen/qwen3-32b",
+              "provider_name": "Nebius",
+              "display_name": "Nebius | qwen/qwen3-32b-04-28",
+              "supports_tools": true,
+              "tool_call_made": true,
+              "status": "success",
+              "error": null,
+              "response_content": null,
+              "tool_calls": [
+                {
+                  "id": "d82fe5732",
+                  "type": "function",
+                  "function": {
+                    "name": "get_weather",
+                    "arguments": "{\"location\": \"San Francisco, CA\", \"unit\": \"fahrenheit\"}"
+                  }
+                }
+              ],
+              "finish_reason": "tool_calls",
+              "model_used": "qwen/qwen3-32b",
+              "timestamp": "2025-06-01T22:49:12.141874"
+            }
+          ],
+          "summary": {
+            "total_runs": 3,
+            "success_count": 3,
+            "error_count": 0,
+            "unclear_count": 0,
+            "no_tool_call_count": 0
+          },
+          "timestamp": "2025-06-01T22:49:12.692068"
+        },
+        {
+          "model_id": "qwen/qwen3-32b",
+          "provider_name": "Lambda",
+          "display_name": "Lambda | qwen/qwen3-32b-04-28",
+          "test_runs": [
+            {
+              "model_id": "qwen/qwen3-32b",
+              "provider_name": "Lambda",
+              "display_name": "Lambda | qwen/qwen3-32b-04-28",
+              "supports_tools": true,
+              "tool_call_made": true,
+              "status": "success",
+              "error": null,
+              "response_content": null,
+              "tool_calls": [
+                {
+                  "id": "28b2f5950",
+                  "type": "function",
+                  "function": {
+                    "name": "get_weather",
+                    "arguments": "{\"location\": \"San Francisco, CA\", \"unit\": \"fahrenheit\"}"
+                  }
+                }
+              ],
+              "finish_reason": "tool_calls",
+              "model_used": "qwen/qwen3-32b",
+              "timestamp": "2025-06-01T22:49:13.202590"
+            },
+            {
+              "model_id": "qwen/qwen3-32b",
+              "provider_name": "Lambda",
+              "display_name": "Lambda | qwen/qwen3-32b-04-28",
+              "supports_tools": true,
+              "tool_call_made": true,
+              "status": "success",
+              "error": null,
+              "response_content": null,
+              "tool_calls": [
+                {
+                  "id": "9389396fa",
+                  "type": "function",
+                  "function": {
+                    "name": "get_weather",
+                    "arguments": "{\"location\": \"San Francisco, CA\", \"unit\": \"fahrenheit\"}"
+                  }
+                }
+              ],
+              "finish_reason": "tool_calls",
+              "model_used": "qwen/qwen3-32b",
+              "timestamp": "2025-06-01T22:49:14.120409"
+            },
+            {
+              "model_id": "qwen/qwen3-32b",
+              "provider_name": "Lambda",
+              "display_name": "Lambda | qwen/qwen3-32b-04-28",
+              "supports_tools": true,
+              "tool_call_made": true,
+              "status": "success",
+              "error": null,
+              "response_content": null,
+              "tool_calls": [
+                {
+                  "id": "333d61f4f",
+                  "type": "function",
+                  "function": {
+                    "name": "get_weather",
+                    "arguments": "{\"location\": \"San Francisco\", \"unit\": \"fahrenheit\"}"
+                  }
+                }
+              ],
+              "finish_reason": "tool_calls",
+              "model_used": "qwen/qwen3-32b",
+              "timestamp": "2025-06-01T22:49:15.041897"
+            }
+          ],
+          "summary": {
+            "total_runs": 3,
+            "success_count": 3,
+            "error_count": 0,
+            "unclear_count": 0,
+            "no_tool_call_count": 0
+          },
+          "timestamp": "2025-06-01T22:49:15.659929"
+        },
+        {
+          "model_id": "qwen/qwen3-32b",
+          "provider_name": "Novita",
+          "display_name": "Novita | qwen/qwen3-32b-04-28",
+          "test_runs": [
+            {
+              "model_id": "qwen/qwen3-32b",
+              "provider_name": "Novita",
+              "display_name": "Novita | qwen/qwen3-32b-04-28",
+              "supports_tools": true,
+              "tool_call_made": true,
+              "status": "success",
+              "error": null,
+              "response_content": null,
+              "tool_calls": [
+                {
+                  "id": "003274074",
+                  "type": "function",
+                  "function": {
+                    "name": "get_weather",
+                    "arguments": "{\"location\": \"San Francisco, CA\", \"unit\": null}"
+                  }
+                }
+              ],
+              "finish_reason": "tool_calls",
+              "model_used": "qwen/qwen3-32b",
+              "timestamp": "2025-06-01T22:49:16.165415"
+            },
+            {
+              "model_id": "qwen/qwen3-32b",
+              "provider_name": "Novita",
+              "display_name": "Novita | qwen/qwen3-32b-04-28",
+              "supports_tools": true,
+              "tool_call_made": true,
+              "status": "success",
+              "error": null,
+              "response_content": null,
+              "tool_calls": [
+                {
+                  "id": "f57f4a93b",
+                  "type": "function",
+                  "function": {
+                    "name": "get_weather",
+                    "arguments": "{\"location\": \"San Francisco\", \"unit\": \"fahrenheit\"}"
+                  }
+                }
+              ],
+              "finish_reason": "tool_calls",
+              "model_used": "qwen/qwen3-32b",
+              "timestamp": "2025-06-01T22:49:17.960404"
+            },
+            {
+              "model_id": "qwen/qwen3-32b",
+              "provider_name": "Novita",
+              "display_name": "Novita | qwen/qwen3-32b-04-28",
+              "supports_tools": true,
+              "tool_call_made": true,
+              "status": "success",
+              "error": null,
+              "response_content": null,
+              "tool_calls": [
+                {
+                  "id": "781b7d3ac",
+                  "type": "function",
+                  "function": {
+                    "name": "get_weather",
+                    "arguments": "{\"location\": \"San Francisco, CA\", \"unit\": \"fahrenheit\"}"
+                  }
+                }
+              ],
+              "finish_reason": "tool_calls",
+              "model_used": "qwen/qwen3-32b",
+              "timestamp": "2025-06-01T22:49:18.925899"
+            }
+          ],
+          "summary": {
+            "total_runs": 3,
+            "success_count": 3,
+            "error_count": 0,
+            "unclear_count": 0,
+            "no_tool_call_count": 0
+          },
+          "timestamp": "2025-06-01T22:49:19.692976"
+        },
+        {
+          "model_id": "qwen/qwen3-32b",
+          "provider_name": "Parasail",
+          "display_name": "Parasail | qwen/qwen3-32b-04-28",
+          "test_runs": [
+            {
+              "model_id": "qwen/qwen3-32b",
+              "provider_name": "Parasail",
+              "display_name": "Parasail | qwen/qwen3-32b-04-28",
+              "supports_tools": true,
+              "tool_call_made": true,
+              "status": "success",
+              "error": null,
+              "response_content": null,
+              "tool_calls": [
+                {
+                  "id": "2c9a4177a",
+                  "type": "function",
+                  "function": {
+                    "name": "get_weather",
+                    "arguments": "{\"location\": \"San Francisco, CA\", \"unit\": \"fahrenheit\"}"
+                  }
+                }
+              ],
+              "finish_reason": "tool_calls",
+              "model_used": "qwen/qwen3-32b",
+              "timestamp": "2025-06-01T22:49:20.205476"
+            },
+            {
+              "model_id": "qwen/qwen3-32b",
+              "provider_name": "Parasail",
+              "display_name": "Parasail | qwen/qwen3-32b-04-28",
+              "supports_tools": true,
+              "tool_call_made": true,
+              "status": "success",
+              "error": null,
+              "response_content": null,
+              "tool_calls": [
+                {
+                  "id": "9c6b5c244",
+                  "type": "function",
+                  "function": {
+                    "name": "get_weather",
+                    "arguments": "{\"location\": \"San Francisco, CA\", \"unit\": \"celsius\"}"
+                  }
+                }
+              ],
+              "finish_reason": "tool_calls",
+              "model_used": "qwen/qwen3-32b",
+              "timestamp": "2025-06-01T22:49:21.297804"
+            },
+            {
+              "model_id": "qwen/qwen3-32b",
+              "provider_name": "Parasail",
+              "display_name": "Parasail | qwen/qwen3-32b-04-28",
+              "supports_tools": true,
+              "tool_call_made": true,
+              "status": "success",
+              "error": null,
+              "response_content": null,
+              "tool_calls": [
+                {
+                  "id": "b33240440",
+                  "type": "function",
+                  "function": {
+                    "name": "get_weather",
+                    "arguments": "{\"location\": \"San Francisco, CA\", \"unit\": \"celsius\"}"
+                  }
+                }
+              ],
+              "finish_reason": "tool_calls",
+              "model_used": "qwen/qwen3-32b",
+              "timestamp": "2025-06-01T22:49:22.310053"
+            }
+          ],
+          "summary": {
+            "total_runs": 3,
+            "success_count": 3,
+            "error_count": 0,
+            "unclear_count": 0,
+            "no_tool_call_count": 0
+          },
+          "timestamp": "2025-06-01T22:49:22.934898"
+        },
+        {
+          "model_id": "qwen/qwen3-32b",
+          "provider_name": "GMICloud",
+          "display_name": "GMICloud | qwen/qwen3-32b-04-28",
+          "test_runs": [
+            {
+              "model_id": "qwen/qwen3-32b",
+              "provider_name": "GMICloud",
+              "display_name": "GMICloud | qwen/qwen3-32b-04-28",
+              "supports_tools": true,
+              "tool_call_made": true,
+              "status": "success",
+              "error": null,
+              "response_content": null,
+              "tool_calls": [
+                {
+                  "id": "9f9183b13",
+                  "type": "function",
+                  "function": {
+                    "name": "get_weather",
+                    "arguments": "{\"location\": \"San Francisco, CA\", \"unit\": \"fahrenheit\"}"
+                  }
+                }
+              ],
+              "finish_reason": "tool_calls",
+              "model_used": "qwen/qwen3-32b",
+              "timestamp": "2025-06-01T22:49:23.447530"
+            },
+            {
+              "model_id": "qwen/qwen3-32b",
+              "provider_name": "GMICloud",
+              "display_name": "GMICloud | qwen/qwen3-32b-04-28",
+              "supports_tools": true,
+              "tool_call_made": true,
+              "status": "success",
+              "error": null,
+              "response_content": null,
+              "tool_calls": [
+                {
+                  "id": "e2b735332",
+                  "type": "function",
+                  "function": {
+                    "name": "get_weather",
+                    "arguments": "{\"location\": \"San Francisco, CA\", \"unit\": \"fahrenheit\"}"
+                  }
+                }
+              ],
+              "finish_reason": "tool_calls",
+              "model_used": "qwen/qwen3-32b",
+              "timestamp": "2025-06-01T22:49:24.770689"
+            },
+            {
+              "model_id": "qwen/qwen3-32b",
+              "provider_name": "GMICloud",
+              "display_name": "GMICloud | qwen/qwen3-32b-04-28",
+              "supports_tools": true,
+              "tool_call_made": true,
+              "status": "success",
+              "error": null,
+              "response_content": null,
+              "tool_calls": [
+                {
+                  "id": "0c29df2be",
+                  "type": "function",
+                  "function": {
+                    "name": "get_weather",
+                    "arguments": "{\"location\": \"San Francisco\", \"unit\": \"fahrenheit\"}"
+                  }
+                }
+              ],
+              "finish_reason": "tool_calls",
+              "model_used": "qwen/qwen3-32b",
+              "timestamp": "2025-06-01T22:49:25.691287"
+            }
+          ],
+          "summary": {
+            "total_runs": 3,
+            "success_count": 3,
+            "error_count": 0,
+            "unclear_count": 0,
+            "no_tool_call_count": 0
+          },
+          "timestamp": "2025-06-01T22:49:26.200746"
+        },
+        {
+          "model_id": "qwen/qwen3-32b",
+          "provider_name": "Nebius",
+          "display_name": "Nebius | qwen/qwen3-32b-04-28",
+          "test_runs": [
+            {
+              "model_id": "qwen/qwen3-32b",
+              "provider_name": "Nebius",
+              "display_name": "Nebius | qwen/qwen3-32b-04-28",
+              "supports_tools": true,
+              "tool_call_made": true,
+              "status": "success",
+              "error": null,
+              "response_content": null,
+              "tool_calls": [
+                {
+                  "id": "e28f22030",
+                  "type": "function",
+                  "function": {
+                    "name": "get_weather",
+                    "arguments": "{\"location\": \"San Francisco\", \"unit\": \"fahrenheit\"}"
+                  }
+                }
+              ],
+              "finish_reason": "tool_calls",
+              "model_used": "qwen/qwen3-32b",
+              "timestamp": "2025-06-01T22:49:26.715423"
+            },
+            {
+              "model_id": "qwen/qwen3-32b",
+              "provider_name": "Nebius",
+              "display_name": "Nebius | qwen/qwen3-32b-04-28",
+              "supports_tools": true,
+              "tool_call_made": true,
+              "status": "success",
+              "error": null,
+              "response_content": null,
+              "tool_calls": [
+                {
+                  "id": "75575c0d9",
+                  "type": "function",
+                  "function": {
+                    "name": "get_weather",
+                    "arguments": "{\"location\": \"San Francisco\", \"unit\": \"fahrenheit\"}"
+                  }
+                }
+              ],
+              "finish_reason": "tool_calls",
+              "model_used": "qwen/qwen3-32b",
+              "timestamp": "2025-06-01T22:49:27.903969"
+            },
+            {
+              "model_id": "qwen/qwen3-32b",
+              "provider_name": "Nebius",
+              "display_name": "Nebius | qwen/qwen3-32b-04-28",
+              "supports_tools": true,
+              "tool_call_made": true,
+              "status": "success",
+              "error": null,
+              "response_content": null,
+              "tool_calls": [
+                {
+                  "id": "7196217ea",
+                  "type": "function",
+                  "function": {
+                    "name": "get_weather",
+                    "arguments": "{\"location\": \"San Francisco\", \"unit\": \"celsius\"}"
+                  }
+                }
+              ],
+              "finish_reason": "tool_calls",
+              "model_used": "qwen/qwen3-32b",
+              "timestamp": "2025-06-01T22:49:28.760420"
+            }
+          ],
+          "summary": {
+            "total_runs": 3,
+            "success_count": 3,
+            "error_count": 0,
+            "unclear_count": 0,
+            "no_tool_call_count": 0
+          },
+          "timestamp": "2025-06-01T22:49:29.578133"
+        },
+        {
+          "model_id": "qwen/qwen3-32b",
+          "provider_name": "Cerebras",
+          "display_name": "Cerebras | qwen/qwen3-32b-04-28",
+          "test_runs": [
+            {
+              "model_id": "qwen/qwen3-32b",
+              "provider_name": "Cerebras",
+              "display_name": "Cerebras | qwen/qwen3-32b-04-28",
+              "supports_tools": false,
+              "tool_call_made": false,
+              "status": "no_tool_call",
+              "error": null,
+              "response_content": "\nOkay, the user is asking for the weather in San Francisco and wants me to use the get_weather function. Let me check the function's parameters. The function requires location and unit. The location is provided as San Francisco, but I need to specify the unit. The user didn't mention which unit, so maybe I should default to one. Since the function allows both celsius and fahrenheit, and the user is in the US, maybe fahrenheit is more common there. But I should probably ask, but the user said to use the function, so maybe just pick one. Wait, the function's required parameters are location and unit, so I can't leave unit out. The user didn't specify, but the function requires it. Since the user didn't specify, maybe I should use a default. Alternatively, maybe the function allows null, but looking back, the unit is anyOf with a string enum or null. Wait, no, the required parameters include unit, so even though unit can be null, it's required. Wait, no, looking at the schema, the required fields are location and unit. So unit must be provided. But the user didn't specify. Hmm, that's a problem. How to handle that. Maybe assume the default, like celsius or fahrenheit. Since the user is in the US, maybe fahrenheit. Alternatively, maybe the function can handle it if the unit is null, but according to the schema, the unit is required. Wait, the parameters required are location and unit, but the unit's type is anyOf which includes null. Wait, no, the required means that the parameter must be present. So the unit must be either celsius or fahrenheit. So I need to choose one. The user didn't specify, so perhaps I should default to one. Maybe celsius? Or maybe the user is in the US, so fahrenheit. But the assistant is supposed to decide. Alternatively, perhaps the user expects a choice, but the function requires a specific one. Since the user didn't specify, but the function requires it, I have to make a choice. Let's go with celsius as a default. Wait, but in the US, people usually use Fahrenheit. Maybe the user would expect Fahrenheit. Hmm. Well, since it's required, I need to pick one. Let me check the function's parameters again. The unit is anyOf with two options: a string enum of celsius or fahrenheit, or null. But since the required includes unit, the unit cannot be null. Wait, no. The anyOf means that unit can be either a string in the enum or null. But required: [\"location\", \"unit\"] means that the unit must be present, but according to the schema, if unit is null, is it considered present? I'm a bit confused. Wait, in JSON schema, the 'required' keyword checks that the property is present, regardless of its value. So if the unit is required, the function call must include unit, but its value can be null if allowed. However, in the parameters, the unit's type is anyOf (enum or null), which means it can be null. But the user's query doesn't specify a unit. So perhaps the assistant can set unit to null. But the user asked to use the get_weather function. If the function allows unit to be null, maybe the function can handle it. Let me check the schema again. The unit's type is anyOf [{\"type\": \"string\", \"enum\": [\"celsius\", \"fahrenheit\"]}, {\"type\": \"null\"}]. So the unit can be one of the two strings or null. Therefore, in the tool call, I can set unit to null. But the required parameters include unit. Wait, no, the required parameters are location and unit, so the unit must be present, but its value can be null. Therefore, I can call get_weather with location as \"San Francisco\" and unit as null. Alternatively, perhaps the function expects a valid unit. Maybe the assistant should assume a default. The user didn't specify, so maybe the assistant should default to one. For example, if the user is in the US, use Fahrenheit. However, the function's documentation doesn't specify a default. Since the user is asking to use the function, and the unit is required, but the user didn't specify, perhaps the assistant should make a choice. Alternatively, maybe the user expects the assistant to output an error, but the assistant must proceed. Since the user explicitly said to use the get_weather function, perhaps proceed with one of the units. Let's choose celsius as a safe default. Or maybe the assistant can't choose and must ask, but the instructions say to call the function. Hmm. Let me re-express: the user's query is \"What's the weather like in San Francisco? Please",
+              "tool_calls": null,
+              "finish_reason": "tool_calls",
+              "model_used": "qwen/qwen3-32b",
+              "timestamp": "2025-06-01T22:49:30.085988"
+            },
+            {
+              "model_id": "qwen/qwen3-32b",
+              "provider_name": "Cerebras",
+              "display_name": "Cerebras | qwen/qwen3-32b-04-28",
+              "supports_tools": true,
+              "tool_call_made": true,
+              "status": "success",
+              "error": null,
+              "response_content": null,
+              "tool_calls": [
+                {
+                  "id": "dd35c1fbc",
+                  "type": "function",
+                  "function": {
+                    "name": "get_weather",
+                    "arguments": "{\"location\": \"San Francisco, CA\", \"unit\": \"fahrenheit\"}"
+                  }
+                }
+              ],
+              "finish_reason": "tool_calls",
+              "model_used": "qwen/qwen3-32b",
+              "timestamp": "2025-06-01T22:49:31.731488"
+            },
+            {
+              "model_id": "qwen/qwen3-32b",
+              "provider_name": "Cerebras",
+              "display_name": "Cerebras | qwen/qwen3-32b-04-28",
+              "supports_tools": true,
+              "tool_call_made": true,
+              "status": "success",
+              "error": null,
+              "response_content": null,
+              "tool_calls": [
+                {
+                  "id": "2d3407689",
+                  "type": "function",
+                  "function": {
+                    "name": "get_weather",
+                    "arguments": "{\"location\": \"San Francisco, CA\", \"unit\": \"celsius\"}"
+                  }
+                }
+              ],
+              "finish_reason": "tool_calls",
+              "model_used": "qwen/qwen3-32b",
+              "timestamp": "2025-06-01T22:49:32.758099"
+            }
+          ],
+          "summary": {
+            "total_runs": 3,
+            "success_count": 2,
+            "error_count": 0,
+            "unclear_count": 0,
+            "no_tool_call_count": 1
+          },
+          "timestamp": "2025-06-01T22:49:33.469588"
+        },
+        {
+          "model_id": "qwen/qwen3-32b",
+          "provider_name": "SambaNova",
+          "display_name": "SambaNova | qwen/qwen3-32b-04-28",
+          "test_runs": [
+            {
+              "model_id": "qwen/qwen3-32b",
+              "provider_name": "SambaNova",
+              "display_name": "SambaNova | qwen/qwen3-32b-04-28",
+              "supports_tools": true,
+              "tool_call_made": true,
+              "status": "success",
+              "error": null,
+              "response_content": null,
+              "tool_calls": [
+                {
+                  "id": "486f8aed5",
+                  "type": "function",
+                  "function": {
+                    "name": "get_weather",
+                    "arguments": "{\"location\": \"San Francisco, CA\", \"unit\": \"celsius\"}"
+                  }
+                }
+              ],
+              "finish_reason": "tool_calls",
+              "model_used": "qwen/qwen3-32b",
+              "timestamp": "2025-06-01T22:49:33.984966"
+            },
+            {
+              "model_id": "qwen/qwen3-32b",
+              "provider_name": "SambaNova",
+              "display_name": "SambaNova | qwen/qwen3-32b-04-28",
+              "supports_tools": true,
+              "tool_call_made": true,
+              "status": "success",
+              "error": null,
+              "response_content": null,
+              "tool_calls": [
+                {
+                  "id": "2fb1e96c4",
+                  "type": "function",
+                  "function": {
+                    "name": "get_weather",
+                    "arguments": "{\"location\": \"San Francisco\", \"unit\": \"fahrenheit\"}"
+                  }
+                }
+              ],
+              "finish_reason": "tool_calls",
+              "model_used": "qwen/qwen3-32b",
+              "timestamp": "2025-06-01T22:49:34.904792"
+            },
+            {
+              "model_id": "qwen/qwen3-32b",
+              "provider_name": "SambaNova",
+              "display_name": "SambaNova | qwen/qwen3-32b-04-28",
+              "supports_tools": true,
+              "tool_call_made": true,
+              "status": "success",
+              "error": null,
+              "response_content": null,
+              "tool_calls": [
+                {
+                  "id": "0be857afe",
+                  "type": "function",
+                  "function": {
+                    "name": "get_weather",
+                    "arguments": "{\"location\": \"San Francisco, CA\", \"unit\": null}"
+                  }
+                }
+              ],
+              "finish_reason": "tool_calls",
+              "model_used": "qwen/qwen3-32b",
+              "timestamp": "2025-06-01T22:49:35.826552"
+            }
+          ],
+          "summary": {
+            "total_runs": 3,
+            "success_count": 3,
+            "error_count": 0,
+            "unclear_count": 0,
+            "no_tool_call_count": 0
+          },
+          "timestamp": "2025-06-01T22:49:36.824398"
+        }
+      ]
+    },
+    {
+      "model_id": "qwen/qwen3-32b:free",
+      "timestamp": "2025-06-01T22:49:39.074614",
+      "providers_tested": 1,
+      "providers": [
+        {
+          "model_id": "qwen/qwen3-32b:free",
+          "provider_name": "Chutes",
+          "display_name": "Chutes | qwen/qwen3-32b-04-28:free",
+          "test_runs": [
+            {
+              "model_id": "qwen/qwen3-32b:free",
+              "provider_name": "Chutes",
+              "display_name": "Chutes | qwen/qwen3-32b-04-28:free",
+              "supports_tools": false,
+              "tool_call_made": false,
+              "status": "error",
+              "error": "Error code: 404 - {'error': {'message': 'No endpoints found that support tool use. To learn more about provider routing, visit: https://openrouter.ai/docs/provider-routing', 'code': 404}}",
+              "response_content": null,
+              "tool_calls": null,
+              "finish_reason": null,
+              "model_used": null,
+              "timestamp": "2025-06-01T22:49:37.744601"
+            },
+            {
+              "model_id": "qwen/qwen3-32b:free",
+              "provider_name": "Chutes",
+              "display_name": "Chutes | qwen/qwen3-32b-04-28:free",
+              "supports_tools": false,
+              "tool_call_made": false,
+              "status": "error",
+              "error": "Error code: 404 - {'error': {'message': 'No endpoints found that support tool use. To learn more about provider routing, visit: https://openrouter.ai/docs/provider-routing', 'code': 404}}",
+              "response_content": null,
+              "tool_calls": null,
+              "finish_reason": null,
+              "model_used": null,
+              "timestamp": "2025-06-01T22:49:38.123887"
+            },
+            {
+              "model_id": "qwen/qwen3-32b:free",
+              "provider_name": "Chutes",
+              "display_name": "Chutes | qwen/qwen3-32b-04-28:free",
+              "supports_tools": false,
+              "tool_call_made": false,
+              "status": "error",
+              "error": "Error code: 404 - {'error': {'message': 'No endpoints found that support tool use. To learn more about provider routing, visit: https://openrouter.ai/docs/provider-routing', 'code': 404}}",
+              "response_content": null,
+              "tool_calls": null,
+              "finish_reason": null,
+              "model_used": null,
+              "timestamp": "2025-06-01T22:49:38.498389"
+            }
+          ],
+          "summary": {
+            "total_runs": 3,
+            "success_count": 0,
+            "error_count": 3,
+            "unclear_count": 0,
+            "no_tool_call_count": 0
+          },
+          "timestamp": "2025-06-01T22:49:38.571966"
+        }
+      ]
+    },
+    {
+      "model_id": "sarvamai/sarvam-m",
+      "timestamp": "2025-06-01T22:49:40.821219",
+      "providers_tested": 1,
+      "providers": [
+        {
+          "model_id": "sarvamai/sarvam-m",
+          "provider_name": "Parasail",
+          "display_name": "Parasail | sarvamai/sarvam-m",
+          "test_runs": [
+            {
+              "model_id": "sarvamai/sarvam-m",
+              "provider_name": "Parasail",
+              "display_name": "Parasail | sarvamai/sarvam-m",
+              "supports_tools": false,
+              "tool_call_made": false,
+              "status": "error",
+              "error": "Error code: 404 - {'error': {'message': 'No endpoints found that support tool use. To learn more about provider routing, visit: https://openrouter.ai/docs/provider-routing', 'code': 404}}",
+              "response_content": null,
+              "tool_calls": null,
+              "finish_reason": null,
+              "model_used": null,
+              "timestamp": "2025-06-01T22:49:39.486735"
+            },
+            {
+              "model_id": "sarvamai/sarvam-m",
+              "provider_name": "Parasail",
+              "display_name": "Parasail | sarvamai/sarvam-m",
+              "supports_tools": false,
+              "tool_call_made": false,
+              "status": "error",
+              "error": "Error code: 404 - {'error': {'message': 'No endpoints found that support tool use. To learn more about provider routing, visit: https://openrouter.ai/docs/provider-routing', 'code': 404}}",
+              "response_content": null,
+              "tool_calls": null,
+              "finish_reason": null,
+              "model_used": null,
+              "timestamp": "2025-06-01T22:49:39.855367"
+            },
+            {
+              "model_id": "sarvamai/sarvam-m",
+              "provider_name": "Parasail",
+              "display_name": "Parasail | sarvamai/sarvam-m",
+              "supports_tools": false,
+              "tool_call_made": false,
+              "status": "error",
+              "error": "Error code: 404 - {'error': {'message': 'No endpoints found that support tool use. To learn more about provider routing, visit: https://openrouter.ai/docs/provider-routing', 'code': 404}}",
+              "response_content": null,
+              "tool_calls": null,
+              "finish_reason": null,
+              "model_used": null,
+              "timestamp": "2025-06-01T22:49:40.244548"
+            }
+          ],
+          "summary": {
+            "total_runs": 3,
+            "success_count": 0,
+            "error_count": 3,
+            "unclear_count": 0,
+            "no_tool_call_count": 0
+          },
+          "timestamp": "2025-06-01T22:49:40.307983"
+        }
+      ]
+    },
+    {
+      "model_id": "sarvamai/sarvam-m:free",
+      "timestamp": "2025-06-01T22:49:42.554919",
+      "providers_tested": 1,
+      "providers": [
+        {
+          "model_id": "sarvamai/sarvam-m:free",
+          "provider_name": "Chutes",
+          "display_name": "Chutes | sarvamai/sarvam-m:free",
+          "test_runs": [
+            {
+              "model_id": "sarvamai/sarvam-m:free",
+              "provider_name": "Chutes",
+              "display_name": "Chutes | sarvamai/sarvam-m:free",
+              "supports_tools": false,
+              "tool_call_made": false,
+              "status": "error",
+              "error": "Error code: 404 - {'error': {'message': 'No endpoints found that support tool use. To learn more about provider routing, visit: https://openrouter.ai/docs/provider-routing', 'code': 404}}",
+              "response_content": null,
+              "tool_calls": null,
+              "finish_reason": null,
+              "model_used": null,
+              "timestamp": "2025-06-01T22:49:41.229508"
+            },
+            {
+              "model_id": "sarvamai/sarvam-m:free",
+              "provider_name": "Chutes",
+              "display_name": "Chutes | sarvamai/sarvam-m:free",
+              "supports_tools": false,
+              "tool_call_made": false,
+              "status": "error",
+              "error": "Error code: 404 - {'error': {'message': 'No endpoints found that support tool use. To learn more about provider routing, visit: https://openrouter.ai/docs/provider-routing', 'code': 404}}",
+              "response_content": null,
+              "tool_calls": null,
+              "finish_reason": null,
+              "model_used": null,
+              "timestamp": "2025-06-01T22:49:41.620377"
+            },
+            {
+              "model_id": "sarvamai/sarvam-m:free",
+              "provider_name": "Chutes",
+              "display_name": "Chutes | sarvamai/sarvam-m:free",
+              "supports_tools": false,
+              "tool_call_made": false,
+              "status": "error",
+              "error": "Error code: 404 - {'error': {'message': 'No endpoints found that support tool use. To learn more about provider routing, visit: https://openrouter.ai/docs/provider-routing', 'code': 404}}",
+              "response_content": null,
+              "tool_calls": null,
+              "finish_reason": null,
+              "model_used": null,
+              "timestamp": "2025-06-01T22:49:41.995646"
+            }
+          ],
+          "summary": {
+            "total_runs": 3,
+            "success_count": 0,
+            "error_count": 3,
+            "unclear_count": 0,
+            "no_tool_call_count": 0
+          },
+          "timestamp": "2025-06-01T22:49:42.053035"
+        }
+      ]
+    }
+  ]
+}
