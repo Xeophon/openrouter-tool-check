@@ -1,19 +1,30 @@
-[
-
-  "qwen/qwen3-30b-a3b",
-  "qwen/qwen3-30b-a3b:free",
-  "qwen/qwen3-1.7b",
-  "deepseek/deepseek-r1-0528",
-  "deepseek/deepseek-r1-0528:free",
-  "deepseek/deepseek-chat-v3-0324",
-  "deepseek/deepseek-chat-v3-0324:free",
-  "openai/gpt-4.1-nano",
-  "meta-llama/llama-4-maverick",
-  "meta-llama/llama-4-maverick:free",
-  "meta-llama/llama-4-scout",
-  "meta-llama/llama-4-scout:free",
-  "qwen/qwen-2.5-coder-32b-instruct",
-  "qwen/qwen-2.5-coder-32b-instruct:free",
-  "qwen/qwen-2.5-7b-instruct",
-  "qwen/qwen-2.5-7b-instruct:free"
-]
+{
+  "DeepSeek V3 0324": {
+    "huggingface": ["deepseek-ai/DeepSeek-V3-0324"],
+    "openrouter": ["deepseek/deepseek-chat-v3-0324", "deepseek/deepseek-chat-v3-0324:free"]
+  },
+  "DeepSeek R1 0528": {
+    "huggingface": ["deepseek-ai/DeepSeek-R1-0528"],
+    "openrouter": ["deepseek/deepseek-r1-0528", "deepseek/deepseek-r1-0528:free"]
+  },
+  "Llama 4 Scout": {
+    "huggingface": ["meta-llama/Llama-4-Scout-17B-16E-Instruct"],
+    "openrouter": ["meta-llama/llama-4-scout", "meta-llama/llama-4-scout:free"]
+  },
+  "GPT-4.1 Nano": {
+    "huggingface": [],
+    "openrouter": ["openai/gpt-4.1-nano"]
+  },
+  "Qwen 2.5 7B": {
+    "huggingface": ["Qwen/Qwen2.5-7B-Instruct"],
+    "openrouter": ["qwen/qwen-2.5-7b-instruct", "qwen/qwen-2.5-7b-instruct:free"]
+  },
+  "Qwen 2.5 Coder 32B": {
+    "huggingface": ["Qwen/Qwen2.5-Coder-32B-Instruct"],
+    "openrouter": ["qwen/qwen-2.5-coder-32b-instruct", "qwen/qwen-2.5-coder-32b-instruct:free"]
+  },
+  "Qwen3 30B A3B": {
+    "huggingface": ["Qwen/Qwen3-30B-A3B"],
+    "openrouter": ["qwen/qwen3-30b-a3b", "qwen/qwen3-30b-a3b:free"]
+  }
+}

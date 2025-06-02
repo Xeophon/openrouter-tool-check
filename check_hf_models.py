@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Check tool support for all models and providers on OpenRouter.
+Check tool support for all models and providers on Hugging Face Inference API.
 Generates a comprehensive report for multiple models.
 Optimized version with concurrent requests.
 """
@@ -10,70 +10,70 @@ import json
 import asyncio
 from datetime import datetime
 from typing import Dict, Any, List
-from openai import AsyncOpenAI
 from dotenv import load_dotenv
-import httpx
+from huggingface_hub import model_info, InferenceClient
 
 # Load environment variables
 load_dotenv()
 
 
-class OpenRouterToolSupportChecker:
+class HuggingFaceToolSupportChecker:
     def __init__(self, api_key: str):
         self.api_key = api_key
-        self.base_url = "https://openrouter.ai/api/v1"
-        self.client = AsyncOpenAI(
-            api_key=api_key,
-            base_url=self.base_url,
-        )
         # Semaphore to limit concurrent requests
         self.semaphore = asyncio.Semaphore(5)
 
     async def get_model_providers(self, model_id: str) -> List[Dict[str, str]]:
         """Fetch available providers for a specific model."""
-        async with httpx.AsyncClient() as client:
-            try:
-                # Split model ID to get author and slug
-                parts = model_id.split("/")
-                if len(parts) != 2:
-                    print(f"Invalid model ID format: {model_id}")
-                    return []
+        try:
+            # Get model info with inference provider mapping
+            info = await asyncio.to_thread(
+                model_info,
+                model_id,
+                expand="inferenceProviderMapping",
+                token=self.api_key,
+            )
 
-                author, slug = parts
+            providers = []
 
-                # Get provider information from the endpoints API
-                response = await client.get(
-                    f"{self.base_url}/models/{author}/{slug}/endpoints",
-                    headers={"Authorization": f"Bearer {self.api_key}"},
-                )
-
-                if response.status_code != 200:
-                    print(
-                        f"Failed to fetch endpoints for {model_id}: {response.status_code}"
-                    )
-                    return []
-
-                data = response.json()
-                providers = []
-
-                # Extract provider information from endpoints
-                if "data" in data and "endpoints" in data["data"]:
-                    for endpoint in data["data"]["endpoints"]:
-                        provider_info = {
-                            "provider_name": endpoint.get("provider_name", ""),
-                            "display_name": endpoint.get("name", ""),
-                            "context_length": endpoint.get("context_length", 0),
-                            "has_pricing": "pricing" in endpoint,
+            # Extract provider information from inference provider mapping
+            if (
+                hasattr(info, "inference_provider_mapping")
+                and info.inference_provider_mapping
+            ):
+                for (
+                    provider_name,
+                    provider_info,
+                ) in info.inference_provider_mapping.items():
+                    if isinstance(provider_info, dict):
+                        provider_data = {
+                            "provider_name": provider_name,
+                            "display_name": provider_info.get(
+                                "display_name", provider_name
+                            ),
+                            "vendor": provider_info.get("vendor", provider_name),
+                            "region": provider_info.get("region", ""),
+                            "base_url": provider_info.get("base_url", ""),
+                            "endpoint_url": provider_info.get("endpoint_url", ""),
                         }
+                        providers.append(provider_data)
+                    else:
+                        # Simple provider format
+                        providers.append(
+                            {
+                                "provider_name": provider_name,
+                                "display_name": provider_name,
+                                "vendor": provider_name,
+                                "region": "",
+                                "base_url": "",
+                                "endpoint_url": "",
+                            }
+                        )
 
-                        # Only add if we have a valid provider name
-                        if provider_info["provider_name"]:
-                            providers.append(provider_info)
-
-                return providers
-            except Exception as e:
-                print(f"Error getting providers for {model_id}: {e}")
-                return []
+            return providers
+        except Exception as e:
+            print(f"Error getting providers for {model_id}: {e}")
+            return []
 
     async def test_provider(
         self, model_id: str, provider: Dict[str, Any]
@@ -86,7 +86,9 @@ class OpenRouterToolSupportChecker:
             "model_id": model_id,
             "provider_name": provider_name,
             "display_name": display_name,
-            "supports_tools": provider.get("supports_tools", False),
+            "vendor": provider.get("vendor", ""),
+            "region": provider.get("region", ""),
+            "supports_tools": False,
             "tool_call_made": False,
             "status": "unknown",  # "success", "error", "unclear", "no_tool_call"
             "error": None,
@@ -99,8 +101,43 @@ class OpenRouterToolSupportChecker:
 
         async with self.semaphore:  # Limit concurrent requests
             try:
-                # Create the completion with tools
-                response = await self.client.chat.completions.create(
+                # Create InferenceClient with provider parameter if not serverless
+                if provider_name == "serverless":
+                    # Use default HuggingFace serverless API
+                    client = InferenceClient(
+                        token=self.api_key,
+                    )
+                else:
+                    # Use specific provider
+                    vendor = provider.get("vendor", provider_name).lower()
+                    # Map common vendor names to InferenceClient provider names
+                    provider_mapping = {
+                        "aws": "aws",
+                        "amazon": "aws",
+                        "sagemaker": "aws",
+                        "azure": "azure",
+                        "microsoft": "azure",
+                        "together": "together",
+                        "replicate": "replicate",
+                        "cohere": "cohere",
+                        "nebius": "nebius",
+                    }
+                    mapped_provider = provider_mapping.get(vendor, vendor)
+                    
+                    try:
+                        client = InferenceClient(
+                            provider=mapped_provider,
+                            token=self.api_key,
+                        )
+                    except Exception:
+                        # Fallback to serverless if provider is not supported
+                        client = InferenceClient(
+                            token=self.api_key,
+                        )
+
+                # Create the completion with tools using synchronous call in async context
+                response = await asyncio.to_thread(
+                    client.chat_completion,
                     model=model_id,
                     messages=[
                         {
@@ -132,11 +169,8 @@ class OpenRouterToolSupportChecker:
                             },
                         }
                     ],
-                    tool_choice="auto",
                     max_tokens=1000,
-                    # Specify the provider using extra_body
-                    extra_body={"provider": {"only": [provider_name]}},
-                )
+                    )
 
                 # Extract debugging information
                 message = response.choices[0].message
@@ -178,7 +212,7 @@ class OpenRouterToolSupportChecker:
                 # Analyze error type
                 if "tool" in error_str.lower() or "function" in error_str.lower():
                     result["supports_tools"] = False
-                elif "404" in error_str and "No endpoints found" in error_str:
+                elif "404" in error_str:
                     result["supports_tools"] = False
                 else:
                     # Other errors - unclear if tools are supported
@@ -197,6 +231,8 @@ class OpenRouterToolSupportChecker:
             "model_id": model_id,
             "provider_name": provider_name,
             "display_name": display_name,
+            "vendor": provider.get("vendor", ""),
+            "region": provider.get("region", ""),
             "supports_structured_output": False,
             "status": "unknown",  # "success", "error", "unclear"
             "error": None,
@@ -208,8 +244,43 @@ class OpenRouterToolSupportChecker:
 
         async with self.semaphore:  # Limit concurrent requests
             try:
-                # Create the completion with provider routing and structured output format
-                response = await self.client.chat.completions.create(
+                # Create InferenceClient with provider parameter if not serverless
+                if provider_name == "serverless":
+                    # Use default HuggingFace serverless API
+                    client = InferenceClient(
+                        token=self.api_key,
+                    )
+                else:
+                    # Use specific provider
+                    vendor = provider.get("vendor", provider_name).lower()
+                    # Map common vendor names to InferenceClient provider names
+                    provider_mapping = {
+                        "aws": "aws",
+                        "amazon": "aws",
+                        "sagemaker": "aws",
+                        "azure": "azure",
+                        "microsoft": "azure",
+                        "together": "together",
+                        "replicate": "replicate",
+                        "cohere": "cohere",
+                        "nebius": "nebius",
+                    }
+                    mapped_provider = provider_mapping.get(vendor, vendor)
+                    
+                    try:
+                        client = InferenceClient(
+                            provider=mapped_provider,
+                            token=self.api_key,
+                        )
+                    except Exception:
+                        # Fallback to serverless if provider is not supported
+                        client = InferenceClient(
+                            token=self.api_key,
+                        )
+
+                # Create the completion with structured output format using synchronous call in async context
+                response = await asyncio.to_thread(
+                    client.chat_completion,
                     model=model_id,
                     messages=[
                         {
@@ -244,9 +315,7 @@ class OpenRouterToolSupportChecker:
                         },
                     },
                     max_tokens=1000,
-                    # Specify the provider using extra_body
-                    extra_body={"provider": {"only": [provider_name]}},
-                )
+                    )
 
                 # Extract debugging information
                 message = response.choices[0].message
@@ -368,6 +437,8 @@ class OpenRouterToolSupportChecker:
                     "model_id": model_id,
                     "provider_name": provider_name,
                     "display_name": display_name,
+                    "vendor": provider.get("vendor", ""),
+                    "region": provider.get("region", ""),
                     "test_runs": test_runs,
                     "summary": {
                         "total_runs": 3,
@@ -459,6 +530,8 @@ class OpenRouterToolSupportChecker:
                     "model_id": model_id,
                     "provider_name": provider_name,
                     "display_name": display_name,
+                    "vendor": provider.get("vendor", ""),
+                    "region": provider.get("region", ""),
                     "test_runs": test_runs,
                     "summary": {
                         "total_runs": 3,
@@ -480,26 +553,32 @@ class OpenRouterToolSupportChecker:
 
 
 async def main():
-    api_key = os.getenv("OPENROUTER_API_KEY")
+    api_key = os.getenv("HF_TOKEN")
     if not api_key:
-        print("Error: OPENROUTER_API_KEY environment variable not set")
-        return
+        # Try alternate environment variable names
+        api_key = os.getenv("HUGGINGFACE_TOKEN") or os.getenv("HUGGING_FACE_HUB_TOKEN")
+        if not api_key:
+            print("Error: HF_TOKEN environment variable not set")
+            print(
+                "Please set one of: HF_TOKEN, HUGGINGFACE_TOKEN, or HUGGING_FACE_HUB_TOKEN"
+            )
+            return
 
     # Load models from unified models file
     with open("models.json", "r") as f:
         models_data = json.load(f)
     
-    # Extract OpenRouter models
+    # Extract HuggingFace models
     models = []
     for model_name, platforms in models_data.items():
-        if "openrouter" in platforms and platforms["openrouter"]:
-            models.extend(platforms["openrouter"])
+        if "huggingface" in platforms and platforms["huggingface"]:
+            models.extend(platforms["huggingface"])
 
-    print("OpenRouter Tool Support Checker (Fast Concurrent Version)")
+    print("Hugging Face Inference API Tool Support Checker")
     print(f"Testing {len(models)} models")
     print("=" * 60)
 
-    checker = OpenRouterToolSupportChecker(api_key)
+    checker = HuggingFaceToolSupportChecker(api_key)
 
     # Check all models
     all_results = {
@@ -509,7 +588,7 @@ async def main():
     }
 
     # Process all models concurrently in batches
-    batch_size = 3  # Process 3 models at a time to avoid overwhelming the API
+    batch_size = 2  # Process 2 models at a time to avoid overwhelming the API
     for i in range(0, len(models), batch_size):
         batch = models[i : i + batch_size]
         print(
@@ -534,7 +613,7 @@ async def main():
             all_results["models"].append(tool_result)
 
     # Save final results
-    final_output = "data.json"
+    final_output = "data_hf.json"
     with open(final_output, "w") as f:
         json.dump(all_results, f, indent=2)
 
