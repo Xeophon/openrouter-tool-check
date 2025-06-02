@@ -2,15 +2,16 @@
 """
 Check tool support for all models and providers on OpenRouter.
 Generates a comprehensive report for multiple models.
+Optimized version with concurrent requests.
 """
 
 import os
 import json
 import asyncio
 from datetime import datetime
-from typing import List, Dict, Any
-from dotenv import load_dotenv
+from typing import Dict, Any, List, Optional
 from openai import AsyncOpenAI
+from dotenv import load_dotenv
 import httpx
 
 # Load environment variables
@@ -25,6 +26,8 @@ class OpenRouterToolSupportChecker:
             api_key=api_key,
             base_url=self.base_url,
         )
+        # Semaphore to limit concurrent requests
+        self.semaphore = asyncio.Semaphore(5)
         
     async def get_model_providers(self, model_id: str) -> List[Dict[str, str]]:
         """Fetch available providers for a specific model."""
@@ -60,53 +63,28 @@ class OpenRouterToolSupportChecker:
                             "context_length": endpoint.get("context_length", 0),
                             "has_pricing": "pricing" in endpoint
                         }
+                        
+                        # Only add if we have a valid provider name
                         if provider_info["provider_name"]:
                             providers.append(provider_info)
                 
                 return providers
-                
             except Exception as e:
-                print(f"Error fetching providers for {model_id}: {e}")
+                print(f"Error getting providers for {model_id}: {e}")
                 return []
-    
-    @staticmethod
-    def get_weather_tool() -> Dict[str, Any]:
-        """Return the weather tool definition in OpenAI format."""
-        return {
-            "type": "function",
-            "function": {
-                "name": "get_weather",
-                "description": "Get the current weather for a location",
-                "parameters": {
-                    "type": "object",
-                    "properties": {
-                        "location": {
-                            "type": "string",
-                            "description": "The city and state, e.g. San Francisco, CA"
-                        },
-                        "unit": {
-                            "type": "string",
-                            "enum": ["celsius", "fahrenheit"],
-                            "description": "The unit for temperature"
-                        }
-                    },
-                    "required": ["location"]
-                }
-            }
-        }
-    
-    async def test_provider_tool_support(self, model_id: str, provider_info: Dict[str, Any]) -> Dict[str, Any]:
-        """Test if a specific provider supports tool calls for a model."""
-        provider_name = provider_info["provider_name"]
-        display_name = provider_info.get("display_name", provider_name)
+            
+    async def test_provider(self, model_id: str, provider: Dict[str, Any]) -> Dict[str, Any]:
+        """Test if a specific provider supports tool calling."""
+        provider_name = provider["provider_name"]
+        display_name = provider.get("display_name", provider_name)
         
         result = {
             "model_id": model_id,
             "provider_name": provider_name,
             "display_name": display_name,
-            "supports_tools": False,
+            "supports_tools": provider.get("supports_tools", False),
             "tool_call_made": False,
-            "status": "unknown",  # "success", "no_tool_call", "error", "unclear"
+            "status": "unknown",  # "success", "error", "unclear", "no_tool_call"
             "error": None,
             "response_content": None,
             "tool_calls": None,
@@ -115,85 +93,98 @@ class OpenRouterToolSupportChecker:
             "timestamp": datetime.now().isoformat()
         }
         
-        try:
-            # Create the completion with provider routing
-            response = await self.client.chat.completions.create(
-                model=model_id,
-                messages=[
-                    {
-                        "role": "user",
-                        "content": "What's the weather like in San Francisco? Please use the get_weather function."
-                    }
-                ],
-                tools=[self.get_weather_tool()],
-                max_tokens=1000,
-                # Specify the provider using extra_body
-                extra_body={
-                    "provider": {
-                        "only": [provider_name]
-                    }
-                }
-            )
-            
-            # Extract debugging information
-            message = response.choices[0].message
-            result["finish_reason"] = response.choices[0].finish_reason
-            result["model_used"] = response.model if hasattr(response, 'model') else None
-            
-            # Check if the model made tool calls
-            if hasattr(message, 'tool_calls') and message.tool_calls:
-                result["supports_tools"] = True
-                result["tool_call_made"] = True
-                result["status"] = "success"
-                result["tool_calls"] = [
-                    {
-                        "id": tc.id,
-                        "type": tc.type,
+        async with self.semaphore:  # Limit concurrent requests
+            try:
+                # Create the completion with tools
+                response = await self.client.chat.completions.create(
+                    model=model_id,
+                    messages=[
+                        {
+                            "role": "user",
+                            "content": "What's the weather like in San Francisco?"
+                        }
+                    ],
+                    tools=[{
+                        "type": "function",
                         "function": {
-                            "name": tc.function.name,
-                            "arguments": tc.function.arguments
+                            "name": "get_weather",
+                            "description": "Get the current weather in a given location",
+                            "parameters": {
+                                "type": "object",
+                                "properties": {
+                                    "location": {
+                                        "type": "string",
+                                        "description": "The city and state, e.g. San Francisco, CA"
+                                    },
+                                    "unit": {
+                                        "type": "string",
+                                        "enum": ["celsius", "fahrenheit"],
+                                        "description": "The unit of temperature"
+                                    }
+                                },
+                                "required": ["location"]
+                            }
+                        }
+                    }],
+                    tool_choice="auto",
+                    max_tokens=1000,
+                    # Specify the provider using extra_body
+                    extra_body={
+                        "provider": {
+                            "only": [provider_name]
                         }
                     }
-                    for tc in message.tool_calls
-                ]
-            else:
-                # No tool calls made - need to analyze why
-                result["response_content"] = message.content
+                )
                 
-                if not message.content or message.content.strip() == "":
-                    # Empty response - unclear if tools are supported
-                    result["status"] = "unclear"
-                    result["supports_tools"] = None  # Unknown
-                elif any(phrase in str(message.content).lower() for phrase in [
-                    "i can't", "i cannot", "don't have access", "unable to", "no access to tools",
-                    "function calling", "tool use", "weather function"
-                ]):
-                    # Model explicitly says it can't use tools
+                # Extract debugging information
+                message = response.choices[0].message
+                result["finish_reason"] = response.choices[0].finish_reason
+                result["model_used"] = response.model if hasattr(response, 'model') else None
+                
+                # Check if the model made a tool call
+                if hasattr(message, 'tool_calls') and message.tool_calls:
+                    result["tool_calls"] = [
+                        {
+                            "id": tc.id,
+                            "type": tc.type,
+                            "function": {
+                                "name": tc.function.name,
+                                "arguments": tc.function.arguments
+                            }
+                        } for tc in message.tool_calls
+                    ]
+                    result["tool_call_made"] = True
+                    result["status"] = "success"
+                    result["supports_tools"] = True
+                elif message.content:
+                    result["response_content"] = message.content
+                    result["tool_call_made"] = False
                     result["status"] = "no_tool_call"
                     result["supports_tools"] = False
                 else:
-                    # Model responded but didn't use tools when asked
-                    result["status"] = "no_tool_call"
-                    result["supports_tools"] = False
+                    result["status"] = "unclear"
+                    result["supports_tools"] = None
+                    
+            except Exception as e:
+                error_str = str(e)
+                result["error"] = error_str
+                result["status"] = "error"
                 
-        except Exception as e:
-            error_str = str(e)
-            result["error"] = error_str
-            result["status"] = "error"
+                # Analyze error type
+                if "tool" in error_str.lower() or "function" in error_str.lower():
+                    result["supports_tools"] = False
+                elif "404" in error_str and "No endpoints found" in error_str:
+                    result["supports_tools"] = False
+                else:
+                    # Other errors - unclear if tools are supported
+                    result["supports_tools"] = None
             
-            # Analyze error type
-            if any(keyword in error_str.lower() for keyword in ["tool", "function", "not supported", "invalid"]):
-                result["supports_tools"] = False
-            else:
-                # Other errors - unclear if tools are supported
-                result["supports_tools"] = None
-            
-        return result
+            return result
     
-    async def test_provider_structured_output(self, model_id: str, provider_info: Dict[str, Any]) -> Dict[str, Any]:
-        """Test if a specific provider supports structured outputs for a model."""
-        provider_name = provider_info["provider_name"]
-        display_name = provider_info.get("display_name", provider_name)
+    async def test_provider_structured_output(self, model_id: str, provider: Dict[str, Any]) -> Dict[str, Any]:
+        """Test if a specific provider supports structured output."""
+        provider_name = provider["provider_name"]
+        display_name = provider.get("display_name", provider_name)
         
         result = {
             "model_id": model_id,
@@ -208,87 +199,88 @@ class OpenRouterToolSupportChecker:
             "timestamp": datetime.now().isoformat()
         }
         
-        try:
-            # Create the completion with provider routing and structured output format
-            response = await self.client.chat.completions.create(
-                model=model_id,
-                messages=[
-                    {
-                        "role": "user",
-                        "content": "What's the weather like in London?"
-                    }
-                ],
-                response_format={
-                    "type": "json_schema",
-                    "json_schema": {
-                        "name": "weather",
-                        "strict": True,
-                        "schema": {
-                            "type": "object",
-                            "properties": {
-                                "location": {
-                                    "type": "string",
-                                    "description": "City or location name"
+        async with self.semaphore:  # Limit concurrent requests
+            try:
+                # Create the completion with provider routing and structured output format
+                response = await self.client.chat.completions.create(
+                    model=model_id,
+                    messages=[
+                        {
+                            "role": "user",
+                            "content": "What's the weather like in London?"
+                        }
+                    ],
+                    response_format={
+                        "type": "json_schema",
+                        "json_schema": {
+                            "name": "weather",
+                            "strict": True,
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "location": {
+                                        "type": "string",
+                                        "description": "City or location name"
+                                    },
+                                    "temperature": {
+                                        "type": "number",
+                                        "description": "Temperature in Celsius"
+                                    },
+                                    "conditions": {
+                                        "type": "string",
+                                        "description": "Weather conditions description"
+                                    }
                                 },
-                                "temperature": {
-                                    "type": "number",
-                                    "description": "Temperature in Celsius"
-                                },
-                                "conditions": {
-                                    "type": "string",
-                                    "description": "Weather conditions description"
-                                }
-                            },
-                            "required": ["location", "temperature", "conditions"],
-                            "additionalProperties": False
+                                "required": ["location", "temperature", "conditions"],
+                                "additionalProperties": False
+                            }
+                        }
+                    },
+                    max_tokens=1000,
+                    # Specify the provider using extra_body
+                    extra_body={
+                        "provider": {
+                            "only": [provider_name]
                         }
                     }
-                },
-                max_tokens=1000,
-                # Specify the provider using extra_body
-                extra_body={
-                    "provider": {
-                        "only": [provider_name]
-                    }
-                }
-            )
-            
-            # Extract debugging information
-            message = response.choices[0].message
-            result["finish_reason"] = response.choices[0].finish_reason
-            result["model_used"] = response.model if hasattr(response, 'model') else None
-            
-            # Check if the model returned valid JSON according to our schema
-            if message.content:
-                result["response_content"] = message.content
-                try:
-                    json_response = json.loads(message.content)
-                    if all(key in json_response for key in ["location", "temperature", "conditions"]):
-                        result["supports_structured_output"] = True
-                        result["status"] = "success"
-                    else:
-                        result["supports_structured_output"] = False
-                        result["status"] = "invalid_schema"
-                except json.JSONDecodeError:
-                    result["supports_structured_output"] = False
-                    result["status"] = "invalid_json"
-            else:
-                result["status"] = "unclear"
-                result["supports_structured_output"] = None
+                )
                 
-        except Exception as e:
-            error_str = str(e)
-            result["error"] = error_str
-            result["status"] = "error"
+                # Extract debugging information
+                message = response.choices[0].message
+                result["finish_reason"] = response.choices[0].finish_reason
+                result["model_used"] = response.model if hasattr(response, 'model') else None
+                
+                # Check if the model returned valid JSON according to our schema
+                if message.content:
+                    result["response_content"] = message.content
+                    try:
+                        json_response = json.loads(message.content)
+                        if all(key in json_response for key in ["location", "temperature", "conditions"]):
+                            result["supports_structured_output"] = True
+                            result["status"] = "success"
+                        else:
+                            result["supports_structured_output"] = False
+                            result["status"] = "invalid_schema"
+                    except json.JSONDecodeError:
+                        result["supports_structured_output"] = False
+                        result["status"] = "invalid_json"
+                else:
+                    result["status"] = "unclear"
+                    result["supports_structured_output"] = None
+                    
+            except Exception as e:
+                error_str = str(e)
+                result["error"] = error_str
+                result["status"] = "error"
+                
+                # Analyze error type
+                if any(keyword in error_str.lower() for keyword in ["response_format", "json_schema", "not supported", "invalid"]):
+                    result["supports_structured_output"] = False
+                else:
+                    # Other errors - unclear if structured output is supported
+                    result["supports_structured_output"] = None
             
-            # Analyze error type
-            if any(keyword in error_str.lower() for keyword in ["response_format", "json_schema", "not supported", "invalid"]):
-                result["supports_structured_output"] = False
-            else:
-                # Other errors - unclear if structured output is supported
-                result["supports_structured_output"] = None
-            
-        return result
+            return result
     
     async def check_model_structured_output(self, model_id: str) -> Dict[str, Any]:
         """Check all providers for structured output support for a specific model."""
@@ -310,45 +302,52 @@ class OpenRouterToolSupportChecker:
         
         print(f"Found {len(providers)} providers")
         
-        # Test each provider multiple times
-        results = []
-        for i, provider in enumerate(providers, 1):
-            display_name = provider.get("display_name", provider["provider_name"])
-            provider_name = provider["provider_name"]
-            
-            print(f"\n[{i}/{len(providers)}] Testing: {display_name}")
-            
-            # Run 3 tests for this provider
-            test_runs = []
+        # Create all test tasks
+        tasks = []
+        for provider in providers:
+            # Create 3 test tasks for each provider
             for run in range(3):
-                print(f"  Run {run + 1}/3...", end="", flush=True)
-                
-                test_result = await self.test_provider_structured_output(model_id, provider)
-                test_runs.append(test_result)
-                
-                # Quick status indicator
-                if test_result["status"] == "success":
-                    print(" ✓", end="", flush=True)
-                elif test_result["status"] == "unclear":
-                    print(" ?", end="", flush=True)
-                elif test_result["status"] == "error":
-                    print(" ⚠", end="", flush=True)
-                else:
-                    print(" ✗", end="", flush=True)
-                
-                # Small delay between runs
-                if run < 2:
-                    await asyncio.sleep(0.3)
+                task = self.test_provider_structured_output(model_id, provider)
+                tasks.append((provider, run, task))
+        
+        print(f"Running {len(tasks)} structured output tests concurrently...")
+        
+        # Execute all tests concurrently
+        results = await asyncio.gather(*[task for _, _, task in tasks])
+        
+        # Group results by provider
+        provider_results = {}
+        for i, (provider, run, _) in enumerate(tasks):
+            provider_name = provider["provider_name"]
+            if provider_name not in provider_results:
+                provider_results[provider_name] = {
+                    "provider": provider,
+                    "test_runs": []
+                }
+            provider_results[provider_name]["test_runs"].append(results[i])
+        
+        # Process and format results
+        final_results = []
+        for i, (provider_name, data) in enumerate(provider_results.items(), 1):
+            provider = data["provider"]
+            test_runs = data["test_runs"]
+            display_name = provider.get("display_name", provider_name)
             
-            print()  # New line after run indicators
-            
-            # Summarize results
+            # Calculate summary
             success_count = sum(1 for r in test_runs if r["status"] == "success")
             error_count = sum(1 for r in test_runs if r["status"] == "error")
             unclear_count = sum(1 for r in test_runs if r["status"] == "unclear")
+            fail_count = 3 - success_count - error_count - unclear_count
             
-            # Create aggregated result
-            aggregated_result = {
+            # Display results
+            print(f"\n[{i}/{len(providers)}] {display_name}:")
+            print(f"  Summary: {success_count}/3 successful")
+            if error_count > 0:
+                print(f"  Errors: {error_count}/3")
+            if unclear_count > 0:
+                print(f"  Unclear: {unclear_count}/3")
+            
+            final_results.append({
                 "model_id": model_id,
                 "provider_name": provider_name,
                 "display_name": display_name,
@@ -358,28 +357,16 @@ class OpenRouterToolSupportChecker:
                     "success_count": success_count,
                     "error_count": error_count,
                     "unclear_count": unclear_count,
-                    "fail_count": 3 - success_count - error_count - unclear_count
+                    "fail_count": fail_count
                 },
                 "timestamp": datetime.now().isoformat()
-            }
-            
-            results.append(aggregated_result)
-            
-            # Print summary
-            print(f"  Summary: {success_count}/3 successful")
-            if error_count > 0:
-                print(f"  Errors: {error_count}/3")
-            if unclear_count > 0:
-                print(f"  Unclear: {unclear_count}/3")
-            
-            # Small delay to avoid rate limiting
-            await asyncio.sleep(0.5)
+            })
         
         return {
             "model_id": model_id,
             "timestamp": datetime.now().isoformat(),
             "providers_tested": len(providers),
-            "providers": results
+            "providers": final_results
         }
     
     async def check_model(self, model_id: str) -> Dict[str, Any]:
@@ -402,45 +389,52 @@ class OpenRouterToolSupportChecker:
         
         print(f"Found {len(providers)} providers")
         
-        # Test each provider multiple times
-        results = []
-        for i, provider in enumerate(providers, 1):
-            display_name = provider.get("display_name", provider["provider_name"])
-            provider_name = provider["provider_name"]
-            
-            print(f"\n[{i}/{len(providers)}] Testing: {display_name}")
-            
-            # Run 3 tests for this provider
-            test_runs = []
+        # Create all test tasks
+        tasks = []
+        for provider in providers:
+            # Create 3 test tasks for each provider
             for run in range(3):
-                print(f"  Run {run + 1}/3...", end="", flush=True)
-                
-                test_result = await self.test_provider_tool_support(model_id, provider)
-                test_runs.append(test_result)
-                
-                # Quick status indicator
-                if test_result["status"] == "success":
-                    print(" ✓", end="", flush=True)
-                elif test_result["status"] == "unclear":
-                    print(" ?", end="", flush=True)
-                elif test_result["status"] == "error":
-                    print(" ⚠", end="", flush=True)
-                else:
-                    print(" ✗", end="", flush=True)
-                
-                # Small delay between runs
-                if run < 2:
-                    await asyncio.sleep(0.3)
+                task = self.test_provider(model_id, provider)
+                tasks.append((provider, run, task))
+        
+        print(f"Running {len(tasks)} tests concurrently...")
+        
+        # Execute all tests concurrently
+        results = await asyncio.gather(*[task for _, _, task in tasks])
+        
+        # Group results by provider
+        provider_results = {}
+        for i, (provider, run, _) in enumerate(tasks):
+            provider_name = provider["provider_name"]
+            if provider_name not in provider_results:
+                provider_results[provider_name] = {
+                    "provider": provider,
+                    "test_runs": []
+                }
+            provider_results[provider_name]["test_runs"].append(results[i])
+        
+        # Process and format results
+        final_results = []
+        for i, (provider_name, data) in enumerate(provider_results.items(), 1):
+            provider = data["provider"]
+            test_runs = data["test_runs"]
+            display_name = provider.get("display_name", provider_name)
             
-            print()  # New line after run indicators
-            
-            # Summarize results
+            # Calculate summary
             success_count = sum(1 for r in test_runs if r["status"] == "success")
             error_count = sum(1 for r in test_runs if r["status"] == "error")
             unclear_count = sum(1 for r in test_runs if r["status"] == "unclear")
+            no_tool_call_count = sum(1 for r in test_runs if r["status"] == "no_tool_call")
             
-            # Create aggregated result
-            aggregated_result = {
+            # Display results
+            print(f"\n[{i}/{len(providers)}] {display_name}:")
+            print(f"  Summary: {success_count}/3 successful")
+            if error_count > 0:
+                print(f"  Errors: {error_count}/3")
+            if unclear_count > 0:
+                print(f"  Unclear: {unclear_count}/3")
+            
+            final_results.append({
                 "model_id": model_id,
                 "provider_name": provider_name,
                 "display_name": display_name,
@@ -450,50 +444,30 @@ class OpenRouterToolSupportChecker:
                     "success_count": success_count,
                     "error_count": error_count,
                     "unclear_count": unclear_count,
-                    "no_tool_call_count": 3 - success_count - error_count - unclear_count
+                    "no_tool_call_count": no_tool_call_count
                 },
                 "timestamp": datetime.now().isoformat()
-            }
-            
-            results.append(aggregated_result)
-            
-            # Print summary
-            print(f"  Summary: {success_count}/3 successful")
-            if error_count > 0:
-                print(f"  Errors: {error_count}/3")
-            if unclear_count > 0:
-                print(f"  Unclear: {unclear_count}/3")
-            
-            # Small delay to avoid rate limiting
-            await asyncio.sleep(0.5)
+            })
         
         return {
             "model_id": model_id,
             "timestamp": datetime.now().isoformat(),
             "providers_tested": len(providers),
-            "providers": results
+            "providers": final_results
         }
 
 
 async def main():
-    # Get API key from environment
     api_key = os.getenv("OPENROUTER_API_KEY")
     if not api_key:
-        print("Please set OPENROUTER_API_KEY in your .env file")
+        print("Error: OPENROUTER_API_KEY environment variable not set")
         return
     
-    # Load models from JSON file
-    try:
-        with open("models.json", "r") as f:
-            models = json.load(f)
-    except FileNotFoundError:
-        print("models.json not found!")
-        return
-    except json.JSONDecodeError:
-        print("Invalid JSON in models.json!")
-        return
+    # Load models from file
+    with open("models.json", "r") as f:
+        models = json.load(f)
     
-    print("OpenRouter Tool Support Checker")
+    print("OpenRouter Tool Support Checker (Fast Concurrent Version)")
     print(f"Testing {len(models)} models")
     print("=" * 60)
     
@@ -506,16 +480,28 @@ async def main():
         "models": []
     }
     
-    
-    for model_id in models:
-        # Test tool support
-        model_result = await checker.check_model(model_id)
+    # Process all models concurrently in batches
+    batch_size = 3  # Process 3 models at a time to avoid overwhelming the API
+    for i in range(0, len(models), batch_size):
+        batch = models[i:i+batch_size]
+        print(f"\nProcessing batch {i//batch_size + 1}/{(len(models) + batch_size - 1)//batch_size}")
         
-        # Test structured output support if requested
-        structured_output_result = await checker.check_model_structured_output(model_id)
-        model_result["structured_output"] = structured_output_result["providers"]
+        # Create tasks for this batch
+        batch_tasks = []
+        for model_id in batch:
+            # Run both tool support and structured output tests concurrently
+            tool_task = checker.check_model(model_id)
+            structured_task = checker.check_model_structured_output(model_id)
+            batch_tasks.append((model_id, tool_task, structured_task))
         
-        all_results["models"].append(model_result)
+        # Execute batch
+        for model_id, tool_task, structured_task in batch_tasks:
+            tool_result = await tool_task
+            structured_result = await structured_task
+            
+            # Combine results
+            tool_result["structured_output"] = structured_result["providers"]
+            all_results["models"].append(tool_result)
     
     # Save final results
     final_output = "data.json"
@@ -539,68 +525,44 @@ async def main():
     total_partially_supporting_structured_output = 0
     total_not_supporting_structured_output = 0
     
-    for model in all_results["models"]:
-        providers = model["providers"]
-        model_fully_supporting_tools = sum(1 for p in providers if p["summary"]["success_count"] == 3)
-        model_partially_supporting_tools = sum(1 for p in providers if 0 < p["summary"]["success_count"] < 3)
-        model_not_supporting_tools = sum(1 for p in providers if p["summary"]["success_count"] == 0)
+    for model_data in all_results["models"]:
+        model_id = model_data["model_id"]
+        providers_data = model_data["providers"]
         
-        total_providers += len(providers)
-        total_fully_supporting_tools += model_fully_supporting_tools
-        total_partially_supporting_tools += model_partially_supporting_tools
-        total_not_supporting_tools += model_not_supporting_tools
+        for provider_data in providers_data:
+            total_providers += 1
+            summary = provider_data["summary"]
+            
+            # Count tool support
+            if summary["success_count"] == 3:
+                total_fully_supporting_tools += 1
+            elif summary["success_count"] > 0:
+                total_partially_supporting_tools += 1
+            else:
+                total_not_supporting_tools += 1
         
-        print(f"\n{model['model_id']}:")
-        print(f"  Providers tested: {len(providers)}")
-        print(f"  Tool support:")
-        print(f"    Full support (3/3): {model_fully_supporting_tools}")
-        if model_partially_supporting_tools > 0:
-            print(f"    Partial support (1-2/3): {model_partially_supporting_tools}")
-        if model_not_supporting_tools > 0:
-            print(f"    No support (0/3): {model_not_supporting_tools}")
-        
-        # Structured output summary if enabled
-        structured_providers = model["structured_output"]
-        model_fully_supporting_structured = sum(1 for p in structured_providers if p["summary"]["success_count"] == 3)
-        model_partially_supporting_structured = sum(1 for p in structured_providers if 0 < p["summary"]["success_count"] < 3)
-        model_not_supporting_structured = sum(1 for p in structured_providers if p["summary"]["success_count"] == 0)
-        
-        total_fully_supporting_structured_output += model_fully_supporting_structured
-        total_partially_supporting_structured_output += model_partially_supporting_structured
-        total_not_supporting_structured_output += model_not_supporting_structured
-        
-        print(f"  Structured output support:")
-        print(f"    Full support (3/3): {model_fully_supporting_structured}")
-        if model_partially_supporting_structured > 0:
-            print(f"    Partial support (1-2/3): {model_partially_supporting_structured}")
-        if model_not_supporting_structured > 0:
-            print(f"    No support (0/3): {model_not_supporting_structured}")
-
-    print(f"\n\nOVERALL SUMMARY")
-    print(f"Total providers tested: {total_providers}")
+        # Count structured output support
+        if "structured_output" in model_data:
+            for provider_data in model_data["structured_output"]:
+                summary = provider_data["summary"]
+                if summary["success_count"] == 3:
+                    total_fully_supporting_structured_output += 1
+                elif summary["success_count"] > 0:
+                    total_partially_supporting_structured_output += 1
+                else:
+                    total_not_supporting_structured_output += 1
     
-    print(f"\nTool Support:")
-    print(f"  Full support (3/3): {total_fully_supporting_tools}")
-    print(f"  Partial support (1-2/3): {total_partially_supporting_tools}")
-    print(f"  No support (0/3): {total_not_supporting_tools}")
+    print(f"\nTotal provider endpoints tested: {total_providers}")
+    print(f"\nTool support:")
+    print(f"  Fully supporting (3/3): {total_fully_supporting_tools}")
+    print(f"  Partially supporting (1-2/3): {total_partially_supporting_tools}")
+    print(f"  Not supporting (0/3): {total_not_supporting_tools}")
     
-    if total_providers > 0:
-        print(f"\nTool Support Percentages:")
-        print(f"  Full support: {(total_fully_supporting_tools/total_providers*100):.1f}%")
-        print(f"  Partial support: {(total_partially_supporting_tools/total_providers*100):.1f}%")
-        print(f"  No support: {(total_not_supporting_tools/total_providers*100):.1f}%")
-    
-    # Structured output overall summary if enabled
-    print(f"\nStructured Output Support:")
-    print(f"  Full support (3/3): {total_fully_supporting_structured_output}")
-    print(f"  Partial support (1-2/3): {total_partially_supporting_structured_output}")
-    print(f"  No support (0/3): {total_not_supporting_structured_output}")
-    
-    if total_providers > 0:
-        print(f"\nStructured Output Support Percentages:")
-        print(f"  Full support: {(total_fully_supporting_structured_output/total_providers*100):.1f}%")
-        print(f"  Partial support: {(total_partially_supporting_structured_output/total_providers*100):.1f}%")
-        print(f"  No support: {(total_not_supporting_structured_output/total_providers*100):.1f}%")
+    if total_fully_supporting_structured_output > 0 or total_partially_supporting_structured_output > 0:
+        print(f"\nStructured output support:")
+        print(f"  Fully supporting (3/3): {total_fully_supporting_structured_output}")
+        print(f"  Partially supporting (1-2/3): {total_partially_supporting_structured_output}")
+        print(f"  Not supporting (0/3): {total_not_supporting_structured_output}")
 
 
 if __name__ == "__main__":
