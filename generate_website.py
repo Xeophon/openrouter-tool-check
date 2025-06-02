@@ -62,37 +62,72 @@ def create_unified_model_list(or_results, hf_results, models_mapping):
     """Create a unified list of models with user-friendly names and platform suffixes."""
     unified_models = []
     
-    # Create a reverse mapping from model IDs to user-friendly names
-    id_to_name = {}
+    # Create a reverse mapping from model IDs to user-friendly names (for HF mainly now)
+    id_to_name_hf = {}
     for friendly_name, platforms in models_mapping.items():
-        for or_id in platforms.get("openrouter", []):
-            id_to_name[or_id] = (friendly_name, "OR")
         for hf_id in platforms.get("huggingface", []):
-            id_to_name[hf_id] = (friendly_name, "HF")
-    
-    # Process OpenRouter results
+            id_to_name_hf[hf_id] = (friendly_name, "HF")
+
+    # Process OpenRouter results by iterating through models_mapping
     if or_results:
-        for model_data in or_results["models"]:
-            model_id = model_data["model_id"]
-            if model_id in id_to_name:
-                friendly_name, _ = id_to_name[model_id]
+        or_models_data_map = {m["model_id"]: m for m in or_results.get("models", [])}
+
+        for friendly_name, platforms in models_mapping.items():
+            or_ids = platforms.get("openrouter", [])
+            if not or_ids:
+                continue
+
+            model_data_variants = {}
+            actual_model_id_for_sort = None
+            has_regular_variant_defined = False
+            has_free_variant_defined = False
+
+            # Check for regular (non-free) and free variants based on suffix
+            # Assumes models.json lists specific IDs like 'model/name' and 'model/name:free'
+            regular_id_found = None
+            free_id_found = None
+
+            for or_id in or_ids:
+                if or_id.endswith(":free"):
+                    if not free_id_found: # Take first free ID
+                        free_id_found = or_id 
+                        has_free_variant_defined = True
+                else:
+                    if not regular_id_found: # Take first regular ID
+                        regular_id_found = or_id
+                        has_regular_variant_defined = True
+            
+            if regular_id_found and regular_id_found in or_models_data_map:
+                model_data_variants["regular"] = or_models_data_map[regular_id_found]
+                actual_model_id_for_sort = regular_id_found
+            
+            if free_id_found and free_id_found in or_models_data_map:
+                model_data_variants["free"] = or_models_data_map[free_id_found]
+                if not actual_model_id_for_sort:
+                    actual_model_id_for_sort = free_id_found
+            
+            if model_data_variants: # If data found for at least one variant
+                # Store whether variants were defined, to distinguish from single-entry models later
+                model_data_variants['_has_regular_defined'] = has_regular_variant_defined
+                model_data_variants['_has_free_defined'] = has_free_variant_defined
+
                 unified_models.append({
                     "display_name": f"{friendly_name} (OR)",
                     "platform": "OR",
-                    "model_data": model_data,
-                    "sort_key": (friendly_name, "OR", model_id)
+                    "model_data": model_data_variants, # Dict: {"regular": ..., "free": ..., "_has_..."}
+                    "sort_key": (friendly_name, "OR", actual_model_id_for_sort if actual_model_id_for_sort else "") 
                 })
     
-    # Process HuggingFace results
+    # Process HuggingFace results (largely unchanged)
     if hf_results:
-        for model_data in hf_results["models"]:
+        for model_data in hf_results.get("models", []) :
             model_id = model_data["model_id"]
-            if model_id in id_to_name:
-                friendly_name, _ = id_to_name[model_id]
+            if model_id in id_to_name_hf:
+                friendly_name, _ = id_to_name_hf[model_id]
                 unified_models.append({
                     "display_name": f"{friendly_name} (HF)",
                     "platform": "HF",
-                    "model_data": model_data,
+                    "model_data": model_data, # Direct model_data for HF
                     "sort_key": (friendly_name, "HF", model_id)
                 })
     
@@ -100,6 +135,33 @@ def create_unified_model_list(or_results, hf_results, models_mapping):
     unified_models.sort(key=lambda x: x["sort_key"])
     
     return unified_models
+
+
+def normalize_provider_names_in_results(results_data):
+    """Normalize provider names to lowercase in the results data."""
+    if not results_data or "models" not in results_data:
+        return
+
+    for model_idx, model in enumerate(results_data["models"]):
+        # Normalize in 'providers' list
+        if "providers" in model and isinstance(model["providers"], list):
+            for provider_idx, provider_info in enumerate(model["providers"]):
+                if isinstance(provider_info, dict) and "provider_name" in provider_info and provider_info["provider_name"]:
+                    # Ensure in-place modification
+                    normalized_name = str(provider_info["provider_name"]).lower()
+                    if normalized_name == "fireworks-ai":
+                        normalized_name = "fireworks"
+                    results_data["models"][model_idx]["providers"][provider_idx]["provider_name"] = normalized_name
+        
+        # Normalize in 'structured_output' list (if it exists)
+        if "structured_output" in model and isinstance(model["structured_output"], list):
+             for provider_idx, provider_info in enumerate(model["structured_output"]):
+                if isinstance(provider_info, dict) and "provider_name" in provider_info and provider_info["provider_name"]:
+                    # Ensure in-place modification
+                    normalized_name = str(provider_info["provider_name"]).lower()
+                    if normalized_name == "fireworks-ai":
+                        normalized_name = "fireworks"
+                    results_data["models"][model_idx]["structured_output"][provider_idx]["provider_name"] = normalized_name
 
 
 def get_all_providers(results):
@@ -126,66 +188,138 @@ def has_structured_output_data(results):
     return False
 
 
-def get_cell_status(model_data, provider_name, data_type="tool_support"):
-    """Get the status for a specific model-provider combination.
+# Helper function to get status for a single model variant
+def _get_single_model_provider_status(single_model_data, provider_name, data_type="tool_support"):
+    """Get the status for a specific model-provider combination for a single model data object."""
+    if not single_model_data: # Added check for None
+        return "none", "-", None
 
-    Args:
-        model_data: The model data dictionary
-        provider_name: The provider name to check
-        data_type: Either "tool_support" (default) or "structured_output"
-    """
-    providers_list = model_data["providers"]
+    providers_list_key = ""
+    if data_type == "structured_output":
+        if "structured_output" in single_model_data:
+            providers_list_key = "structured_output"
+        else:
+            # If requesting structured_output and the key doesn't exist for this model variant,
+            # then there's no SO data for it.
+            return "none", "-", None 
+    else: # data_type == "tool_support" (or default)
+        # For tool_support, we assume the 'providers' key should exist if single_model_data is valid.
+        # If it's missing, the check below will handle it.
+        providers_list_key = "providers"
+    
+    if providers_list_key not in single_model_data or not single_model_data[providers_list_key]:
+        return "none", "-", None
 
-    # Use structured_output data if requested and available
-    if data_type == "structured_output" and "structured_output" in model_data:
-        providers_list = model_data["structured_output"]
+    providers_list = single_model_data[providers_list_key]
 
     for provider in providers_list:
         if provider["provider_name"] == provider_name:
-            summary = provider["summary"]
-            success_count = summary["success_count"]
+            summary = provider.get("summary", {})
+            success_count = summary.get("success_count", -1) # Default to -1 if not found
+
+            if success_count == -1: # Provider listed but no summary/success_count
+                 return "none", "?", ["Missing summary data"]
 
             # Determine status and details
             if success_count == 3:
                 return "success", f"{success_count}/3", None
             elif success_count == 0:
-                # Collect error reasons
                 reasons = []
-                for run in provider["test_runs"]:
-                    if run["status"] == "error" and run["error"]:
-                        error = run["error"][:100]
+                for run in provider.get("test_runs", []) :
+                    if run.get("status") == "error" and run.get("error"):
+                        error = str(run["error"])[:100]
                         if error not in reasons:
                             reasons.append(error)
-                    elif run["status"] == "unclear":
+                    elif run.get("status") == "unclear":
                         reasons.append("Empty response")
-                    elif (
-                        run["status"] == "no_tool_call"
-                        or run["status"] == "invalid_json"
-                        or run["status"] == "invalid_schema"
-                    ):
-                        if run["response_content"]:
+                    elif run.get("status") in ["no_tool_call", "invalid_json", "invalid_schema"]:
+                        if run.get("response_content"):
                             reasons.append(
-                                f"No proper response: {run['response_content'][:50]}..."
+                                f"No proper response: {str(run['response_content'])[:50]}..."
                             )
-                return "failure", f"{success_count}/3", reasons
-            else:
-                # Partial success - collect both successes and failures
+                        else:
+                            reasons.append("No proper response (empty)")
+                return "failure", f"{success_count}/3", reasons if reasons else ["Unknown failure"]
+            else: # Partial success (1 or 2)
                 reasons = []
-                for run in provider["test_runs"]:
-                    if run["status"] != "success":
-                        if run["status"] == "error" and run["error"]:
-                            reasons.append(f"Error: {run['error'][:50]}...")
-                        elif run["status"] == "unclear":
+                for run in provider.get("test_runs", []) :
+                    if run.get("status") != "success":
+                        if run.get("status") == "error" and run.get("error"):
+                            reasons.append(f"Error: {str(run['error'])[:50]}...")
+                        elif run.get("status") == "unclear":
                             reasons.append("Empty response")
-                        elif (
-                            run["status"] == "no_tool_call"
-                            or run["status"] == "invalid_json"
-                            or run["status"] == "invalid_schema"
-                        ):
+                        elif run.get("status") in ["no_tool_call", "invalid_json", "invalid_schema"]:
                             reasons.append("Invalid response format")
-                return "partial", f"{success_count}/3", reasons
+                return "partial", f"{success_count}/3", reasons if reasons else ["Unknown partial failure"]
 
-    return "none", "-", None
+    return "none", "-", None # Provider not found for this model
+
+
+def get_cell_status(model_data_container, provider_name, data_type="tool_support"):
+    """Get the status for a specific model-provider combination.
+
+    Args:
+        model_data_container: For HF, the model data dict. For OR, a dict like 
+                              {'regular': data, 'free': data, '_has_regular_defined': bool, '_has_free_defined': bool}.
+        provider_name: The provider name to check.
+        data_type: Either "tool_support" (default) or "structured_output".
+    """
+    # Check if it's an OpenRouter model with variants structure
+    if isinstance(model_data_container, dict) and ('regular' in model_data_container or 'free' in model_data_container):
+        reg_data = model_data_container.get("regular")
+        free_data = model_data_container.get("free")
+        has_regular_defined = model_data_container.get('_has_regular_defined', False)
+        has_free_defined = model_data_container.get('_has_free_defined', False)
+
+        status_reg, text_reg, reasons_reg = _get_single_model_provider_status(reg_data, provider_name, data_type)
+        status_free, text_free, reasons_free = _get_single_model_provider_status(free_data, provider_name, data_type)
+
+        # Determine if data exists for this provider for each variant
+        has_reg_provider_data = status_reg != "none"
+        has_free_provider_data = status_free != "none"
+
+        # Case 1: Only one variant type was defined in models.json for this model (e.g. only paid, no free counterpart)
+        if has_regular_defined and not has_free_defined:
+            return status_reg, text_reg, reasons_reg
+        if has_free_defined and not has_regular_defined:
+            return status_free, text_free, reasons_free
+        
+        # Case 2: Both variant types defined in models.json, now combine their provider status
+        combined_text_parts = []
+        if has_reg_provider_data:
+            combined_text_parts.append(text_reg)
+        if has_free_provider_data:
+            combined_text_parts.append(text_free)
+        
+        final_text = " | ".join(combined_text_parts) if combined_text_parts else "-"
+
+        # Determine overall status class (prioritize success > partial > failure > none)
+        status_priority = {"success": 4, "partial": 3, "failure": 2, "none": 1}
+        final_status = "none"
+        # If either is success, final is success. If either is partial (and none success), final is partial etc.
+        if status_reg == "success" or status_free == "success":
+            final_status = "success"
+        elif status_reg == "partial" or status_free == "partial":
+            final_status = "partial"
+        elif status_reg == "failure" or status_free == "failure":
+            final_status = "failure"
+        else: # both are none or undefined
+            final_status = "none"
+        
+        if not has_reg_provider_data and not has_free_provider_data:
+            final_status = "none" # Ensure if no data for provider from either, it's 'none'
+            final_text = "-"
+
+        combined_reasons = []
+        if reasons_reg:
+            combined_reasons.extend(reasons_reg)
+        if reasons_free:
+            combined_reasons.extend(reasons_free)
+            
+        return final_status, final_text, combined_reasons if combined_reasons else None
+    else:
+        # Fallback for HF models or non-variant OR models (should be direct model_data object)
+        return _get_single_model_provider_status(model_data_container, provider_name, data_type)
 
 
 def format_reasons_for_tooltip(reasons):
@@ -566,15 +700,11 @@ def generate_html(results, hf_results=None):
             structured_output_html += f"<tr><td class='model-name-cell'>{display_name}</td>"
 
             for provider_name in all_providers:
-                # Check if this model has structured output data
-                if "structured_output" in model_data:
-                    status, text, reasons = get_cell_status(
-                        model_data, provider_name, "structured_output"
-                    )
-                else:
-                    status = "none"
-                    text = "-"
-                    reasons = None
+                # The get_cell_status function already handles checking for structured_output
+                # in the right place (variant data for OR, direct for HF)
+                status, text, reasons = get_cell_status(
+                    model_data, provider_name, "structured_output"
+                )
 
                 if status != "none":
                     structured_output_html += (
@@ -665,6 +795,14 @@ def main():
     print("Loading HF test results...")
     hf_results = load_hf_results()
 
+    # Normalize provider names in the loaded data
+    if results:
+        normalize_provider_names_in_results(results)
+    if hf_results:
+        normalize_provider_names_in_results(hf_results)
+
+    models_mapping = load_models_mapping()
+    
     print("Generating HTML...")
     html = generate_html(results, hf_results)
 
