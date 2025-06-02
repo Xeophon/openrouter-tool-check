@@ -516,15 +516,9 @@ async def main():
         model_result["structured_output"] = structured_output_result["providers"]
         
         all_results["models"].append(model_result)
-        
-        # Save intermediate results
-        output_file = f"data/tool_support_results_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json"
-        os.makedirs("data", exist_ok=True)
-        with open(output_file, "w") as f:
-            json.dump(all_results, f, indent=2)
     
     # Save final results
-    final_output = "data/tool_support_results_latest.json"
+    final_output = "data.json"
     with open(final_output, "w") as f:
         json.dump(all_results, f, indent=2)
     

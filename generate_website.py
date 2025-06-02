@@ -12,7 +12,7 @@ from collections import defaultdict
 
 def load_latest_results():
     """Load the latest test results from JSON."""
-    results_file = "data/tool_support_results_latest.json"
+    results_file = "data.json"
     
     if not os.path.exists(results_file):
         print(f"Results file not found: {results_file}")
@@ -569,11 +569,6 @@ def main():
         f.write(html)
     
     print(f"Website generated: {output_file}")
-    
-    # Copy latest results for GitHub Pages
-    import shutil
-    shutil.copy("data/tool_support_results_latest.json", "docs/data.json")
-    print("Data file copied to docs/data.json")
 
 
 if __name__ == "__main__":
