@@ -5,10 +5,6 @@ on:
     # Run every 12 hours
     - cron: '0 */12 * * *'
   workflow_dispatch:  # Allow manual triggers
-  push:
-    branches:
-      - main
-      - master
 
 permissions:
   contents: write
