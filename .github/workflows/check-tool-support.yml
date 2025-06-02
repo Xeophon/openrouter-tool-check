@@ -34,8 +34,17 @@ jobs:
     - name: Run tool support checks
       env:
         OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+        HF_TOKEN: ${{ secrets.HF_TOKEN }}
       run: |
-        uv run check_all_models.py
+        # Run both scripts in parallel
+        uv run check_all_models.py &
+        PID1=$!
+        uv run check_hf_models.py &
+        PID2=$!
+        
+        # Wait for both processes to complete
+        wait $PID1
+        wait $PID2
     
     - name: Generate website
       run: |
@@ -47,8 +56,7 @@ jobs:
         git config --local user.name "github-actions[bot]"
         
         # Add all changes
-        git add data/
-        git add docs/
+        git add docs/ data.json data_hf.json
         
         # Check if there are changes to commit
         if git diff --staged --quiet; then
