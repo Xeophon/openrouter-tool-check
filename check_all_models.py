@@ -132,7 +132,6 @@ class OpenRouterToolSupportChecker:
                             },
                         }
                     ],
-                    tool_choice="auto",
                     max_tokens=1000,
                     # Specify the provider using extra_body
                     extra_body={"provider": {"only": [provider_name]}},
