@@ -8,23 +8,12 @@
   "deepseek/deepseek-chat-v3-0324",
   "deepseek/deepseek-chat-v3-0324:free",
   "openai/gpt-4.1-nano",
-  "qwen/qwen3-32b",
-  "qwen/qwen3-32b:free",
-  "sarvamai/sarvam-m",
-  "sarvamai/sarvam-m:free",
   "meta-llama/llama-4-maverick",
   "meta-llama/llama-4-maverick:free",
   "meta-llama/llama-4-scout",
   "meta-llama/llama-4-scout:free",
-
   "qwen/qwen-2.5-coder-32b-instruct",
   "qwen/qwen-2.5-coder-32b-instruct:free",
-  "qwen/qwen-2.5-72b-instruct",
-  "qwen/qwen-2.5-72b-instruct:free",
-  "qwen/qwen-2.5-32b-instruct",
-  "qwen/qwen-2.5-32b-instruct:free",
-  "qwen/qwen-2.5-14b-instruct",
-  "qwen/qwen-2.5-14b-instruct:free",
   "qwen/qwen-2.5-7b-instruct",
   "qwen/qwen-2.5-7b-instruct:free"
 ]
