@@ -1,9 +1,6 @@
 name: Check Tool Support
 
 on:
-  schedule:
-    # Run every 12 hours
-    - cron: '0 */12 * * *'
   workflow_dispatch:  # Allow manual triggers
 
 permissions:
